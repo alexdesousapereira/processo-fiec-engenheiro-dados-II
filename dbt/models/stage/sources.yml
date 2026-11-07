@@ -1,0 +1,59 @@
+version: 2
+
+# Estes testes validam o lote antes de publicar (tarefa validar_lote da DAG). Uma reprovação
+# aqui impede a carga: o warehouse não muda, e os meses seguem pendentes.
+sources:
+  - name: stage
+    description: Carga tratada pelo pandas. Sem chaves; cada carga esvazia e recarrega as tabelas envolvidas.
+    schema: stage
+    tables:
+      - name: territorio
+        columns:
+          - name: territorio_codigo
+            data_tests: [not_null, unique]
+          - name: territorio_nome
+            data_tests: [not_null]
+          - name: nivel
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: [N1, N2, N3]
+      - name: variaveis
+        columns:
+          - name: variavel_codigo
+            data_tests: [not_null, unique]
+          - name: unidade
+            data_tests: [not_null]
+      - name: categoria
+        columns:
+          - name: categoria_codigo
+            data_tests: [not_null, unique]
+          - name: eh_atividade_transformacao
+            data_tests: [not_null]
+      - name: producao_fisica
+        columns:
+          - name: territorio_codigo
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('stage', 'territorio')
+                    field: territorio_codigo
+          - name: periodo
+            data_tests: [not_null]
+          - name: variavel_codigo
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('stage', 'variaveis')
+                    field: variavel_codigo
+          - name: categoria_codigo
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('stage', 'categoria')
+                    field: categoria_codigo
+          - name: path_origem
+            data_tests: [not_null]

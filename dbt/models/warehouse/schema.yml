@@ -1,0 +1,208 @@
+version: 2
+
+# Contrato: o dbt cria as tabelas com estes tipos e chaves, e o banco garante a integridade.
+# Prefixos: dim_ para dimensão, fat_ para fato. Toda tabela informa a origem e a data de carga.
+models:
+  - name: dim_territorio
+    description: Dimensão com Brasil, Nordeste e as 17 UFs presentes na fonte.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: territorio_codigo
+        data_type: integer
+        constraints: [{type: primary_key}]
+        data_tests: [unique]
+      - name: territorio_nome
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: nivel
+        data_type: text
+        constraints: [{type: not_null}]
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [N1, N2, N3]
+      - name: path_origem
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: data_carga
+        data_type: timestamptz
+        constraints: [{type: not_null}]
+
+  - name: dim_variaveis
+    description: Dimensão com as 6 variáveis da tabela 8888.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: variavel_codigo
+        data_type: integer
+        constraints: [{type: primary_key}]
+        data_tests: [unique]
+      - name: variavel_nome
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: unidade
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: path_origem
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: data_carga
+        data_type: timestamptz
+        constraints: [{type: not_null}]
+
+  - name: dim_categorias
+    description: Dimensão com as seções e atividades da CNAE 2.0. O agregado "3" não é atividade.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: categoria_codigo
+        data_type: integer
+        constraints: [{type: primary_key}]
+        data_tests: [unique]
+      - name: categoria_cnae
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: categoria_nome
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: eh_atividade_transformacao
+        data_type: boolean
+        constraints: [{type: not_null}]
+      - name: path_origem
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: data_carga
+        data_type: timestamptz
+        constraints: [{type: not_null}]
+
+  - name: dim_calendario
+    description: Dimensão de tempo com uma linha por mês, ligada ao fato pelo código AAAAMM.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: periodo
+        data_type: integer
+        description: Código AAAAMM, igual ao da fonte e ao do fato.
+        constraints: [{type: primary_key}]
+        data_tests: [unique]
+      - name: data
+        data_type: date
+        description: Primeiro dia do mês.
+        constraints: [{type: not_null}]
+      - name: ano
+        data_type: integer
+        constraints: [{type: not_null}]
+      - name: mes
+        data_type: integer
+        constraints: [{type: not_null}]
+      - name: mes_nome
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: trimestre
+        data_type: integer
+        constraints: [{type: not_null}]
+      - name: semestre
+        data_type: integer
+        constraints: [{type: not_null}]
+      - name: path_origem
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: data_carga
+        data_type: timestamptz
+        constraints: [{type: not_null}]
+
+  - name: fat_producao_fisica
+    description: Fato com todos os dados da fonte. Grão território x mês x variável x categoria.
+    config:
+      contract: {enforced: true}
+    constraints:
+      - type: primary_key
+        columns: [territorio_codigo, periodo, variavel_codigo, categoria_codigo]
+      - type: foreign_key
+        columns: [territorio_codigo]
+        to: ref('dim_territorio')
+        to_columns: [territorio_codigo]
+      - type: foreign_key
+        columns: [variavel_codigo]
+        to: ref('dim_variaveis')
+        to_columns: [variavel_codigo]
+      - type: foreign_key
+        columns: [categoria_codigo]
+        to: ref('dim_categorias')
+        to_columns: [categoria_codigo]
+      - type: foreign_key
+        columns: [periodo]
+        to: ref('dim_calendario')
+        to_columns: [periodo]
+    columns:
+      - name: territorio_codigo
+        data_type: integer
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_territorio')
+                field: territorio_codigo
+      - name: periodo
+        data_type: integer
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_calendario')
+                field: periodo
+      - name: variavel_codigo
+        data_type: integer
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_variaveis')
+                field: variavel_codigo
+      - name: categoria_codigo
+        data_type: integer
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_categorias')
+                field: categoria_codigo
+      - name: valor
+        data_type: numeric(14,5)
+        description: Nulo quando a fonte traz um símbolo.
+      - name: simbolo_origem
+        data_type: text
+        description: Símbolo original, preservado para a decisão ser reversível.
+      - name: execucao_id
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: path_origem
+        data_type: text
+        description: Arquivo bruto de origem. O manifesto ao lado dele traz a URL.
+        constraints: [{type: not_null}]
+      - name: data_carga
+        data_type: timestamptz
+        constraints: [{type: not_null}]
+
+  - name: vw_transformacao_2025
+    description: Estrutura analítica exigida (A1 a A4), consumida pelo top 3 e pelo Power BI.
+    columns:
+      - name: uf_codigo
+        data_tests: [not_null]
+      - name: periodo
+        data_tests: [not_null]
+      - name: atividade_codigo
+        data_tests: [not_null]
+      - name: indice_producao
+        data_tests: [not_null]
+
+  - name: vw_top3_transformacao_2025
+    description: As 3 atividades de maior índice por UF e mês de 2025 (S2), para o Power BI.
+    columns:
+      - name: uf_codigo
+        data_tests: [not_null]
+      - name: periodo
+        data_tests: [not_null]
+      - name: posicao
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false

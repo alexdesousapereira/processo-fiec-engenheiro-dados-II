@@ -1,0 +1,12 @@
+pim_pf:
+  target: warehouse
+  outputs:
+    warehouse:
+      type: postgres
+      host: "{{ env_var('PIM_DB_HOST') }}"
+      port: "{{ env_var('PIM_DB_PORTA') | int }}"
+      dbname: "{{ env_var('PIM_DB_NOME') }}"
+      user: "{{ env_var('PIM_DB_USUARIO') }}"
+      password: "{{ env_var('PIM_DB_SENHA') }}"
+      schema: warehouse
+      threads: 2

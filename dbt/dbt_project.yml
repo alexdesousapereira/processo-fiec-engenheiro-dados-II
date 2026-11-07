@@ -1,0 +1,16 @@
+name: pim_pf
+version: "1.0.0"
+config-version: 2
+profile: pim_pf
+
+model-paths: ["models"]
+test-paths: ["tests"]
+
+models:
+  pim_pf:
+    warehouse:
+      # merge é o upsert: atualiza a chave existente e insere a nova. Ao contrário de
+      # delete+insert, não apaga linhas de dimensão referenciadas pela chave estrangeira.
+      +materialized: incremental
+      +incremental_strategy: merge
+      +on_schema_change: fail
