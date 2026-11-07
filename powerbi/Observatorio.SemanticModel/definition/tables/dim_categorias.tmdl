@@ -1,0 +1,33 @@
+table dim_categorias
+	lineageTag: 6a13771a-038e-4ddd-a248-528ac1558380
+
+	column categoria_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: fdb0196b-f4ed-4533-aa9e-d586a3d24178
+		summarizeBy: none
+		sourceColumn: categoria_codigo
+
+	column categoria_cnae
+		dataType: string
+		lineageTag: 3211a25d-5ec2-4202-9917-bda5b4283ce0
+		summarizeBy: none
+		sourceColumn: categoria_cnae
+
+	column categoria_nome
+		dataType: string
+		lineageTag: ff9a64b7-881d-4389-ba24-cf2393a3d36f
+		summarizeBy: none
+		sourceColumn: categoria_nome
+
+	partition dim_categorias = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
+				    Tabela = Fonte{[Schema="warehouse",Item="dim_categorias"]}[Data],
+				    Filtrada = Table.SelectRows(Tabela, each [eh_atividade_transformacao] = true),
+				    Colunas = Table.SelectColumns(Filtrada, {"categoria_codigo", "categoria_cnae", "categoria_nome"})
+				in
+				    Colunas
+

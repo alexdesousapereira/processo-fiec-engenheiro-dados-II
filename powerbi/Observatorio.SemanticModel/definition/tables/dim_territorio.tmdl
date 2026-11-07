@@ -1,0 +1,27 @@
+table dim_territorio
+	lineageTag: 7a13d2f4-8cca-4486-87a4-2ac43cebaa18
+
+	column territorio_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: ece6649d-c4b8-4aae-89e8-181aed54e934
+		summarizeBy: none
+		sourceColumn: territorio_codigo
+
+	column territorio_nome
+		dataType: string
+		lineageTag: 95dc7ddc-01e0-46eb-8331-0575fff21dcf
+		summarizeBy: none
+		sourceColumn: territorio_nome
+
+	partition dim_territorio = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
+				    Tabela = Fonte{[Schema="warehouse",Item="dim_territorio"]}[Data],
+				    Filtrada = Table.SelectRows(Tabela, each [nivel] = "N3"),
+				    Colunas = Table.SelectColumns(Filtrada, {"territorio_codigo", "territorio_nome"})
+				in
+				    Colunas
+

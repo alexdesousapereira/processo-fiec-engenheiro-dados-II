@@ -1,0 +1,24 @@
+relationship 30f79bf0-f4df-58bd-8dbd-18f8c68d0c00
+	fromColumn: vw_transformacao_2025.uf_codigo
+	toColumn: dim_territorio.territorio_codigo
+
+relationship f0e88283-8586-5d63-93df-5a213398ef15
+	fromColumn: vw_transformacao_2025.periodo
+	toColumn: dim_calendario.periodo
+
+relationship 15c2aedc-8fc1-54d4-a41b-aae9899826ef
+	fromColumn: vw_transformacao_2025.atividade_codigo
+	toColumn: dim_categorias.categoria_codigo
+
+relationship d76f17a6-5c20-5093-acdc-3da9cac28fe0
+	fromColumn: vw_top3_transformacao_2025.uf_codigo
+	toColumn: dim_territorio.territorio_codigo
+
+relationship ec81e3fe-74af-51a1-afc7-c6843e1bc84c
+	fromColumn: vw_top3_transformacao_2025.periodo
+	toColumn: dim_calendario.periodo
+
+relationship 92604943-9f26-55f2-838b-3b9cc51275e8
+	fromColumn: vw_top3_transformacao_2025.atividade_codigo
+	toColumn: dim_categorias.categoria_codigo
+

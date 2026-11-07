@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Observatorio"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4ee7ee91-ed13-4327-a576-6a733e92b3b9"
+  }
+}

@@ -1,0 +1,86 @@
+table vw_transformacao_2025
+	lineageTag: 1693e37c-4dfb-45a5-8c68-e97f18bff845
+
+	measure 'Índice de produção' = AVERAGE(vw_transformacao_2025[indice_producao])
+		formatString: #,0.00
+		lineageTag: ebb1b17e-a92d-4f1e-9614-5b243f844598
+
+	measure 'Média das atividades' = AVERAGE(vw_transformacao_2025[media_atividades_uf_mes])
+		formatString: #,0.00
+		lineageTag: dd763219-9ebc-4b23-87ac-0e052d7da3b8
+
+	measure 'Diferença para a média' = [Índice de produção] - [Média das atividades]
+		formatString: +#,0.00;-#,0.00;0.00
+		lineageTag: e76773fe-5249-421a-abde-fe3c11b8d764
+
+	measure 'Atividades acima da média' = COUNTROWS(FILTER(vw_transformacao_2025, vw_transformacao_2025[diferenca_para_media] > 0)) + 0
+		formatString: 0
+		lineageTag: c2ba307e-ea1f-46ec-8865-1aa89ff050bd
+
+	measure 'Cor da diferença' = IF([Diferença para a média] >= 0, "#0CA30C", "#D03B3B")
+		lineageTag: ccdfbde0-968e-42bb-b2a8-6da9a890046b
+
+	column uf_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: d16d2f39-1dc9-4cf6-978d-c4e86e2d6258
+		summarizeBy: none
+		sourceColumn: uf_codigo
+
+	column periodo
+		dataType: int64
+		formatString: 0
+		lineageTag: f24e7338-2120-48ca-beef-c156c219acb9
+		summarizeBy: none
+		sourceColumn: periodo
+
+	column atividade_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: e7a4c7ba-ff36-4a41-950d-5c05817d5348
+		summarizeBy: none
+		sourceColumn: atividade_codigo
+
+	column atividade_cnae
+		dataType: string
+		lineageTag: 8692d1b8-28dd-44eb-bdbc-e5f9b8ad01b0
+		summarizeBy: none
+		sourceColumn: atividade_cnae
+
+	column atividade_nome
+		dataType: string
+		lineageTag: 82c82984-064b-4873-a475-f0a7e90d6fef
+		summarizeBy: none
+		sourceColumn: atividade_nome
+
+	column indice_producao
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 04f69702-a6c4-4949-a051-ad6606520cc8
+		summarizeBy: none
+		sourceColumn: indice_producao
+
+	column media_atividades_uf_mes
+		dataType: double
+		formatString: #,0.00
+		lineageTag: dea42746-9c3a-46a6-afeb-2935cb909a25
+		summarizeBy: none
+		sourceColumn: media_atividades_uf_mes
+
+	column diferenca_para_media
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 5c9a34d7-1da9-4f77-92eb-62a17037d0b3
+		summarizeBy: none
+		sourceColumn: diferenca_para_media
+
+	partition vw_transformacao_2025 = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
+				    Tabela = Fonte{[Schema="warehouse",Item="vw_transformacao_2025"]}[Data],
+				    Colunas = Table.SelectColumns(Tabela, {"uf_codigo", "periodo", "atividade_codigo", "atividade_cnae", "atividade_nome", "indice_producao", "media_atividades_uf_mes", "diferenca_para_media"})
+				in
+				    Colunas
+

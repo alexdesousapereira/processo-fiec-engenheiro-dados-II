@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Observatorio"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "79f83b65-fc00-4f8f-892c-b25f7aaf6bb8"
+  }
+}

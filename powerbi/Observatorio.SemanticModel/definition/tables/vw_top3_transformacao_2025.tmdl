@@ -1,0 +1,81 @@
+table vw_top3_transformacao_2025
+	lineageTag: 07c11030-47c2-46ce-95ab-725f0af19f88
+
+	measure 'Atividade líder' = CALCULATE(SELECTEDVALUE(vw_top3_transformacao_2025[atividade_nome], "Selecione uma UF e um mês"), vw_top3_transformacao_2025[posicao] = 1)
+		lineageTag: d5544833-6cad-4927-82c3-f1b8b304e315
+
+	measure 'Índice do top 3' = AVERAGE(vw_top3_transformacao_2025[indice_producao])
+		formatString: #,0.00
+		lineageTag: d57ca679-fc01-4170-8ba4-f74d489adefc
+
+	column uf_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: 96a1be0a-dbcc-414c-baa5-d520aa48d544
+		summarizeBy: none
+		sourceColumn: uf_codigo
+
+	column periodo
+		dataType: int64
+		formatString: 0
+		lineageTag: a293e926-54f0-4f33-a851-c0104a5137a2
+		summarizeBy: none
+		sourceColumn: periodo
+
+	column atividade_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: 15676a74-7169-479b-87b2-c98734074060
+		summarizeBy: none
+		sourceColumn: atividade_codigo
+
+	column atividade_cnae
+		dataType: string
+		lineageTag: ca1adc83-bb66-4623-9dc5-ab9fb8a00742
+		summarizeBy: none
+		sourceColumn: atividade_cnae
+
+	column atividade_nome
+		dataType: string
+		lineageTag: dfe66a4a-290b-46e4-be66-c0b0f895cd30
+		summarizeBy: none
+		sourceColumn: atividade_nome
+
+	column indice_producao
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 95ab00b9-0bc9-44cc-82d1-bb90560847d4
+		summarizeBy: none
+		sourceColumn: indice_producao
+
+	column media_atividades_uf_mes
+		dataType: double
+		formatString: #,0.00
+		lineageTag: f6ef343f-0727-499b-bab8-7e3e9a61702f
+		summarizeBy: none
+		sourceColumn: media_atividades_uf_mes
+
+	column diferenca_para_media
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 122fcb4d-ec81-450b-b9a6-b2c2d4451c2b
+		summarizeBy: none
+		sourceColumn: diferenca_para_media
+
+	column posicao
+		dataType: int64
+		formatString: 0
+		lineageTag: 373b01eb-8654-479c-8501-163de533ffef
+		summarizeBy: none
+		sourceColumn: posicao
+
+	partition vw_top3_transformacao_2025 = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
+				    Tabela = Fonte{[Schema="warehouse",Item="vw_top3_transformacao_2025"]}[Data],
+				    Colunas = Table.SelectColumns(Tabela, {"uf_codigo", "periodo", "atividade_codigo", "atividade_cnae", "atividade_nome", "indice_producao", "media_atividades_uf_mes", "diferenca_para_media", "posicao"})
+				in
+				    Colunas
+

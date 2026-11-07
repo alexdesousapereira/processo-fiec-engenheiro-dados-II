@@ -1,0 +1,44 @@
+table dim_calendario
+	lineageTag: 2fc16bce-d455-4fef-a2d0-464e9b1df15e
+
+	column periodo
+		dataType: int64
+		formatString: 0
+		lineageTag: 9cfd8224-aac4-48bb-ad08-8ab151a13c6e
+		summarizeBy: none
+		sourceColumn: periodo
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ea8ec23-ceb7-4075-972c-a76c445f1f57
+		summarizeBy: none
+		sourceColumn: ano
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: bdbb04f2-4d09-4021-bd0a-b76703ec5e20
+		summarizeBy: none
+		sourceColumn: mes
+
+	column mes_nome
+		dataType: string
+		lineageTag: b1da6369-836b-409a-8935-68fec1ee3195
+		summarizeBy: none
+		sourceColumn: mes_nome
+		sortByColumn: mes
+
+	partition dim_calendario = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
+				    Tabela = Fonte{[Schema="warehouse",Item="dim_calendario"]}[Data],
+				    Filtrada = Table.SelectRows(Tabela, each [ano] = 2025),
+				    Colunas = Table.SelectColumns(Filtrada, {"periodo", "ano", "mes", "mes_nome"})
+				in
+				    Colunas
+
+	annotation PBI_ResultType = Table
+
