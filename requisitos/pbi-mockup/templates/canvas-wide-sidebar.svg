@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: SIDEBAR LARGO ESCURO (nav + filtros) + conteúdo claro. GRID PADRÃO (margem 24, gutter 20, sidebar 240 → conteúdo x264).
+    Os filtros (data lidera) moram no sidebar, à esquerda. KPIs (4) w233, x = 264 / 517 / 770 / 1023 (y104, h92).
+    Corpo: wide w650 (x264) + lateral w322 (x934), 2 linhas (y216 / y454, h218).
+    Cor de ação: #4E7CFF. Ícones Material inline no-->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="#F5F7FB"/>
+    <!-- superfície do sidebar (navy) -->
+    <rect x="0" y="0" width="240" height="720" fill="#14215C"/>
+  </g>
+
+  <!-- SIDEBAR: logo + itens de navegação -->
+  <g id="menu">
+    <rect x="24" y="24" width="30" height="30" rx="8" fill="#4E7CFF"/>
+    <text x="66" y="45" font-size="16" font-weight="600" fill="#FFFFFF">{{CLIENTE}}</text>
+    <rect x="0" y="96" width="3" height="44" fill="#4E7CFF"/>
+    <rect x="16" y="96" width="208" height="44" rx="10" fill="#4E7CFF" fill-opacity="0.18"/>
+    <g transform="translate(28,107) scale(0.022917) translate(0,960)" fill="#FFFFFF"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></g><text x="62" y="123" font-size="13" font-weight="600" fill="#FFFFFF">{{TELA_ATIVA}}</text>
+    <g transform="translate(28,159) scale(0.022917) translate(0,960)" fill="#8A929E"><path d="M640-160v-280h160v280H640Zm-240 0v-640h160v640H400Zm-240 0v-440h160v440H160Z"/></g><text x="62" y="175" font-size="13" fill="#7C8595">{{TELA_2}}</text>
+    <g transform="translate(28,207) scale(0.022917) translate(0,960)" fill="#8A929E"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g><text x="62" y="223" font-size="13" fill="#7C8595">{{TELA_3}}</text>
+  </g>
+
+  <!-- CONTEÚDO: título + carimbos -->
+  <g id="cabecalho">
+    <text x="264" y="48" font-size="22" font-weight="600" fill="#33394C">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="264" y="68" font-size="13" fill="#5C6470">Dados: <tspan font-weight="600" fill="#33394C">{{DATA_REFERENCIA}}</tspan> · atualizado em {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <!-- FILTROS no sidebar (data lidera) -->
+  <g id="filtros">
+    <text x="24" y="520" font-size="11" letter-spacing="1.2" fill="#7C8595">FILTROS</text>
+    <g id="filtro-data">
+      <rect x="24" y="532" width="192" height="30" rx="8" fill="#4E7CFF" fill-opacity="0.18"/><g transform="translate(34,539) scale(0.016667) translate(0,960)" fill="#FFFFFF"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></g><text x="58" y="552" font-size="12" font-weight="600" fill="#FFFFFF">{{MES}}/{{ANO}}</text>
+    </g>
+    <g id="filtro-1">
+      <rect x="24" y="570" width="192" height="30" rx="8" fill="#FFFFFF" fill-opacity="0.08"/><text x="34" y="590" font-size="12" fill="#7C8595">{{FILTRO_1}} ▾</text>
+    </g>
+    <g id="filtro-2">
+      <rect x="24" y="608" width="192" height="30" rx="8" fill="#FFFFFF" fill-opacity="0.08"/><text x="34" y="628" font-size="12" fill="#7C8595">{{FILTRO_2}} ▾</text>
+    </g>
+    <g id="filtro-limpar">
+      <text x="24" y="664" font-size="12" fill="#7FB0FF" font-weight="600">✕ Limpar filtros</text>
+    </g>
+  </g>
+
+  <!-- KPIs (4) -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(264,104)">
+      <rect width="233" height="92" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <rect x="14" y="16" width="36" height="36" rx="9" fill="#4E7CFF" fill-opacity="0.12"/>
+      <g transform="translate(21,23) scale(0.022917) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+      <text x="60" y="42" font-size="24" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="60" y="60" font-size="11" letter-spacing="1.1" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="60" y="80" font-size="12" fill="#2E9E5B">{{CONTEXTO_KPI}}</text>
+    </g>
+    <!-- repita X = 517 / 770 / 1023 -->
+  </g>
+
+  <!-- CORPO -->
+  <g id="visuais">
+    <g id="visual-1" transform="translate(264,216)"><rect width="650" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-2" transform="translate(934,216)"><rect width="322" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-3" transform="translate(264,454)"><rect width="650" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-4" transform="translate(934,454)"><rect width="322" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+  </g>
+
+  <!-- RODAPÉ -->
+  <g id="rodape">
+    <text x="264" y="694" font-size="11" fill="#7C8595">Fonte: {{FONTE}}</text>
+    <text x="1256" y="694" text-anchor="end" font-size="11" fill="#C9CDD4">MOCKUP — dados ilustrativos</text>
+  </g>
+  </svg>

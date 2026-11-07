@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: GRADE 2×2 LIMPA + cabeçalho (sem menu). GRID PADRÃO (margem 24, gutter 20). Sem faixa de KPIs.
+    Corpo usa 104..672: 2 cols w606 (x24/x650) × 2 linhas h274 (y104/y398). Para 4 histórias de peso parecido.
+    Cor de ação: #4E7CFF. Ícones Material inline no-->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="#F5F7FB"/>
+  </g>
+
+  <!-- CABEÇALHO -->
+  <g id="cabecalho">
+    <text x="24" y="46" font-size="24" font-weight="600" fill="#33394C">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="24" y="68" font-size="13" fill="#5C6470">Dados: <tspan font-weight="600" fill="#33394C">{{DATA_REFERENCIA}}</tspan> · atualizado em {{DATA_ATUALIZACAO}}</text>
+  </g>
+  <g id="filtros">
+    <g transform="translate(700,28)" font-size="12">
+      <g id="filtro-data"><rect x="0"   y="0" width="108" height="26" rx="13" fill="#4E7CFF" fill-opacity="0.12"/><text x="16" y="17" fill="#4E7CFF" font-weight="600">{{MES}}/{{ANO}}</text></g>
+      <g id="filtro-1"><rect x="118" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="130" y="17" fill="#5C6470">{{FILTRO_1}} ▾</text></g>
+      <g id="filtro-2"><rect x="242" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="254" y="17" fill="#5C6470">{{FILTRO_2}} ▾</text></g>
+      <g id="filtro-3"><rect x="366" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="378" y="17" fill="#5C6470">{{FILTRO_3}} ▾</text></g>
+      <g id="filtro-limpar"><text x="492" y="17" fill="#4E7CFF" font-weight="600">✕ Limpar</text></g>
+    </g>
+  </g>
+
+  <!-- GRADE 2×2 -->
+  <g id="visuais">
+    <g id="visual-1" transform="translate(24,104)"><rect width="606" height="274" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="34" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="52" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-2" transform="translate(650,104)"><rect width="606" height="274" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="34" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="52" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-3" transform="translate(24,398)"><rect width="606" height="274" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="34" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="52" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-4" transform="translate(650,398)"><rect width="606" height="274" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="34" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="52" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+  </g>
+
+  <!-- RODAPÉ -->
+  <g id="rodape">
+    <text x="24" y="694" font-size="11" fill="#7C8595">Fonte: {{FONTE}}</text>
+    <text x="1256" y="694" text-anchor="end" font-size="11" fill="#C9CDD4">MOCKUP — dados ilustrativos</text>
+  </g>
+  </svg>

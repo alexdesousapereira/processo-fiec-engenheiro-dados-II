@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: CANVAS EMOLDURADO (estilo ex.03 / ex.11) — superfície branca arredondada dentro de uma moldura colorida (gradiente da marca).
+    A moldura é re-skinnável: ex.03 = roxo, ex.11 = âmbar; aqui gradiente #4E7CFF→#7033FF (troque pela marca).
+    Padding interno 24 → conteúdo x48..1232. KPIs (4): w281, x = 48 / 349 / 650 / 951 (y112, h84).
+    Corpo: principal w774 (x48) + apoio w390 (x842), 2 linhas (y216 / y454, h218).
+    Filtros: data + 2 + limpar. Ícones Material assados como path (Figma-safe).
+    CAMADAS (Figma): fundo · moldura · cabecalho · filtros · kpis · visuais · rodape.
+  -->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="#F5F7FB"/>
+  </g>
+
+  <!-- MOLDURA: anel gradiente + superfície branca interna -->
+  <g id="moldura">
+    <rect x="12" y="12" width="1256" height="696" rx="26" fill="url(#moldura-grad)"/>
+    <rect x="24" y="24" width="1232" height="672" rx="18" fill="#FFFFFF"/>
+  </g>
+
+  <g id="cabecalho">
+    <rect x="48" y="48" width="6" height="26" rx="3" fill="#4E7CFF"/>
+    <text x="66" y="62" font-size="22" font-weight="600" fill="#33394C">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="66" y="84" font-size="13" fill="#5C6470">Dados: <tspan font-weight="600" fill="#33394C">{{DATA_REFERENCIA}}</tspan> · atualizado em {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <g id="filtros" transform="translate(810,52)" font-size="12">
+    <g id="filtro-data"><rect x="0"   y="0" width="108" height="26" rx="13" fill="#4E7CFF" fill-opacity="0.12"/><text x="16" y="17" fill="#4E7CFF" font-weight="600">{{MES}}/{{ANO}}</text></g>
+    <g id="filtro-1"><rect x="118" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="130" y="17" fill="#5C6470">{{FILTRO_1}} ▾</text></g>
+    <g id="filtro-2"><rect x="246" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="258" y="17" fill="#5C6470">{{FILTRO_2}} ▾</text></g>
+    <g id="filtro-limpar"><text x="372" y="17" fill="#4E7CFF" font-weight="600">✕ Limpar</text></g>
+  </g>
+
+  <!-- KPIs (4) — chips claros sobre a superfície branca -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(48,112)">
+      <rect width="281" height="84" rx="10" fill="#F5F7FB" stroke="#E6E8EC"/>
+      <rect x="14" y="14" width="36" height="36" rx="9" fill="#4E7CFF" fill-opacity="0.12"/>
+      <g transform="translate(21,21) scale(0.022917) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+      <text x="60" y="40" font-size="24" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="60" y="58" font-size="11" letter-spacing="1.1" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="60" y="76" font-size="12" fill="#2E9E5B">{{CONTEXTO_KPI}}</text>
+    </g>
+    <!-- repita X = 349 / 650 / 951 -->
+  </g>
+
+  <g id="visuais">
+    <g id="visual-principal" transform="translate(48,216)">
+      <rect width="774" height="456" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="24" y="34" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO_PRINCIPAL}}</text>
+      <text x="24" y="52" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-1" transform="translate(842,216)">
+      <rect width="390" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-2" transform="translate(842,454)">
+      <rect width="390" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+  </g>
+
+  <g id="rodape">
+    <text x="48" y="688" font-size="11" fill="#7C8595">Fonte: {{FONTE}} · MOCKUP — dados ilustrativos</text>
+  </g>
+
+  <defs>
+    <linearGradient id="moldura-grad" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4E7CFF"/><stop offset="1" stop-color="#7033FF"/></linearGradient>
+  </defs>
+</svg>

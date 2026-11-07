@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: APP-SHELL (estilo ex.20) — superfície branca com RECORTE (aba) no topo-esquerdo; título em navy na aba.
+    Geometria (superfície, sidebar, item ativo) = paths EXATOS do Figma do cliente. Margem 48px · sidebar centro x=100 · cards de x152.
+    CORES = paleta padrão: shell navy #14215C (app-shell, sobreposição de backgrounds) + acentos categóricos #F65164/#E0A458/#4E7CFF + gradiente #7033FF→#F65164. Troque pela marca.
+    Conteúdo: linha1 (y121, h238) 3 cards-acento w200 (x152/372/592) + wide w396 (x812) · linha2 (y379, h294) wide w656 (x152) + gradiente w380 (x828).
+    Filtros: data + 2 (mínimo 2), terminando em x1208 (24px de respiro até a borda da superfície x1232). Ícones assados como path (Figma-safe).
+    CAMADAS (Figma): fundo · menu · cabecalho · filtros · kpis · visuais · rodape. Cada kpi-N / visual-N é deletável de uma vez.
+  -->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="#14215C"/>
+    <!-- SUPERFÍCIE com recorte da aba (path exato do Figma) -->
+    <path d="M1232 73V43.0039C1232 31.9582 1223.05 23 1212 23H417.241C409.904 23 403.049 26.6584 398.965 32.7544L378.536 63.2455C374.451 69.3416 367.596 73 360.259 73H101H70.0006C57.8503 73 48 82.8498 48 95V673C48 685.136 57.8272 695.017 69.9629 695.037L1209.96 696.963C1222.13 696.983 1232 687.139 1232 674.975V673V73Z" fill="#FFFFFF"/>
+  </g>
+
+  <g id="menu">
+    <!-- SIDEBAR navy (path exato) + item ativo (path exato) + ícones centrados em x=100 -->
+    <path d="M110 88H90C77.8497 88 68 98.3635 68 111.147V649.852C68 662.636 77.8497 673 90 673H110C122.15 673 132 662.636 132 649.852V111.147C132 98.3635 122.15 88 110 88Z" fill="#14215C"/>
+    <path d="M111 191H89C81.8203 191 76 196.82 76 204V226C76 233.18 81.8203 239 89 239H111C118.18 239 124 233.18 124 226V204C124 196.82 118.18 191 111 191Z" fill="#FFFFFF"/>
+    <g transform="translate(88,203) scale(0.025000) translate(0,960)" fill="#14215C"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></g>
+    <g transform="translate(88,300) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="m105-233-65-47 200-320 120 140 160-260 109 163q-23 1-43.5 5.5T545-539l-22-33-152 247-121-141-145 233ZM863-40 738-165q-20 14-44.5 21t-50.5 7q-75 0-127.5-52.5T463-317q0-75 52.5-127.5T643-497q75 0 127.5 52.5T823-317q0 26-7 50.5T795-221L920-97l-57 57ZM643-217q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm89-320q-19-8-39.5-13t-42.5-6l205-324 65 47-188 296Z"/></g>
+    <g transform="translate(88,385) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></g>
+  </g>
+
+  <g id="cabecalho">
+    <!-- TÍTULO + carimbos na aba navy (texto claro) -->
+    <text x="48" y="40" font-size="18" font-weight="600" fill="#FFFFFF">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="48" y="60" font-size="12" fill="#AEB6C6">Dados: <tspan font-weight="600" fill="#FFFFFF">{{DATA_REFERENCIA}}</tspan> · {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <!-- FILTROS (data + 2). Pílulas largas terminando em x1208 (24px de respiro até a borda da superfície) -->
+  <g id="filtros" transform="translate(848,63)" font-size="12">
+    <g id="filtro-data"><rect x="0"   y="0" width="108" height="26" rx="13" fill="#4E7CFF" fill-opacity="0.12"/><text x="16" y="17" fill="#4E7CFF" font-weight="600">{{MES}}/{{ANO}}</text></g>
+    <g id="filtro-1"><rect x="118" y="0" width="116" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="130" y="17" fill="#5C6470">{{FILTRO_1}} ▾</text></g>
+    <g id="filtro-2"><rect x="244" y="0" width="116" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="256" y="17" fill="#5C6470">{{FILTRO_2}} ▾</text></g>
+  </g>
+
+  <!-- KPIs: 3 cards de topo colorido (acento decorativo/categórico) -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(152,121)">
+      <rect width="200" height="238" rx="12" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <path d="M0,12 Q0,0 12,0 H188 Q200,0 200,12 V20 H0 Z" fill="#F65164"/>
+      <rect x="148" y="34" width="36" height="36" rx="9" fill="#F65164" fill-opacity="0.14"/><g transform="translate(155,41) scale(0.022917) translate(0,960)" fill="#F65164"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+      <text x="20" y="118" font-size="28" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="20" y="140" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="20" y="164" font-size="12" fill="#2E9E5B">{{CONTEXTO_KPI}}</text>
+    </g>
+    <g id="kpi-2" transform="translate(372,121)">
+      <rect width="200" height="238" rx="12" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <path d="M0,12 Q0,0 12,0 H188 Q200,0 200,12 V20 H0 Z" fill="#E0A458"/>
+      <rect x="148" y="34" width="36" height="36" rx="9" fill="#E0A458" fill-opacity="0.20"/><g transform="translate(155,41) scale(0.022917) translate(0,960)" fill="#E0A458"><path d="M520-520h278q-15-110-91.5-186.5T520-798v278Zm-80 358v-636q-121 15-200.5 105.5T160-480q0 122 79.5 212.5T440-162Zm80 0q110-14 187-91t91-187H520v278Zm-40-318Zm0 400q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 155.5 31.5t127 86q54.5 54.5 86 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Z"/></g>
+      <text x="20" y="118" font-size="28" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="20" y="140" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="20" y="164" font-size="12" fill="#5C6470">{{CONTEXTO_KPI}}</text>
+    </g>
+    <g id="kpi-3" transform="translate(592,121)">
+      <rect width="200" height="238" rx="12" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <path d="M0,12 Q0,0 12,0 H188 Q200,0 200,12 V20 H0 Z" fill="#4E7CFF"/>
+      <rect x="148" y="34" width="36" height="36" rx="9" fill="#4E7CFF" fill-opacity="0.14"/><g transform="translate(155,41) scale(0.022917) translate(0,960)" fill="#4E7CFF"><path d="M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z"/></g>
+      <text x="20" y="118" font-size="28" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="20" y="140" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="20" y="164" font-size="12" fill="#5C6470">{{CONTEXTO_KPI}}</text>
+    </g>
+  </g>
+
+  <!-- VISUAIS: insight wide (linha1) + visual principal (linha2) + card-destaque em gradiente -->
+  <g id="visuais">
+    <g id="visual-1" transform="translate(812,121)">
+      <rect width="396" height="238" rx="12" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-principal" transform="translate(152,379)">
+      <rect width="656" height="294" rx="12" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-destaque" transform="translate(828,379)">
+      <rect width="380" height="294" rx="12" fill="url(#grad)"/>
+      <text x="24" y="40" font-size="15" font-weight="600" fill="#FFFFFF">{{NOME_DESCRITIVO}}</text>
+      <text x="24" y="92" font-size="40" font-weight="700" fill="#FFFFFF">{{VALOR}}</text>
+      <text x="24" y="116" font-size="12" fill="#FFFFFF" fill-opacity="0.85">{{INSIGHT}}</text>
+    </g>
+  </g>
+
+  <g id="rodape">
+    <text x="152" y="690" font-size="11" fill="#C9CDD4">Fonte: {{FONTE}} · MOCKUP — dados ilustrativos</text>
+  </g>
+
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="380" y2="294" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7033FF"/><stop offset="1" stop-color="#F65164"/></linearGradient>
+  </defs>
+</svg>

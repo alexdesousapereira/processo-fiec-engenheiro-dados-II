@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: SIDEBAR + coluna de KPIs + PAINEL AGRUPADO (container colorido) + faixa inferior. Réplica fiel do exemplo_12.svg (geometria exata).
+    Coordenadas do ex.12: KPIs x165 y135/238/341 w277 h83 · turnover x165 y444 277x206 ·
+    painel agrupado x462 y50 758x374 rx36 · pílula ANALISAR x485 y69 + 2 filtros · 3 cards x489/732/975 y176 223x222 · faixa x462 y444 736x206.
+    Cards brancos = SLOTS de gráfico (deixe vazios; o visual entra por cima no PBIX). Paleta padrão (ação #4E7CFF; troque pela marca). Ícones assados como path.
+  -->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="url(#bg)"/>
+    <!-- superfície do painel agrupado (cor de ação) -->
+    <rect x="462" y="50" width="758" height="374" rx="36" fill="url(#teal)"/>
+  </g>
+
+  <!-- SIDEBAR arredondado (cor de ação) -->
+  <g id="menu">
+    <rect x="55" y="50" width="82" height="600" rx="40" fill="url(#teal)"/>
+    <rect x="80" y="74" width="32" height="32" rx="9" fill="#FFFFFF" fill-opacity="0.18"/>
+    <g transform="translate(84,78) scale(0.025000) translate(0,960)" fill="#FFFFFF"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></g>
+    <rect x="65" y="188" width="62" height="96" rx="29" fill="#FFFFFF"/>
+    <g transform="translate(84,212) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></g>
+    <text x="96" y="262" text-anchor="middle" font-size="10" fill="#4E7CFF">{{TELA_ATIVA}}</text>
+    <g transform="translate(84,320) scale(0.025000) translate(0,960)" fill="#FFFFFF"><path d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"/></g>
+    <text x="96" y="370" text-anchor="middle" font-size="10" fill="#FFFFFF" fill-opacity="0.85">{{TELA_2}}</text>
+  </g>
+
+  <!-- TÍTULO + carimbos -->
+  <g id="cabecalho">
+    <text x="165" y="82" font-size="11" letter-spacing="1.2" fill="#4E7CFF">{{AREA}}</text>
+    <text x="165" y="106" font-size="20" font-weight="700" fill="#33394C">{{ASSUNTO}}</text>
+    <text x="165" y="124" font-size="11" fill="#5C6470">Dados: <tspan font-weight="600" fill="#33394C">{{DATA_REFERENCIA}}</tspan> · atual. {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <!-- FILTROS (pílula ANALISAR + 2 filtros) -->
+  <g id="filtros">
+    <g id="filtro-data">
+      <rect x="485" y="69" width="180" height="45" rx="12" fill="#FFFFFF"/>
+      <g transform="translate(501,80) scale(0.022917) translate(0,960)" fill="#4E7CFF"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></g>
+      <text x="532" y="97" font-size="14" font-weight="600" fill="#33394C">Analisar</text>
+    </g>
+    <g id="filtro-1">
+      <rect x="685" y="69" width="250" height="45" rx="12" fill="#FFFFFF"/><text x="705" y="97" font-size="13" fill="#5C6470">{{FILTRO_1}} ▾</text>
+    </g>
+    <g id="filtro-2">
+      <rect x="955" y="69" width="245" height="45" rx="12" fill="#FFFFFF"/><text x="975" y="97" font-size="13" fill="#5C6470">{{FILTRO_2}} ▾</text>
+    </g>
+  </g>
+
+  <!-- COLUNA DE KPIs (3 cards) -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(165,135)"><rect width="277" height="83" rx="16" fill="#FFFFFF"/><rect x="20" y="22" width="38" height="38" rx="10" fill="#4E7CFF" fill-opacity="0.12"/><g transform="translate(27,29) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780Zm-455-80h311q-10-20-55.5-35T480-370q-55 0-100.5 15T325-320ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560Zm1 240Zm-1-280Z"/></g><text x="72" y="42" font-size="22" font-weight="700" fill="#33394C">{{VALOR}}</text><text x="72" y="62" font-size="11" letter-spacing="1" fill="#7C8595">{{ROTULO_KPI}}</text></g>
+    <g id="kpi-2" transform="translate(165,238)"><rect width="277" height="83" rx="16" fill="#FFFFFF"/><rect x="20" y="22" width="38" height="38" rx="10" fill="#4E7CFF" fill-opacity="0.12"/><g transform="translate(27,29) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g><text x="72" y="42" font-size="22" font-weight="700" fill="#33394C">{{VALOR}}</text><text x="72" y="62" font-size="11" letter-spacing="1" fill="#7C8595">{{ROTULO_KPI}}</text></g>
+    <g id="kpi-3" transform="translate(165,341)"><rect width="277" height="83" rx="16" fill="#FFFFFF"/><rect x="20" y="22" width="38" height="38" rx="10" fill="#4E7CFF" fill-opacity="0.12"/><g transform="translate(27,29) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></g><text x="72" y="42" font-size="22" font-weight="700" fill="#33394C">{{VALOR}}</text><text x="72" y="62" font-size="11" letter-spacing="1" fill="#7C8595">{{ROTULO_KPI}}</text></g>
+  </g>
+
+  <!-- VISUAIS: card inferior esquerdo + painel agrupado + faixa inferior -->
+  <g id="visuais">
+    <!-- card inferior esquerdo (slot: % turnover) -->
+    <g id="visual-1" transform="translate(165,444)"><rect width="277" height="206" rx="16" fill="#FFFFFF"/><text x="20" y="34" font-size="14" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="52" font-size="11" fill="#4E7CFF">{{INSIGHT}}</text></g>
+
+    <!-- PAINEL AGRUPADO (cor de ação) com 3 cards da MESMA pergunta · superfície teal em #fundo -->
+    <g id="painel">
+      <text x="489" y="158" font-size="12" font-weight="600" fill="#FFFFFF" letter-spacing="0.5">{{QUEBRA_1}}</text>
+      <text x="732" y="158" font-size="12" font-weight="600" fill="#FFFFFF" letter-spacing="0.5">{{QUEBRA_2}}</text>
+      <text x="975" y="158" font-size="12" font-weight="600" fill="#FFFFFF" letter-spacing="0.5">{{QUEBRA_3}}</text>
+      <g id="visual-2"><rect x="489" y="176" width="223" height="222" rx="16" fill="#FFFFFF"/></g>
+      <g id="visual-3"><rect x="732" y="176" width="223" height="222" rx="16" fill="#FFFFFF"/></g>
+      <g id="visual-4"><rect x="975" y="176" width="223" height="222" rx="16" fill="#FFFFFF"/></g>
+    </g>
+
+    <!-- FAIXA INFERIOR (slot) -->
+    <g id="visual-5" transform="translate(462,444)"><rect width="736" height="206" rx="16" fill="#FFFFFF"/><text x="24" y="34" font-size="14" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="24" y="52" font-size="11" fill="#5C6470">{{INSIGHT}}</text></g>
+  </g>
+
+  <!-- RODAPÉ -->
+  <g id="rodape">
+    <text x="165" y="688" font-size="11" fill="#5C6470">Fonte: {{FONTE}} · MOCKUP — dados ilustrativos</text>
+  </g>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F5F7FB"/><stop offset="1" stop-color="#EDEFF2"/></linearGradient>
+    <!-- superfície de painel/sidebar: azul PROFUNDO p/ texto branco legível (rótulos QUEBRA/nav brancos ≥4,5:1; o accent #4E7CFF é claro demais p/ texto pequeno branco) -->
+    <linearGradient id="teal" x1="462" y1="50" x2="1220" y2="424" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2E50C8"/><stop offset="1" stop-color="#2E50C8"/></linearGradient>
+  </defs>
+</svg>

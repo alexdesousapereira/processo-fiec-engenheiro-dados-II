@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: ESCURO + RANKING — réplica FIEL do exemplo_22 (geometria exata do Figma), recolorida nos TOKENS DARK definidos da skill.
+    Painel-base #181B22 com MOLDURA ANGULAR entalhada (stroke #2A2E38, notches no topo p/ rail e título). Trilho x48..130 (#0F1117).
+    3 CARDS x160/377/593 (y125..371): corpo #0F1117 + ACENTO topo-esquerdo e base-direita (#F65164/#E0A458/#4E7CFF) + BORDA na mesma cor + chip de ícone (x316/532/749, y142).
+    Painel direito + gráfico #0F1117. RANKING em gradiente PROFUNDO #6A2BD9→#B5283C (contraste: texto branco passa). Linhas #2A2E38 / branco 0.7.
+    Ícones = pack (icons-material.svg), assados como <path>. Tokens dark: page #0F1117 · card #181B22/#0F1117 · borda #2A2E38 · grid #262B35 · ink #FFFFFF/#C7CCD3/#8A929E · ação #4E7CFF/#7FB0FF/#9DC0FF.
+    Filtros: data + 1 (no tab escuro). CAMADAS (Figma): fundo(painel-base, moldura-angular) · menu · cabecalho(cabecalho-tab) · filtros · kpis(kpi-1..3) · visuais(visual-painel, visual-principal, visual-ranking: rank-1..3) · rodape.
+  -->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="url(#paint0)"/>
+    <path id="painel-base" d="M132.551 34H36C31.5817 34 28 37.5817 28 42V677.5C28 681.918 31.5817 685.5 36 685.5H1244.5C1248.92 685.5 1252.5 681.918 1252.5 677.5V95V42C1252.5 37.5817 1248.92 34 1244.5 34H573.055C569.967 34 567.155 35.7767 565.83 38.5651L541.17 90.4349C539.845 93.2233 537.033 95 533.945 95H167.449C164.162 95 161.209 92.9885 160.005 89.929L139.995 39.071C138.791 36.0115 135.838 34 132.551 34Z" fill="#181B22"/>
+    <path id="moldura-angular" d="M36 34.5H132.551C135.633 34.5001 138.402 36.3857 139.53 39.2539L159.54 90.1123C160.819 93.3628 163.956 95.4999 167.449 95.5H533.945C537.226 95.5 540.214 93.6121 541.622 90.6494L566.281 38.7803C567.524 36.1661 570.16 34.5 573.055 34.5H1244.5C1248.64 34.5 1252 37.8579 1252 42V677.5C1252 681.642 1248.64 685 1244.5 685H36C31.8579 685 28.5 681.642 28.5 677.5V42C28.5 37.8579 31.8579 34.5 36 34.5Z" fill="none" stroke="#2A2E38"/>
+  </g>
+
+  <!-- TRILHO de ícones (pack) -->
+  <g id="menu">
+    <rect x="48" y="54" width="82" height="612" rx="8" fill="#0F1117"/>
+    <rect x="48.5" y="54.5" width="81" height="611" rx="7.5" fill="none" stroke="#2A2E38"/>
+    <rect x="73" y="86" width="32" height="32" rx="8" fill="#4E7CFF"/>
+    <g transform="translate(79,92) scale(0.020833) translate(0,960)" fill="#FFFFFF"><path d="M80-120v-720h400v160h400v560H80Zm80-80h240v-80H160v80Zm0-160h240v-80H160v80Zm0-160h240v-80H160v80Zm0-160h240v-80H160v80Zm320 480h320v-400H480v400Zm80-240v-80h160v80H560Zm0 160v-80h160v80H560Z"/></g>
+    <rect x="66" y="177" width="46" height="44" rx="12.446" fill="#262B35" stroke="#4E7CFF"/>
+    <g transform="translate(77,187) scale(0.025000) translate(0,960)" fill="#7FB0FF"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></g>
+    <rect x="66" y="249" width="46" height="44" rx="12.446" fill="#262B35"/>
+    <g transform="translate(77,259) scale(0.025000) translate(0,960)" fill="#8A929E"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z"/></g>
+    <rect x="66" y="321" width="46" height="44" rx="12.446" fill="#262B35"/>
+    <g transform="translate(77,331) scale(0.025000) translate(0,960)" fill="#8A929E"><path d="M720-80q-50 0-85-35t-35-85q0-7 1-14.5t3-13.5L322-392q-17 15-38 23.5t-44 8.5q-50 0-85-35t-35-85q0-50 35-85t85-35q23 0 44 8.5t38 23.5l282-164q-2-6-3-13.5t-1-14.5q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35q-23 0-44-8.5T638-672L356-508q2 6 3 13.5t1 14.5q0 7-1 14.5t-3 13.5l282 164q17-15 38-23.5t44-8.5q50 0 85 35t35 85q0 50-35 85t-85 35Z"/></g>
+    <rect x="66" y="393" width="46" height="44" rx="12.446" fill="#262B35"/>
+    <g transform="translate(77,403) scale(0.025000) translate(0,960)" fill="#8A929E"><path d="M120-520v-320h320v320H120Zm0 400v-320h320v320H120Zm400-400v-320h320v320H520Zm0 400v-320h320v320H520ZM200-600h160v-160H200v160Zm400 0h160v-160H600v160Zm0 400h160v-160H600v160Zm-400 0h160v-160H200v160Z"/></g>
+    <g transform="translate(77,572) scale(0.025000) translate(0,960)" fill="#8A929E"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q20-22 36-47.5t26.5-53q10.5-27.5 16-56.5t5.5-59q0-98-54.5-179T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q26 0 47 15.5t29 40.5Z"/></g>
+    <g transform="translate(77,624) scale(0.025000) translate(0,960)" fill="#8A929E"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Z"/></g>
+  </g>
+
+  <g id="cabecalho">
+    <path id="cabecalho-tab" d="M577.939 51.6467C579.247 48.8139 582.082 47 585.202 47H1215C1219.42 47 1223 50.5817 1223 55V89C1223 93.4183 1219.42 97 1215 97H569.505C563.666 97 559.794 90.9477 562.242 85.6467L577.939 51.6467Z" fill="#0F1117" stroke="#2A2E38"/>
+    <text x="160" y="60" font-size="22" font-weight="700" fill="#FFFFFF">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="160" y="82" font-size="12" fill="#8A929E">Dados: <tspan font-weight="600" fill="#FFFFFF">{{DATA_REFERENCIA}}</tspan> · {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <!-- FILTROS (no tab escuro: texto claro = ótimo contraste) -->
+  <g id="filtros" font-size="12">
+    <g id="filtro-data"><rect x="978" y="58" width="104" height="26" rx="13" fill="#4E7CFF" fill-opacity="0.30"/><text x="994" y="75" fill="#9DC0FF" font-weight="600">{{MES}}/{{ANO}}</text></g>
+    <g id="filtro-1"><rect x="1092" y="58" width="116" height="26" rx="6" fill="#FFFFFF" fill-opacity="0.08" stroke="#2A2E38"/><text x="1104" y="75" fill="#C7CCD3">{{FILTRO_1}} ▾</text></g>
+  </g>
+
+  <!-- KPIs (3) — corpo + acento topo-esquerdo/base-direita + borda + chip (ícones do pack) -->
+  <g id="kpis">
+    <g id="kpi-1">
+      <path id="kpi-1-corpo" d="M159.967 132.967C159.985 128.561 163.561 125 167.967 125H258.5H276.464C278.493 125 280.213 126.492 280.5 128.5C280.787 130.508 282.507 132 284.536 132H349C353.418 132 357 135.582 357 140V361.762C357 366.636 352.68 370.377 347.857 369.68L309.068 364.082C308.69 364.027 308.308 364 307.926 364H167.034C162.602 364 159.015 360.398 159.034 355.967L159.967 132.967Z" fill="#0F1117"/>
+      <path id="kpi-1-acento-topo" d="M160 133C160 128.582 163.582 125 168 125H222H276C280.418 125 284 128.582 284 133H160Z" fill="#F65164"/>
+      <path id="kpi-1-acento-base" d="M357 363C357 367.418 353.418 371 349 371H332.5H316C311.582 371 308 367.418 308 363H357Z" fill="#F65164"/>
+      <path id="kpi-1-borda" d="M167.967 125.5H276.465C278.244 125.5 279.753 126.809 280.005 128.57C280.327 130.825 282.258 132.5 284.535 132.5H349C353.142 132.5 356.5 135.858 356.5 140V361.763C356.5 366.331 352.45 369.838 347.929 369.186L309.14 363.587C308.738 363.529 308.332 363.5 307.926 363.5H167.033C162.879 363.5 159.516 360.123 159.533 355.969L160.467 132.969C160.484 128.839 163.837 125.5 167.967 125.5Z" fill="none" stroke="#F65164"/>
+      <rect x="316" y="142" width="30" height="30" rx="6" fill="#F65164"/>
+      <g transform="translate(322,148) scale(0.018750) translate(0,960)" fill="#FFFFFF"><path d="M444-200h70v-50q50-9 86-39t36-89q0-42-24-77t-96-61q-60-20-83-35t-23-41q0-26 18.5-41t53.5-15q32 0 50 15.5t26 38.5l64-26q-11-35-40.5-61T516-710v-50h-70v50q-50 11-78 44t-28 74q0 47 27.5 76t86.5 50q63 23 87.5 41t24.5 47q0 33-23.5 48.5T486-314q-33 0-58.5-20.5T390-396l-66 26q14 48 43.5 77.5T444-252v52Zm36 120q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></g>
+      <text x="180" y="185" font-size="11" letter-spacing="1.2" fill="#8A929E">{{ROTULO_KPI}}</text>
+      <text x="180" y="226" font-size="32" font-weight="700" fill="#FFFFFF">{{VALOR}}</text>
+      <text x="180" y="306" font-size="12" fill="#8A929E">{{CONTEXTO_KPI}}</text>
+    </g>
+    <g id="kpi-2">
+      <path id="kpi-2-corpo" d="M377 133C377 128.582 380.582 125 385 125H475H491.783C494.012 125 496 126.401 496.75 128.5C497.5 130.599 499.488 132 501.717 132H565C569.418 132 573 135.582 573 140V361.749C573 366.627 568.672 370.369 563.846 369.665L525.574 364.084C525.192 364.028 524.806 364 524.42 364H385C380.582 364 377 360.418 377 356V133Z" fill="#0F1117"/>
+      <path id="kpi-2-acento-topo" d="M377 133C377 128.582 380.582 125 385 125H439H493C497.418 125 501 128.582 501 133H377Z" fill="#E0A458"/>
+      <path id="kpi-2-acento-base" d="M573 363C573 367.418 569.418 371 565 371H548.5H532C527.582 371 524 367.418 524 363H573Z" fill="#E0A458"/>
+      <path id="kpi-2-borda" d="M385 125.5H491.783C493.801 125.5 495.601 126.768 496.279 128.668C497.1 130.966 499.277 132.5 501.717 132.5H565C569.142 132.5 572.5 135.858 572.5 140V361.749C572.5 366.322 568.443 369.83 563.918 369.17L525.646 363.589C525.24 363.53 524.83 363.5 524.42 363.5H385C380.858 363.5 377.5 360.142 377.5 356V133C377.5 128.858 380.858 125.5 385 125.5Z" fill="none" stroke="#E0A458"/>
+      <rect x="532" y="142" width="30" height="30" rx="6" fill="#E0A458"/>
+      <g transform="translate(538,148) scale(0.018750) translate(0,960)" fill="#33394C"><path d="M520-520h278q-15-110-91.5-186.5T520-798v278Zm-80 358v-636q-121 15-200.5 105.5T160-480q0 122 79.5 212.5T440-162Zm80 0q110-14 187-91t91-187H520v278Zm-40-318Z"/></g>
+      <text x="397" y="185" font-size="11" letter-spacing="1.2" fill="#8A929E">{{ROTULO_KPI}}</text>
+      <text x="397" y="226" font-size="32" font-weight="700" fill="#FFFFFF">{{VALOR}}</text>
+      <text x="397" y="306" font-size="12" fill="#8A929E">{{CONTEXTO_KPI}}</text>
+    </g>
+    <g id="kpi-3">
+      <path id="kpi-3-corpo" d="M593 133C593 128.582 596.582 125 601 125H704.839C707.432 125 709.848 126.319 711.25 128.5C712.652 130.681 715.068 132 717.661 132H782C786.418 132 790 135.582 790 140V361.749C790 366.627 785.672 370.369 780.846 369.665L742.574 364.084C742.192 364.028 741.806 364 741.42 364H601C596.582 364 593 360.418 593 356V133Z" fill="#0F1117"/>
+      <path id="kpi-3-acento-topo" d="M593 133C593 128.582 596.582 125 601 125H655H709C713.418 125 717 128.582 717 133H593Z" fill="#4E7CFF"/>
+      <path id="kpi-3-acento-base" d="M790 363C790 367.418 786.418 371 782 371H765.5H749C744.582 371 741 367.418 741 363H790Z" fill="#4E7CFF"/>
+      <path id="kpi-3-borda" d="M601 125.5H704.839C707.262 125.5 709.519 126.732 710.829 128.771C712.323 131.095 714.898 132.5 717.661 132.5H782C786.142 132.5 789.5 135.858 789.5 140V361.749C789.5 366.322 785.443 369.83 780.918 369.17L742.646 363.589C742.24 363.53 741.83 363.5 741.42 363.5H601C596.858 363.5 593.5 360.142 593.5 356V133C593.5 128.858 596.858 125.5 601 125.5Z" fill="none" stroke="#4E7CFF"/>
+      <rect x="749" y="142" width="30" height="30" rx="6" fill="#4E7CFF"/>
+      <g transform="translate(755,148) scale(0.018750) translate(0,960)" fill="#FFFFFF"><path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520Z"/></g>
+      <text x="613" y="185" font-size="11" letter-spacing="1.2" fill="#8A929E">{{ROTULO_KPI}}</text>
+      <text x="613" y="226" font-size="32" font-weight="700" fill="#FFFFFF">{{VALOR}}</text>
+      <text x="613" y="306" font-size="12" fill="#8A929E">{{CONTEXTO_KPI}}</text>
+    </g>
+  </g>
+
+  <g id="visuais">
+    <g id="visual-painel">
+      <path d="M820 133C820 128.582 823.582 125 828 125H1021.25H1214.5C1218.92 125 1222.5 128.582 1222.5 133V363C1222.5 367.418 1218.92 371 1214.5 371H828C823.582 371 820 367.418 820 363V133Z" fill="#0F1117" stroke="#2A2E38"/>
+      <line x1="820" y1="176.5" x2="1222" y2="176.5" stroke="#2A2E38"/>
+      <text x="840" y="158" font-size="14" font-weight="600" fill="#FFFFFF">{{NOME_DESCRITIVO}}</text>
+    </g>
+    <g id="visual-principal">
+      <path d="M160 396C160 391.582 163.582 388 168 388H475H782C786.418 388 790 391.582 790 396V657C790 661.418 786.418 665 782 665H168C163.582 665 160 661.418 160 657V396Z" fill="#0F1117" stroke="#2A2E38"/>
+      <line x1="160" y1="442.5" x2="790" y2="442.5" stroke="#2A2E38"/>
+      <text x="180" y="422" font-size="15" font-weight="600" fill="#FFFFFF">{{NOME_DESCRITIVO_PRINCIPAL}}</text>
+      <text x="180" y="440" font-size="12" fill="#7FB0FF">{{INSIGHT}}</text>
+    </g>
+    <!-- RANKING em gradiente PROFUNDO (top-N) — texto branco passa no contraste -->
+    <g id="visual-ranking">
+      <path d="M820 399C820 394.582 823.582 391 828 391H1021.5H1215C1219.42 391 1223 394.582 1223 399V658C1223 662.418 1219.42 666 1215 666H828C823.582 666 820 662.418 820 658V399Z" fill="url(#paint2)"/>
+      <text x="844" y="430" font-size="15" font-weight="600" fill="#FFFFFF">{{NOME_DESCRITIVO}}</text>
+      <g transform="translate(1186,415) scale(0.018750) translate(0,960)" fill="#FFFFFF"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></g>
+      <line x1="820" y1="441.5" x2="1222" y2="441.5" stroke="#FFFFFF" stroke-opacity="0.7"/>
+      <g id="rank-1">
+        <rect x="844" y="478" width="28" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.20"/><text x="858" y="497" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">1</text>
+        <text x="886" y="497" font-size="13" fill="#FFFFFF" fill-opacity="0.92">{{ROTULO_KPI}}</text>
+        <text x="1158" y="497" text-anchor="end" font-size="16" font-weight="700" fill="#FFFFFF">{{VALOR}}</text>
+        <g transform="translate(1180,483) scale(0.018750) translate(0,960)" fill="#E0A458"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></g>
+      </g>
+      <g id="rank-2">
+        <rect x="844" y="539" width="28" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.20"/><text x="858" y="558" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">2</text>
+        <text x="886" y="558" font-size="13" fill="#FFFFFF" fill-opacity="0.92">{{ROTULO_KPI}}</text>
+        <text x="1158" y="558" text-anchor="end" font-size="16" font-weight="700" fill="#FFFFFF">{{VALOR}}</text>
+        <g transform="translate(1180,544) scale(0.018750) translate(0,960)" fill="#C7CCD3"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></g>
+      </g>
+      <g id="rank-3">
+        <rect x="844" y="600" width="28" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.20"/><text x="858" y="619" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">3</text>
+        <text x="886" y="619" font-size="13" fill="#FFFFFF" fill-opacity="0.92">{{ROTULO_KPI}}</text>
+        <text x="1158" y="619" text-anchor="end" font-size="16" font-weight="700" fill="#FFFFFF">{{VALOR}}</text>
+        <g transform="translate(1180,605) scale(0.018750) translate(0,960)" fill="#8A929E"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="rodape">
+    <text x="1244" y="700" text-anchor="end" font-size="11" fill="#8A929E">MOCKUP — dados ilustrativos · Fonte: {{FONTE}}</text>
+  </g>
+
+  <defs>
+    <linearGradient id="paint0" x1="72" y1="36" x2="1536.5" y2="855.5" gradientUnits="userSpaceOnUse"><stop stop-color="#0F1117"/><stop offset="1" stop-color="#181B22"/></linearGradient>
+    <linearGradient id="paint2" x1="820" y1="391" x2="1184.08" y2="710.37" gradientUnits="userSpaceOnUse"><stop stop-color="#6A2BD9"/><stop offset="1" stop-color="#B5283C"/></linearGradient>
+  </defs>
+</svg>

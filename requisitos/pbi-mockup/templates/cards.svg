@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1420" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    BIBLIOTECA DE CARDS DE KPI — 12 variações copy-paste (todas nativas no PBI: Cartão / Cartão novo / KPI + sparkline + format. condicional).
+    Convenções: número GRANDE com UNIDADE; rótulo pequeno/claro; contexto diz bom/ruim (Δ/meta com direção, cor condicional);
+    fundo do card NEUTRO (cor só com significado); ícone Material no box tint. Troque #4E7CFF pela cor do cliente.
+    Tamanho-base do card: 380×100 (cabe nas faixas de KPI do grid; ajuste a largura conforme a coluna).
+  -->
+<rect width="1280" height="1420" fill="#F5F7FB"/>
+  <g id="cabecalho">
+  <text x="24" y="34" font-size="14" font-weight="600" fill="#33394C">Biblioteca de cards de KPI — escolha por necessidade</text>
+  </g>
+
+  <!-- ============ LINHA 1 ============ -->
+  <!-- 1. BÁSICO -->
+  <g id="card-01-basico">
+  <text x="24" y="64" font-size="11" letter-spacing="1" fill="#7C8595">1 · BÁSICO (ícone + valor + rótulo)</text>
+  <g transform="translate(24,72)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <rect x="16" y="20" width="44" height="44" rx="10" fill="#4E7CFF" fill-opacity="0.12"/><g transform="translate(26,30) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+    <text x="76" y="54" font-size="30" font-weight="700" fill="#33394C">R$ 18 Mi</text>
+    <text x="76" y="76" font-size="11" letter-spacing="1.4" fill="#7C8595">FATURAMENTO</text>
+  </g>
+  </g>
+  <!-- 2. Δ vs PERÍODO (direção clara) -->
+  <g id="card-02-delta-periodo">
+  <text x="448" y="64" font-size="11" letter-spacing="1" fill="#7C8595">2 · Δ vs PERÍODO ANTERIOR</text>
+  <g transform="translate(448,72)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <rect x="16" y="20" width="44" height="44" rx="10" fill="#4E7CFF" fill-opacity="0.12"/><g transform="translate(26,30) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z"/></g>
+    <text x="76" y="52" font-size="30" font-weight="700" fill="#33394C">53 Mil</text>
+    <text x="76" y="72" font-size="11" letter-spacing="1.4" fill="#7C8595">NOTAS EMITIDAS</text>
+    <text x="76" y="90" font-size="12" fill="#2E9E5B">▲ 6,08% vs ano anterior</text>
+  </g>
+  </g>
+  <!-- 3. vs META (mini-bullet nativo) -->
+  <g id="card-03-vs-meta-bullet">
+  <text x="872" y="64" font-size="11" letter-spacing="1" fill="#7C8595">3 · vs META (mini-bullet)</text>
+  <g transform="translate(872,72)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <rect x="16" y="20" width="44" height="44" rx="10" fill="#4E7CFF" fill-opacity="0.12"/><g transform="translate(26,30) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M200-120v-680h360l16 80h224v400H520l-16-80H280v280h-80Zm300-440Zm86 160h134v-240H510l-16-80H280v240h290l16 80Z"/></g>
+    <text x="76" y="50" font-size="28" font-weight="700" fill="#33394C">R$ 8,4M</text>
+    <text x="76" y="68" font-size="11" letter-spacing="1.4" fill="#7C8595">MARGEM · 104% DA META</text>
+    <rect x="76" y="78" width="220" height="8" fill="#EDEFF2"/><rect x="76" y="78" width="180" height="8" fill="#4E7CFF"/><rect x="248" y="75" width="2" height="14" fill="#7C8595"/>
+  </g>
+  </g>
+
+  <!-- ============ LINHA 2 ============ -->
+  <!-- 4. SPARKLINE (linha) -->
+  <g id="card-04-sparkline-linha">
+  <text x="24" y="206" font-size="11" letter-spacing="1" fill="#7C8595">4 · SPARKLINE (tendência) — só em card mais LARGO que o padrão</text>
+  <g transform="translate(24,214)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <text x="20" y="46" font-size="28" font-weight="700" fill="#33394C">R$ 334</text>
+    <text x="20" y="68" font-size="11" letter-spacing="1.4" fill="#7C8595">TICKET MÉDIO</text>
+    <polyline fill="none" stroke="#4E7CFF" stroke-width="2" points="220,70 244,58 268,64 292,40 316,48 340,28 360,22"/><circle cx="360" cy="22" r="3" fill="#4E7CFF"/>
+  </g>
+  </g>
+  <!-- 5. SPARKLINE ÁREA -->
+  <g id="card-05-sparkline-area">
+  <text x="448" y="206" font-size="11" letter-spacing="1" fill="#7C8595">5 · SPARKLINE ÁREA — só em card mais LARGO que o padrão</text>
+  <g transform="translate(448,214)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <text x="20" y="46" font-size="28" font-weight="700" fill="#33394C">1.272</text>
+    <text x="20" y="68" font-size="11" letter-spacing="1.4" fill="#7C8595">COBERTURA DE CLIENTES</text>
+    <path d="M210,78 L234,66 258,70 282,50 306,58 330,40 360,36 360,78 Z" fill="#4E7CFF" fill-opacity="0.15"/>
+    <polyline fill="none" stroke="#4E7CFF" stroke-width="2" points="210,78 234,66 258,70 282,50 306,58 330,40 360,36"/>
+  </g>
+  </g>
+  <!-- 6. NÚMERO GRANDE PURO -->
+  <g id="card-06-numero-grande">
+  <text x="872" y="206" font-size="11" letter-spacing="1" fill="#7C8595">6 · NÚMERO GRANDE (destaque único)</text>
+  <g transform="translate(872,214)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <text x="20" y="60" font-size="44" font-weight="700" fill="#4E7CFF">9 em 10</text>
+    <text x="20" y="84" font-size="13" fill="#5C6470">clientes recompram em 90 dias</text>
+  </g>
+  </g>
+
+  <!-- ============ LINHA 3 ============ -->
+  <!-- 7. MULTI-MÉTRICA -->
+  <g id="card-07-multi-metrica">
+  <text x="24" y="348" font-size="11" letter-spacing="1" fill="#7C8595">7 · MULTI-MÉTRICA (vários números num card)</text>
+  <g transform="translate(24,356)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <text x="20" y="42" font-size="16" font-weight="700" fill="#33394C">6,38 Mi</text><text x="20" y="56" font-size="9" letter-spacing="0.6" fill="#7C8595">ITENS VENDIDOS</text>
+    <text x="205" y="42" font-size="16" font-weight="700" fill="#33394C">798</text><text x="205" y="56" font-size="9" letter-spacing="0.6" fill="#7C8595">SKUS VENDIDOS</text>
+    <text x="20" y="76" font-size="16" font-weight="700" fill="#33394C">1.272</text><text x="20" y="90" font-size="9" letter-spacing="0.6" fill="#7C8595">CLIENTES</text>
+    <text x="205" y="76" font-size="16" font-weight="700" fill="#33394C">R$ 329k</text><text x="205" y="90" font-size="9" letter-spacing="0.6" fill="#7C8595">DESCONTO</text>
+  </g>
+  </g>
+  <!-- 8. META com % CONDICIONAL (abaixo = vermelho) -->
+  <g id="card-08-valor-meta-condicional">
+  <text x="448" y="348" font-size="11" letter-spacing="1" fill="#7C8595">8 · VALOR + META (% condicional)</text>
+  <g transform="translate(448,356)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <text x="20" y="50" font-size="30" font-weight="700" fill="#D64545">R$ 18 Mi</text>
+    <text x="20" y="74" font-size="11" letter-spacing="1.4" fill="#7C8595">FATURAMENTO</text>
+    <text x="20" y="92" font-size="12" fill="#5C6470">Meta: <tspan font-weight="600" fill="#33394C">R$ 33 Mi</tspan>  <tspan fill="#D64545" font-weight="600">52,87%</tspan></text>
+  </g>
+  </g>
+  <!-- 9. ANO ANTERIOR (acima = verde) -->
+  <g id="card-09-valor-ano-anterior">
+  <text x="872" y="348" font-size="11" letter-spacing="1" fill="#7C8595">9 · VALOR + ANO ANTERIOR</text>
+  <g transform="translate(872,356)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <text x="20" y="50" font-size="30" font-weight="700" fill="#2E9E5B">R$ 8 Mi</text>
+    <text x="20" y="74" font-size="11" letter-spacing="1.4" fill="#7C8595">MARGEM BRUTA</text>
+    <text x="20" y="92" font-size="12" fill="#5C6470">Ano anterior: <tspan font-weight="600" fill="#33394C">R$ 8 Mi</tspan>  <tspan fill="#2E9E5B" font-weight="600">+6,50%</tspan></text>
+  </g>
+  </g>
+
+  <!-- ============ LINHA 4 ============ -->
+  <!-- 10. TOPO COLORIDO (acento + ícone) -->
+  <g id="card-10-topo-colorido">
+  <text x="24" y="490" font-size="11" letter-spacing="1" fill="#7C8595">10 · TOPO COLORIDO (acento decorativo + ícone)</text>
+  <g transform="translate(24,498)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <path d="M0 10 q0-10 10-10 h360 q10 0 10 10 v8 H0 Z" fill="#4E7CFF"/>
+    <rect x="320" y="28" width="40" height="40" rx="10" fill="#4E7CFF" fill-opacity="0.14"/><g transform="translate(328,36) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M520-520h278q-15-110-91.5-186.5T520-798v278Zm-80 358v-636q-121 15-200.5 105.5T160-480q0 122 79.5 212.5T440-162Zm80 0q110-14 187-91t91-187H520v278Zm-40-318Zm0 400q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 155.5 31.5t127 86q54.5 54.5 86 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Z"/></g>
+    <text x="20" y="58" font-size="28" font-weight="700" fill="#33394C">R$ 334</text>
+    <text x="20" y="80" font-size="11" letter-spacing="1.4" fill="#7C8595">TICKET MÉDIO</text>
+  </g>
+  </g>
+  <!-- 11. DONUT MINI + VALOR -->
+  <g id="card-11-donut-valor">
+  <text x="448" y="490" font-size="11" letter-spacing="1" fill="#7C8595">11 · DONUT (1 fatia) + VALOR — só em card MAIOR (mais alto/largo)</text>
+  <g transform="translate(448,498)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <g transform="translate(58,50)">
+      <circle r="30" fill="none" stroke="#EDEFF2" stroke-width="10"/>
+      <circle r="30" fill="none" stroke="#4E7CFF" stroke-width="10" stroke-dasharray="132 189" transform="rotate(-90)"/>
+      <text y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#33394C">70%</text>
+    </g>
+    <text x="116" y="50" font-size="26" font-weight="700" fill="#33394C">70%</text>
+    <text x="116" y="72" font-size="11" letter-spacing="1.4" fill="#7C8595">POSITIVAÇÃO</text>
+  </g>
+  </g>
+  <!-- 12. GRADIENTE + META (destaque executivo) -->
+  <g id="card-12-gradiente-meta">
+  <text x="872" y="490" font-size="11" letter-spacing="1" fill="#7C8595">12 · GRADIENTE + META (hero)</text>
+  <g transform="translate(872,498)">
+    <rect width="380" height="100" rx="10" fill="url(#cardgrad)"/>
+    <text x="20" y="52" font-size="32" font-weight="700" fill="#FFFFFF">R$ 43.986</text>
+    <text x="20" y="76" font-size="12" fill="#FFFFFF" fill-opacity="0.9">Meta: R$ 994.531  ·  -95,58%</text>
+  </g>
+  </g>
+
+  <!-- legenda -->
+  <g id="secao-legenda">
+  <text x="24" y="700" font-size="11" fill="#7C8595">Regra: fundo do card é neutro (cor só com significado). Cards 8/9/12 usam cor condicional (bom/ruim). 10 usa acento decorativo + ícone (sem significado de dado).</text>
+  <text x="24" y="720" font-size="11" fill="#7C8595">Todos nativos: Cartão / Cartão novo / KPI · sparkline em tabela · formatação condicional. Ícones = Material (cole os símbolos no &lt;defs&gt;).</text>
+  <text x="24" y="740" font-size="11" fill="#D64545">Restrição: cards 4, 5 (sparkline) e 11 (donut) SÓ em card maior que o padrão — sparkline precisa de largura; donut precisa de altura/largura. Em KPI pequeno, use 1/2/3.</text>
+  </g>
+
+  <!-- ===================== VARIAÇÕES DE ACENTO (posição do destaque; mesmo conteúdo) — dos 10 cards de novos/Card ===================== -->
+  <g id="secao-variacoes-acento-titulo">
+  <text x="24" y="788" font-size="13" font-weight="600" fill="#33394C">Variações de acento — a decoração muda, o conteúdo é o mesmo (acento = #4E7CFF; troque pela marca)</text>
+  </g>
+
+  <!-- 13 · acento à DIREITA + ícone -->
+  <g id="card-13-acento-direita-icone">
+  <text x="24" y="806" font-size="11" letter-spacing="1" fill="#7C8595">13 · ACENTO À DIREITA + ÍCONE</text>
+  <g transform="translate(24,812)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <path d="M294,0 H370 Q380,0 380,10 V90 Q380,100 370,100 H294 Z" fill="#4E7CFF"/>
+    <g transform="translate(326,39) scale(0.022917) translate(0,960)" fill="#FFFFFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+    <text x="20" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="20" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+  <!-- 14 · acento à ESQUERDA + ícone -->
+  <g id="card-14-acento-esquerda-icone">
+  <text x="436" y="806" font-size="11" letter-spacing="1" fill="#7C8595">14 · ACENTO À ESQUERDA + ÍCONE</text>
+  <g transform="translate(436,812)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <path d="M86,0 H10 Q0,0 0,10 V90 Q0,100 10,100 H86 Z" fill="#4E7CFF"/>
+    <g transform="translate(28,39) scale(0.022917) translate(0,960)" fill="#FFFFFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+    <text x="108" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="108" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+  <!-- 15 · barra na borda DIREITA -->
+  <g id="card-15-barra-borda-direita">
+  <text x="848" y="806" font-size="11" letter-spacing="1" fill="#7C8595">15 · BARRA NA BORDA DIREITA</text>
+  <g transform="translate(848,812)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <rect x="370" y="12" width="6" height="76" rx="3" fill="#4E7CFF"/>
+    <text x="20" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="20" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+
+  <!-- 16 · barra grossa à ESQUERDA -->
+  <g id="card-16-barra-grossa-esquerda">
+  <text x="24" y="956" font-size="11" letter-spacing="1" fill="#7C8595">16 · BARRA GROSSA À ESQUERDA</text>
+  <g transform="translate(24,962)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <rect x="14" y="14" width="9" height="72" rx="4" fill="#4E7CFF"/>
+    <text x="42" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="42" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+  <!-- 17 · caixa de ícone à ESQUERDA -->
+  <g id="card-17-caixa-icone-esquerda">
+  <text x="436" y="956" font-size="11" letter-spacing="1" fill="#7C8595">17 · CAIXA DE ÍCONE À ESQUERDA</text>
+  <g transform="translate(436,962)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <rect x="16" y="30" width="40" height="40" rx="10" fill="#4E7CFF" fill-opacity="0.12"/>
+    <g transform="translate(26,40) scale(0.020833) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+    <text x="72" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="72" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+  <!-- 18 · contorno + caixa de ícone à DIREITA -->
+  <g id="card-18-contorno-icone-direita">
+  <text x="848" y="956" font-size="11" letter-spacing="1" fill="#7C8595">18 · CONTORNO + ÍCONE À DIREITA</text>
+  <g transform="translate(848,962)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF"/>
+    <rect x="1" y="1" width="378" height="98" rx="10" fill="none" stroke="#4E7CFF" stroke-width="2"/>
+    <rect x="324" y="30" width="40" height="40" rx="10" fill="#4E7CFF" fill-opacity="0.12"/>
+    <g transform="translate(334,40) scale(0.020833) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+    <text x="20" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="20" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+
+  <!-- 19 · acento no TOPO (tab) -->
+  <g id="card-19-acento-topo">
+  <text x="24" y="1106" font-size="11" letter-spacing="1" fill="#7C8595">19 · ACENTO NO TOPO</text>
+  <g transform="translate(24,1112)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <path d="M130,0 H250 L242,9 H138 Z" fill="#4E7CFF"/>
+    <text x="20" y="60" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="20" y="80" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+  <!-- 20 · barra fina à ESQUERDA -->
+  <g id="card-20-barra-fina-esquerda">
+  <text x="436" y="1106" font-size="11" letter-spacing="1" fill="#7C8595">20 · BARRA FINA À ESQUERDA</text>
+  <g transform="translate(436,1112)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <rect x="14" y="14" width="5" height="72" rx="3" fill="#4E7CFF"/>
+    <text x="36" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="36" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+  <!-- 21 · canto TOPO-DIREITO -->
+  <g id="card-21-canto-topo-direito">
+  <text x="848" y="1106" font-size="11" letter-spacing="1" fill="#7C8595">21 · CANTO TOPO-DIREITO</text>
+  <g transform="translate(848,1112)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <path d="M312,0 H370 Q380,0 380,10 V58 L372,50 V8 H312 Z" fill="#4E7CFF"/>
+    <text x="20" y="58" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="20" y="78" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+
+  <!-- 22 · aba TOPO-ESQUERDA + acento inferior -->
+  <g id="card-22-aba-topo-esquerda">
+  <text x="24" y="1256" font-size="11" letter-spacing="1" fill="#7C8595">22 · ABA TOPO-ESQUERDA</text>
+  <g transform="translate(24,1262)">
+    <rect width="380" height="100" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+    <path d="M10,0 H150 L150,9 H0 V10 Q0,0 10,0 Z" fill="#4E7CFF"/>
+    <rect x="150" y="94" width="90" height="6" fill="#4E7CFF"/>
+    <text x="20" y="60" font-size="26" font-weight="700" fill="#33394C">R$ XX.XXX</text><text x="20" y="80" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+  </g>
+  </g>
+  <g id="secao-nota-acento">
+  <text x="24" y="1392" font-size="11" fill="#7C8595">Acento = decoração (sem significado de dado). Para status bom/ruim use cor condicional no número (cards 8/9/12), não no acento.</text>
+  </g>
+
+  <defs>
+    <linearGradient id="cardgrad" x1="0" y1="0" x2="380" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4E7CFF"/><stop offset="1" stop-color="#56CFE1"/></linearGradient>
+    </defs>
+</svg>

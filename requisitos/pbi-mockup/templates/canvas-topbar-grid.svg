@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: BARRA DE MENU NO TOPO (abas, estilo ex.14) + 4 KPIs + 2 linhas (wide + 2). GRID PADRÃO (margem 24, gutter 20).
+    Top bar 0..56. Zonas deslocadas p/ baixo: título 56..120 · KPIs y130 h88 · corpo y238/y474 h216.
+    KPIs (4): w293, x = 24 / 337 / 650 / 963.  Corpo wide w606 (x24) + 2 de w293 (x650 / x963).
+    Cor de ação: #4E7CFF. Ícones Material inline no-->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="#F5F7FB"/>
+  </g>
+
+  <!-- BARRA DE MENU NO TOPO -->
+  <g id="menu">
+    <rect x="0" y="0" width="1280" height="56" fill="#FFFFFF"/>
+    <line x1="0" y1="56" x2="1280" y2="56" stroke="#E6E8EC"/>
+    <rect x="24" y="15" width="26" height="26" rx="7" fill="#4E7CFF"/>
+    <text x="62" y="34" font-size="16" font-weight="600" fill="#33394C">{{CLIENTE}}</text>
+    <g font-size="13">
+      <text x="340" y="34" font-weight="600" fill="#4E7CFF">{{TELA_ATIVA}}</text><rect x="338" y="44" width="64" height="3" fill="#4E7CFF"/>
+      <text x="452" y="34" fill="#7C8595">{{TELA_2}}</text>
+      <text x="568" y="34" fill="#7C8595">{{TELA_3}}</text>
+    </g>
+    <g transform="translate(1192,16) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></g>
+    <g transform="translate(1232,16) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></g>
+  </g>
+
+  <!-- TÍTULO + CARIMBOS -->
+  <g id="cabecalho">
+    <text x="24" y="90" font-size="22" font-weight="600" fill="#33394C">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="24" y="110" font-size="13" fill="#5C6470">Dados: <tspan font-weight="600" fill="#33394C">{{DATA_REFERENCIA}}</tspan> · atualizado em {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <!-- FILTROS (zona 56..120) -->
+  <g id="filtros" transform="translate(638,76)" font-size="12">
+    <g id="filtro-data">
+      <rect x="0"   y="0" width="108" height="26" rx="13" fill="#4E7CFF" fill-opacity="0.12"/><text x="16" y="17" fill="#4E7CFF" font-weight="600">{{MES}}/{{ANO}}</text>
+    </g>
+    <g id="filtro-1">
+      <rect x="118" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="130" y="17" fill="#5C6470">{{FILTRO_1}} ▾</text>
+    </g>
+    <g id="filtro-2">
+      <rect x="242" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="254" y="17" fill="#5C6470">{{FILTRO_2}} ▾</text>
+    </g>
+    <g id="filtro-3">
+      <rect x="366" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="378" y="17" fill="#5C6470">{{FILTRO_3}} ▾</text>
+    </g>
+    <g id="filtro-limpar">
+      <text x="492" y="17" fill="#4E7CFF" font-weight="600">✕ Limpar</text>
+    </g>
+  </g>
+
+  <!-- KPIs (4) -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(24,130)">
+      <rect width="293" height="88" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <rect x="16" y="16" width="36" height="36" rx="9" fill="#4E7CFF" fill-opacity="0.12"/>
+      <g transform="translate(23,23) scale(0.022917) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+      <text x="66" y="42" font-size="26" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="66" y="60" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="66" y="78" font-size="12" fill="#2E9E5B">{{CONTEXTO_KPI}}</text>
+    </g>
+    <!-- repita X = 337 / 650 / 963 -->
+  </g>
+
+  <!-- CORPO: área de visuais -->
+  <g id="visuais">
+    <!-- CORPO linha 1 (y238): wide + 2 -->
+    <g id="visual-principal" transform="translate(24,238)">
+      <rect width="606" height="216" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-1" transform="translate(650,238)">
+      <rect width="293" height="216" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-2" transform="translate(963,238)">
+      <rect width="293" height="216" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <!-- CORPO linha 2 (y474) -->
+    <g id="visual-3" transform="translate(24,474)">
+      <rect width="606" height="216" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-4" transform="translate(650,474)">
+      <rect width="293" height="216" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-5" transform="translate(963,474)">
+      <rect width="293" height="216" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+  </g>
+
+  <!-- RODAPÉ -->
+  <g id="rodape">
+    <text x="24" y="708" font-size="11" fill="#7C8595">Fonte: {{FONTE}}</text>
+    <text x="1256" y="708" text-anchor="end" font-size="11" fill="#C9CDD4">MOCKUP — dados ilustrativos</text>
+  </g>
+  </svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: HERO BANNER colorido no topo + KPIs sobrepostos + corpo. GRID PADRÃO (margem 24, gutter 20).
+    Banner 0..168 (full-width, cor de ação). KPIs (4) w293 sobrepostos (x24/337/650/963, y128, h92).
+    Corpo: principal w804 (x24, y240, h432) + 2 de apoio w408 (x848, y240 e y466, h206).
+    Cor de ação: #4E7CFF. Ícones Material inline no-->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="#F5F7FB"/>
+  </g>
+
+  <!-- HERO BANNER -->
+  <g id="hero">
+    <rect width="1280" height="168" fill="url(#hero-grad)"/>
+  </g>
+
+  <!-- TÍTULO + CARIMBOS (claros sobre o banner) -->
+  <g id="cabecalho">
+    <rect x="24" y="24" width="26" height="26" rx="7" fill="#FFFFFF" fill-opacity="0.9"/>
+    <text x="24" y="84" font-size="24" font-weight="600" fill="#FFFFFF">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="24" y="106" font-size="13" fill="#FFFFFF" fill-opacity="0.85">Dados: <tspan font-weight="600">{{DATA_REFERENCIA}}</tspan> · atualizado em {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <!-- FILTROS -->
+  <g id="filtros" transform="translate(872,32)" font-size="12">
+    <g id="filtro-data">
+      <rect x="0"   y="0" width="108" height="26" rx="13" fill="#FFFFFF"/><text x="16" y="17" fill="#4E7CFF" font-weight="600">{{MES}}/{{ANO}}</text>
+    </g>
+    <g id="filtro-1">
+      <rect x="118" y="0" width="116" height="26" rx="6" fill="#FFFFFF"/><text x="130" y="17" fill="#5C6470">{{FILTRO_1}} ▾</text>
+    </g>
+    <g id="filtro-2">
+      <rect x="244" y="0" width="116" height="26" rx="6" fill="#FFFFFF"/><text x="256" y="17" fill="#5C6470">{{FILTRO_2}} ▾</text>
+    </g>
+  </g>
+
+  <!-- KPIs SOBREPOSTOS -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(24,128)">
+      <rect width="293" height="92" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <rect x="16" y="18" width="38" height="38" rx="9" fill="#4E7CFF" fill-opacity="0.12"/>
+      <g transform="translate(23,25) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+      <text x="66" y="46" font-size="28" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="66" y="64" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="66" y="84" font-size="12" fill="#2E9E5B">{{CONTEXTO_KPI}}</text>
+    </g>
+    <!-- repita X = 337 / 650 / 963 -->
+  </g>
+
+  <!-- CORPO: principal + 2 de apoio -->
+  <g id="visuais">
+    <g id="visual-principal" transform="translate(24,240)"><rect width="804" height="432" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="24" y="34" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO_PRINCIPAL}}</text><text x="24" y="52" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-1" transform="translate(848,240)"><rect width="408" height="206" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-2" transform="translate(848,466)"><rect width="408" height="206" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+  </g>
+
+  <!-- RODAPÉ -->
+  <g id="rodape">
+    <text x="24" y="694" font-size="11" fill="#7C8595">Fonte: {{FONTE}}</text>
+    <text x="1256" y="694" text-anchor="end" font-size="11" fill="#C9CDD4">MOCKUP — dados ilustrativos</text>
+  </g>
+  <defs>
+    <linearGradient id="hero-grad" x1="0" y1="0" x2="1280" y2="168" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14215C"/><stop offset="1" stop-color="#4E7CFF"/>
+    </linearGradient>
+    </defs>
+</svg>

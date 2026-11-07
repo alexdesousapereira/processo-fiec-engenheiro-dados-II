@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: TOP BAR colorido + KPIs com FAIXA DE RODAPÉ colorida (rótulo) + ícone no topo (estilo ex.09). GRID (margem 24, gutter 20).
+    Top bar 0..56. KPIs (4) w293 x24/337/650/963 (y116, h110) com rodapé colorido (rótulo "melhor mês" etc).
+    Corpo: linha1 2 wide w606 (x24/x650, y246, h212); linha2 wide w606 (x24) + 2 w293 (x650/x963, y478, h212).
+    Top bar + faixas de rodapé em azul PROFUNDO #2E50C8 (texto branco pequeno legível ≥4,5:1; o accent #4E7CFF é claro demais sob texto branco pequeno). Accent #4E7CFF segue nos ícones/insights sobre branco. Ícones Material inline no defs.
+  -->
+<g id="fundo">
+  <rect width="1280" height="720" fill="#F5F7FB"/>
+</g>
+
+  <!-- TOP BAR -->
+  <g id="cabecalho">
+    <rect x="0" y="0" width="1280" height="56" fill="#2E50C8"/>
+    <rect x="24" y="18" width="3" height="20" fill="#FFFFFF" fill-opacity="0.5"/>
+    <text x="40" y="34" font-size="17" font-weight="600" fill="#FFFFFF">{{AREA}} — {{ASSUNTO}}</text>
+    <!-- carimbos de data sob a barra -->
+    <text x="24" y="92" font-size="13" fill="#5C6470">Dados: <tspan font-weight="600" fill="#33394C">{{DATA_REFERENCIA}}</tspan> · atualizado em {{DATA_ATUALIZACAO}}</text>
+  </g>
+
+  <!-- FILTROS (no top bar) -->
+  <g id="filtros" font-size="13" fill="#FFFFFF">
+    <g id="filtro-1">
+      <text x="1040" y="34" fill-opacity="0.9">{{FILTRO_1}} ▾</text>
+    </g>
+    <g id="filtro-2">
+      <text x="1170" y="34" fill-opacity="0.9">{{FILTRO_2}} ▾</text>
+    </g>
+  </g>
+
+  <!-- KPI com faixa de rodapé colorida + ícone no topo-direito -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(24,116)">
+      <rect width="293" height="110" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <rect x="241" y="16" width="36" height="36" rx="9" fill="#4E7CFF" fill-opacity="0.12"/><g transform="translate(248,23) scale(0.022917) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+      <text x="20" y="52" font-size="28" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="20" y="72" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <path d="M0,84 L293,84 L293,100 Q293,110 283,110 L10,110 Q0,110 0,100 Z" fill="#2E50C8"/>
+      <text x="14" y="102" font-size="10" letter-spacing="0.6" fill="#FFFFFF">Melhor mês: {{INFO}}</text>
+    </g>
+    <!-- repita X = 337 / 650 / 963 (trocar ícone, valor, rótulo do rodapé) -->
+  </g>
+
+  <!-- CORPO: área de visuais -->
+  <g id="visuais">
+    <!-- CORPO linha 1 (2 wide) -->
+    <g id="visual-principal" transform="translate(24,246)"><rect width="606" height="212" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-1" transform="translate(650,246)"><rect width="606" height="212" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <!-- CORPO linha 2 (wide + 2) -->
+    <g id="visual-2" transform="translate(24,478)"><rect width="606" height="212" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-3" transform="translate(650,478)"><rect width="293" height="212" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+    <g id="visual-4" transform="translate(963,478)"><rect width="293" height="212" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/><text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text><text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text></g>
+  </g>
+
+  <!-- RODAPÉ -->
+  <g id="rodape">
+    <text x="24" y="708" font-size="11" fill="#7C8595">Fonte: {{FONTE}}</text>
+    <text x="1256" y="708" text-anchor="end" font-size="11" fill="#C9CDD4">MOCKUP — dados ilustrativos</text>
+  </g>
+  </svg>

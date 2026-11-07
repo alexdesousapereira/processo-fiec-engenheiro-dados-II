@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="'Segoe UI',system-ui,Inter,sans-serif">
+  <!--
+    VARIANTE: APP-SHELL CLARO + trilho de ícones à esquerda (estilo ex.16). GRID PADRÃO (margem 24, gutter 20, trilho 72).
+    KPIs (4): w275, x = 96 / 391 / 686 / 981 (y104, h92).
+    Corpo linha1 (y216, h218): wide w570 (x96) + 2 de w275 (x686 / x981).
+    Corpo linha2 (y454, h218): wide w570 (x96) + 2 de w275 (x686 / x981).
+    Cor de ação: #4E7CFF (troque). Ícones Material inline no-->
+
+  <g id="fundo">
+    <rect width="1280" height="720" fill="#EDEFF2"/>
+  </g>
+
+  <!-- TRILHO DE MENU (72px). Item ativo: faixa + box na cor de ação -->
+  <g id="menu">
+    <rect x="0" y="0" width="72" height="720" fill="#FFFFFF"/>
+    <line x1="72" y1="0" x2="72" y2="720" stroke="#E6E8EC"/>
+    <rect x="20" y="24" width="32" height="32" rx="9" fill="#4E7CFF"/>
+    <rect x="0" y="100" width="3" height="44" fill="#4E7CFF"/>
+    <rect x="14" y="100" width="44" height="44" rx="11" fill="#4E7CFF" fill-opacity="0.12"/>
+    <g transform="translate(24,110) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></g>
+    <g transform="translate(24,172) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="M640-160v-280h160v280H640Zm-240 0v-640h160v640H400Zm-240 0v-440h160v440H160Z"/></g>
+    <g transform="translate(24,234) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+    <g transform="translate(24,296) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></g>
+    <g transform="translate(24,664) scale(0.025000) translate(0,960)" fill="#7C8595"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></g>
+  </g>
+
+  <!-- TÍTULO + CARIMBOS (zona 24..84) -->
+  <g id="cabecalho">
+    <text x="96" y="52" font-size="24" font-weight="600" fill="#33394C">{{AREA}} — {{ASSUNTO}}</text>
+    <text x="96" y="74" font-size="13" fill="#5C6470">Dados: <tspan font-weight="600" fill="#33394C">{{DATA_REFERENCIA}}</tspan> · atualizado em {{DATA_ATUALIZACAO}}</text>
+  </g>
+  <!-- BARRA DE FILTROS (data destacada + 3 filtros + limpar) -->
+  <g id="filtros" transform="translate(686,28)" font-size="12">
+    <g id="filtro-data">
+      <rect x="0"   y="0" width="108" height="26" rx="13" fill="#4E7CFF" fill-opacity="0.12"/><text x="16" y="17" fill="#4E7CFF" font-weight="600">{{MES}}/{{ANO}}</text>
+    </g>
+    <g id="filtro-1">
+      <rect x="118" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="130" y="17" fill="#5C6470">{{FILTRO_1}} ▾</text>
+    </g>
+    <g id="filtro-2">
+      <rect x="242" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="254" y="17" fill="#5C6470">{{FILTRO_2}} ▾</text>
+    </g>
+    <g id="filtro-3">
+      <rect x="366" y="0" width="114" height="26" rx="6" fill="#FFFFFF" stroke="#E6E8EC"/><text x="378" y="17" fill="#5C6470">{{FILTRO_3}} ▾</text>
+    </g>
+    <g id="filtro-limpar">
+      <text x="492" y="17" fill="#4E7CFF" font-weight="600">✕ Limpar</text>
+    </g>
+  </g>
+
+  <!-- KPIs (4) -->
+  <g id="kpis">
+    <g id="kpi-1" transform="translate(96,104)">
+      <rect width="275" height="92" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <rect x="14" y="16" width="38" height="38" rx="9" fill="#4E7CFF" fill-opacity="0.12"/>
+      <g transform="translate(21,23) scale(0.025000) translate(0,960)" fill="#4E7CFF"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></g>
+      <text x="62" y="44" font-size="26" font-weight="700" fill="#33394C">{{VALOR}}</text>
+      <text x="62" y="62" font-size="11" letter-spacing="1.2" fill="#7C8595">{{ROTULO_KPI}}</text>
+      <text x="62" y="80" font-size="12" fill="#2E9E5B">{{CONTEXTO_KPI}}</text>
+    </g>
+    <!-- repita X = 391 / 686 / 981 -->
+  </g>
+
+  <g id="visuais">
+    <!-- CORPO linha 1: wide + 2 -->
+    <g id="visual-principal" transform="translate(96,216)">
+      <rect width="570" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-1" transform="translate(686,216)">
+      <rect width="275" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-2" transform="translate(981,216)">
+      <rect width="275" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <!-- CORPO linha 2: wide + 2 -->
+    <g id="visual-3" transform="translate(96,454)">
+      <rect width="570" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-4" transform="translate(686,454)">
+      <rect width="275" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+    <g id="visual-5" transform="translate(981,454)">
+      <rect width="275" height="218" rx="10" fill="#FFFFFF" stroke="#E6E8EC"/>
+      <text x="20" y="32" font-size="15" font-weight="600" fill="#33394C">{{NOME_DESCRITIVO}}</text>
+      <text x="20" y="50" font-size="12" fill="#4E7CFF">{{INSIGHT}}</text>
+    </g>
+  </g>
+
+  <!-- RODAPÉ -->
+  <g id="rodape">
+    <text x="96" y="690" font-size="11" fill="#7C8595">Fonte: {{FONTE}}</text>
+    <text x="1256" y="690" text-anchor="end" font-size="11" fill="#C9CDD4">MOCKUP — dados ilustrativos</text>
+  </g>
+  </svg>
