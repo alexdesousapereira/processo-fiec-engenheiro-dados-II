@@ -1,0 +1,4 @@
+-r ingestao.txt
+pytest==9.2.0
+# Exigido pelo TestClient do FastAPI.
+httpx==0.28.1

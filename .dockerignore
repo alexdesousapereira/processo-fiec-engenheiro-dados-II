@@ -1,0 +1,11 @@
+*
+!dags
+!src
+!dbt
+!tests
+!sql
+!requirements
+**/__pycache__
+**/.pytest_cache
+dbt/target
+dbt/logs

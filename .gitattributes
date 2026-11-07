@@ -1,0 +1,3 @@
+# Scripts executados dentro dos contêineres Linux não podem ter CRLF.
+*.sh text eol=lf
+Dockerfile text eol=lf

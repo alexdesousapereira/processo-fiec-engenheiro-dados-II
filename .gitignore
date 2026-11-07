@@ -1,0 +1,30 @@
+# Documento original da prova
+Prova*.docx
+~$*
+
+# Dados gerados pelo pipeline (recriáveis a partir da fonte)
+data/
+
+# Segredos e ambiente local
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Airflow
+logs/
+
+# Power BI: configurações locais e cache com dados
+powerbi/**/.pbi/
+powerbi/**/cache.abf
+
+# Sistema/editor
+.DS_Store
+Thumbs.db
+desktop.ini
+requisitos/
