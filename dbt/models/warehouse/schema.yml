@@ -1,7 +1,7 @@
 version: 2
 
 # Contrato: o dbt cria as tabelas com estes tipos e chaves, e o banco garante a integridade.
-# Prefixos: dim_ para dimensão, fat_ para fato. Toda tabela informa a origem e a data de carga.
+# Prefixos: dim_ para dimensão, fat_ para fato (a tabela analítica usa o nome pedido, fato_...). Toda tabela informa a origem e a data de carga.
 models:
   - name: dim_territorio
     description: Dimensão com Brasil, Nordeste e as 17 UFs presentes na fonte.
@@ -181,8 +181,57 @@ models:
         data_type: timestamptz
         constraints: [{type: not_null}]
 
+  - name: fato_producao_fisica_industrial_2025
+    description: >
+      Estrutura analítica exigida (A1 a A5). Grão UF x mês x atividade da Indústria de Transformação, em 2025.
+      Lida pelas duas views e pelo Power BI. O nome foi pedido pela equipe, por isso não usa o prefixo fat_.
+    config:
+      contract: {enforced: true}
+    constraints:
+      - type: primary_key
+        columns: [territorio_codigo, periodo, categoria_codigo]
+      - type: foreign_key
+        columns: [territorio_codigo]
+        to: ref('dim_territorio')
+        to_columns: [territorio_codigo]
+      - type: foreign_key
+        columns: [categoria_codigo]
+        to: ref('dim_categorias')
+        to_columns: [categoria_codigo]
+      - type: foreign_key
+        columns: [periodo]
+        to: ref('dim_calendario')
+        to_columns: [periodo]
+    columns:
+      - name: territorio_codigo
+        data_type: integer
+        description: Código da UF.
+      - name: periodo
+        data_type: integer
+      - name: categoria_codigo
+        data_type: integer
+        description: Código da atividade da Indústria de Transformação.
+      - name: indice_producao
+        data_type: numeric(14,5)
+        description: Número-índice da produção física (2022=100) da atividade.
+        constraints: [{type: not_null}]
+      - name: media_atividades_uf_mes
+        data_type: numeric
+        description: Média dos índices das atividades com dado na UF e no mês.
+        constraints: [{type: not_null}]
+      - name: diferenca_para_media
+        data_type: numeric
+        description: Índice menos a média. Pode ser negativa.
+        constraints: [{type: not_null}]
+      - name: path_origem
+        data_type: text
+        constraints: [{type: not_null}]
+      - name: data_carga
+        data_type: timestamptz
+        constraints: [{type: not_null}]
+
   - name: vw_transformacao_2025
-    description: Estrutura analítica exigida (A1 a A4), consumida pelo top 3 e pelo Power BI.
+    description: A tabela analítica com os nomes da UF e da atividade, para a consulta SQL do top 3 (S1).
     columns:
       - name: uf_codigo
         data_tests: [not_null]
@@ -194,7 +243,7 @@ models:
         data_tests: [not_null]
 
   - name: vw_top3_transformacao_2025
-    description: As 3 atividades de maior índice por UF e mês de 2025 (S2), para o Power BI.
+    description: As 3 atividades de maior índice por UF e mês de 2025 (S2), lidas da tabela analítica.
     columns:
       - name: uf_codigo
         data_tests: [not_null]
