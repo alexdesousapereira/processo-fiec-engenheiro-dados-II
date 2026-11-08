@@ -13,7 +13,7 @@ respostas originais, trata os dados e publica um warehouse consultável via SQL,
 | Da Stage ao warehouse, views e testes de dados | dbt | [dbt/](dbt/) |
 | Orquestração | Airflow | [dags/pim_pf_8888.py](dags/pim_pf_8888.py), [src/pim_pf/cliente_api.py](src/pim_pf/cliente_api.py) |
 | Consulta do top 3 | SQL | [sql/top3_por_uf_mes.sql](sql/top3_por_uf_mes.sql) |
-| Painel | Power BI (PBIP) | [powerbi/](powerbi/) |
+| Painel | Power BI (PBIP) | [powerbi/](powerbi/) e [painel publicado](#como-abrir-o-painel) |
 
 As decisões estão em [docs/arquitetura/ARQUITETURA.md](docs/arquitetura/ARQUITETURA.md).
 
@@ -113,10 +113,14 @@ No Git Bash do Windows, defina `MSYS_NO_PATHCONV=1` antes de comandos que tenham
 
 ## Como abrir o painel
 
-![Tela de análise do painel (mockup)](mockup/tela-02-analise.svg)
+[![Tela de análise do painel no Power BI: Ceará, janeiro de 2025](docs/painel-power-bi.png)](https://app.powerbi.com/view?r=eyJrIjoiNmNlMTFiZmUtMjYwOS00ZWZmLWIwZTYtYWU0MzY1ZTNhZTQwIiwidCI6IjJlMDg2ODMxLTlkNTAtNDA4Zi04MWMzLTM5Zjc0OTZmYzNmNiJ9)
 
-O desenho acima é o [mockup](mockup/observatorio-mockup.html) aprovado, com os números reais do Ceará em janeiro de 2025. As decisões de cada visual estão
-no [racional](mockup/observatorio-mockup-racional.md). O PBIP é gerado a partir desse desenho por `powerbi/ferramentas/gerar_pbip.py`.
+Clique na imagem para abrir o [painel publicado no Power BI](https://app.powerbi.com/view?r=eyJrIjoiNmNlMTFiZmUtMjYwOS00ZWZmLWIwZTYtYWU0MzY1ZTNhZTQwIiwidCI6IjJlMDg2ODMxLTlkNTAtNDA4Zi04MWMzLTM5Zjc0OTZmYzNmNiJ9), que abre no navegador e não exige login.
+
+O painel segue o [mockup](mockup/observatorio-mockup.html) aprovado. As decisões de cada visual estão no
+[racional](mockup/observatorio-mockup-racional.md). O PBIP é gerado a partir desse desenho por `powerbi/ferramentas/gerar_pbip.py`.
+
+Para abrir o painel local, ligado ao seu PostgreSQL:
 
 1. Com a carga concluída, abra `powerbi/Observatorio.pbip` no Power BI Desktop.
 2. Atualize os dados. Informe o usuário `pim_leitura` e a senha `PIM_LEITURA_SENHA` do `.env`, com autenticação de banco de dados.
