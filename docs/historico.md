@@ -7,14 +7,14 @@ Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
 ### O que foi feito
 
-- README: a seção "Como abrir o painel" mostra o print da tela de análise (`docs/painel-power-bi.png`).
-  A imagem leva ao painel publicado no Power BI, que abre no navegador.
-- O desenho do mockup saiu do README e continua citado por link.
+- README: a seção "Como abrir o painel" mostra o print da tela de análise do painel real
+  (`docs/painel-power-bi.png`), e não mais o desenho do mockup, que continua citado por link.
+- A imagem leva à tela de análise do relatório no workspace do Power BI Service.
 
 ### Decisões
 
-- O link é de "Publicar na Web": qualquer pessoa com ele vê o painel. Os dados são públicos (IBGE), então não há
-  risco de exposição.
+- O link aponta para o relatório no workspace, e não para "Publicar na Web". Por isso, pede login na conta
+  Microsoft e acesso ao workspace.
 
 ## 2026-11-08: Tabela analítica `fato_producao_fisica_industrial_2025`
 
