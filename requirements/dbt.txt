@@ -1,0 +1,3 @@
+# Dependências do contêiner do dbt. As indiretas ficam travadas em dbt.lock.
+dbt-core==1.11.17
+dbt-postgres==1.11.0
