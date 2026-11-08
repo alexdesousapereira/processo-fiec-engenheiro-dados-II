@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "cartao_acima",
   "position": {
-    "x": 1016,
-    "y": 76,
-    "z": 6000,
-    "height": 76,
-    "width": 248,
-    "tabOrder": 6000
+    "x": 858.67,
+    "y": 132,
+    "z": 22000,
+    "height": 88,
+    "width": 397.33,
+    "tabOrder": 22000
   },
   "visual": {
     "visualType": "card",
@@ -20,14 +20,15 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "vw_transformacao_2025"
+                      "Entity": "Medidas"
                     }
                   },
-                  "Property": "Atividades acima da média"
+                  "Property": "Acima da média"
                 }
               },
-              "queryRef": "vw_transformacao_2025.Atividades acima da média",
-              "nativeQueryRef": "Atividades acima da média"
+              "queryRef": "Medidas.Acima da média",
+              "nativeQueryRef": "Acima da média",
+              "active": true
             }
           ]
         }
@@ -40,7 +41,31 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "26D"
+                  "Value": "20D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#33394C'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -68,7 +93,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Quantidade de atividades com índice acima da média da UF'"
+                  "Value": "'Quantas atividades estão acima da média da UF no mês'"
                 }
               }
             }
@@ -81,7 +106,70 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Atividades acima da média da UF'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#33394C'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6E8EC'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }
@@ -90,23 +178,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "d23365250d2e0a0c052c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "vw_transformacao_2025"
-              }
-            },
-            "Property": "Atividades acima da média"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

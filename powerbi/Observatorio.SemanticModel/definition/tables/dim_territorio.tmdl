@@ -1,18 +1,25 @@
 table dim_territorio
-	lineageTag: 7a13d2f4-8cca-4486-87a4-2ac43cebaa18
+	lineageTag: 1267e7fa-5725-44ce-aeda-66c59be00fea
 
 	column territorio_codigo
 		dataType: int64
 		formatString: 0
-		lineageTag: ece6649d-c4b8-4aae-89e8-181aed54e934
+		lineageTag: 44af22e5-3310-49bc-8777-c446d1aea857
 		summarizeBy: none
 		sourceColumn: territorio_codigo
 
 	column territorio_nome
 		dataType: string
-		lineageTag: 95dc7ddc-01e0-46eb-8331-0575fff21dcf
+		lineageTag: 1bf69082-7492-4b01-a5cc-b96c4c7b0731
 		summarizeBy: none
 		sourceColumn: territorio_nome
+
+	column data_carga
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 9bdd5f02-ff6d-47ad-907b-98aebf6bde48
+		summarizeBy: none
+		sourceColumn: data_carga
 
 	partition dim_territorio = m
 		mode: import
@@ -21,7 +28,7 @@ table dim_territorio
 				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
 				    Tabela = Fonte{[Schema="warehouse",Item="dim_territorio"]}[Data],
 				    Filtrada = Table.SelectRows(Tabela, each [nivel] = "N3"),
-				    Colunas = Table.SelectColumns(Filtrada, {"territorio_codigo", "territorio_nome"})
+				    Colunas = Table.SelectColumns(Filtrada, {"territorio_codigo", "territorio_nome", "data_carga"})
 				in
 				    Colunas
 

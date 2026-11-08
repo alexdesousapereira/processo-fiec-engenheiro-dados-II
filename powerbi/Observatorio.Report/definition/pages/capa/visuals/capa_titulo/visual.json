@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "capa_titulo",
   "position": {
-    "x": 530,
-    "y": 170,
-    "z": 2000,
-    "height": 170,
-    "width": 700,
-    "tabOrder": 2000
+    "x": 16,
+    "y": 62,
+    "z": 10000,
+    "height": 44,
+    "width": 1000,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,10 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Produção física da Indústria de Transformação",
+                    "value": "Quais atividades puxam a produção industrial em cada UF?",
                     "textStyle": {
-                      "fontSize": "32pt",
-                      "color": "#0E4194",
+                      "fontSize": "16pt",
+                      "color": "#33394C",
                       "fontWeight": "bold"
                     }
                   }
@@ -40,7 +40,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Título do painel: Produção física da Indústria de Transformação'"
+                  "Value": "'Título do painel'"
                 }
               }
             }

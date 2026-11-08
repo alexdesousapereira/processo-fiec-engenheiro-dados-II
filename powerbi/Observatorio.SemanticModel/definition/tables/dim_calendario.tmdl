@@ -1,30 +1,30 @@
 table dim_calendario
-	lineageTag: 2fc16bce-d455-4fef-a2d0-464e9b1df15e
+	lineageTag: 6e712ce8-0706-4d9a-a611-b7c1f38556db
 
 	column periodo
 		dataType: int64
 		formatString: 0
-		lineageTag: 9cfd8224-aac4-48bb-ad08-8ab151a13c6e
+		lineageTag: 632630d0-045c-4317-834b-d45246f9d7ed
 		summarizeBy: none
 		sourceColumn: periodo
 
 	column ano
 		dataType: int64
 		formatString: 0
-		lineageTag: 4ea8ec23-ceb7-4075-972c-a76c445f1f57
+		lineageTag: c32e8861-8f3c-4357-ba4b-5425b2c3c68b
 		summarizeBy: none
 		sourceColumn: ano
 
 	column mes
 		dataType: int64
 		formatString: 0
-		lineageTag: bdbb04f2-4d09-4021-bd0a-b76703ec5e20
+		lineageTag: 3d853ab1-905c-40d4-81d5-09bddcb91ae5
 		summarizeBy: none
 		sourceColumn: mes
 
 	column mes_nome
 		dataType: string
-		lineageTag: b1da6369-836b-409a-8935-68fec1ee3195
+		lineageTag: 434c153a-5084-4b77-98ba-22faa3e842bc
 		summarizeBy: none
 		sourceColumn: mes_nome
 		sortByColumn: mes
@@ -39,6 +39,4 @@ table dim_calendario
 				    Colunas = Table.SelectColumns(Filtrada, {"periodo", "ano", "mes", "mes_nome"})
 				in
 				    Colunas
-
-	annotation PBI_ResultType = Table
 

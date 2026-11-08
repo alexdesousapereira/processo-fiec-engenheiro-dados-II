@@ -10,11 +10,12 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["dim_calendario","dim_categorias","dim_territorio","vw_top3_transformacao_2025","vw_transformacao_2025","Servidor","Porta","Banco"]
+annotation PBI_QueryOrder = ["dim_calendario","dim_categorias","dim_territorio","fato_producao_fisica_industrial_2025","Medidas","meses_linha","Servidor","Porta","Banco"]
 
 ref table dim_calendario
 ref table dim_categorias
 ref table dim_territorio
-ref table vw_top3_transformacao_2025
-ref table vw_transformacao_2025
+ref table fato_producao_fisica_industrial_2025
+ref table Medidas
+ref table meses_linha
 

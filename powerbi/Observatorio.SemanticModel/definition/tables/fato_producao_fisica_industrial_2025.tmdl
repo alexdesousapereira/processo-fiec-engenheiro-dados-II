@@ -1,0 +1,55 @@
+table fato_producao_fisica_industrial_2025
+	lineageTag: e2e65035-53f7-4195-9dab-89ef20ae5912
+
+	column territorio_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: c371b0b1-8275-4322-86c7-21cbeae85558
+		summarizeBy: none
+		sourceColumn: territorio_codigo
+
+	column periodo
+		dataType: int64
+		formatString: 0
+		lineageTag: e3166a6c-f890-477b-9aae-7ce9e68d0c0e
+		summarizeBy: none
+		sourceColumn: periodo
+
+	column categoria_codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: f55003da-e8d6-4573-8439-033cc0c9ab14
+		summarizeBy: none
+		sourceColumn: categoria_codigo
+
+	column indice_producao
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 0d620450-0e38-46ad-af55-c6155c9c347e
+		summarizeBy: none
+		sourceColumn: indice_producao
+
+	column media_atividades_uf_mes
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 7b912e2e-e6f0-4bb9-b14c-ae859eef7497
+		summarizeBy: none
+		sourceColumn: media_atividades_uf_mes
+
+	column diferenca_para_media
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 43ce451e-7b8f-4ba0-8bc3-c553c87939f3
+		summarizeBy: none
+		sourceColumn: diferenca_para_media
+
+	partition fato_producao_fisica_industrial_2025 = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
+				    Tabela = Fonte{[Schema="warehouse",Item="fato_producao_fisica_industrial_2025"]}[Data],
+				    Colunas = Table.SelectColumns(Tabela, {"territorio_codigo", "periodo", "categoria_codigo", "indice_producao", "media_atividades_uf_mes", "diferenca_para_media"})
+				in
+				    Colunas
+
