@@ -109,7 +109,9 @@ justifica adicionar um componente: isso continua sujeito ao Princípio I.
 
 - Valores externos MUST entrar em consultas como parâmetros, nunca por concatenação. Nomes de tabela e
   coluna montados dinamicamente MUST vir de constantes do código.
-- A publicação no DW MUST ser transacional: uma falha deixa os consumidores com os dados anteriores.
+- O lote MUST ser validado antes de publicar, e a publicação no DW MUST ser transacional por tabela: uma falha na
+  validação ou na carga deixa os consumidores com os dados anteriores. Testes sobre o resultado publicado rodam
+  depois e MUST tornar a falha visível na orquestração.
 - Integridade MUST ser garantida no banco, com chaves primárias e estrangeiras, além dos testes.
 - Consultas publicadas MUST listar as colunas na projeção final, sem `SELECT *`.
 - `ROW_NUMBER` e outras ordenações usadas em resultados MUST ter desempate determinístico.
@@ -141,4 +143,4 @@ Esta constituição prevalece sobre outras práticas do projeto. Alterações MU
 MINOR para acrescentar, PATCH para ajustes de redação. Cada plano MUST verificar a conformidade com
 estes princípios antes da implementação.
 
-**Version**: 1.1.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-07
+**Version**: 1.2.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-07
