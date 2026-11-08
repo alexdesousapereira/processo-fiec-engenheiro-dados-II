@@ -145,12 +145,10 @@ erDiagram
 Todas as tabelas têm também `path_origem` e `data_carga`. `fat_producao_fisica` guarda todas as variáveis e territórios, o que atende a "extrair todos os dados" (I2). `dim_calendario` tem uma linha por mês e se liga ao fato pelo código AAAAMM.
 `valor` usa `numeric(14,5)` e fica nulo quando há símbolo. O tipo comporta o maior valor da fonte, uma variação M/M-12 de 11.126.974,6% (Pernambuco, 04/2021), legítima porque a base estava perto de zero. O dbt cria as tabelas a partir de contratos em [schema.yml](../../dbt/models/warehouse/schema.yml), com as chaves primárias e estrangeiras.
 
-**Estrutura analítica exigida (A1 a A4):** [vw_transformacao_2025.sql](../../dbt/models/warehouse/vw_transformacao_2025.sql).
+**Estrutura analítica exigida (A1 a A5):** a tabela [fato_producao_fisica_industrial_2025](../../dbt/models/warehouse/fato_producao_fisica_industrial_2025.sql), com grão UF × mês × atividade e chave primária e chaves estrangeiras para as dimensões. Ela é recriada a cada carga (`table`, e não `incremental`), porque a média depende de todas as atividades da UF no mês: com merge, um valor revisado para "-" deixaria a linha antiga. A view [vw_transformacao_2025](../../dbt/models/warehouse/vw_transformacao_2025.sql) só acrescenta os nomes da UF e da atividade.
 
 ```sql
-SELECT t.territorio_codigo AS uf_codigo, t.territorio_nome AS uf_nome, f.periodo,
-       c.categoria_codigo AS atividade_codigo, c.categoria_cnae AS atividade_cnae,
-       c.categoria_nome AS atividade_nome,
+SELECT f.territorio_codigo, f.periodo, f.categoria_codigo,
        f.valor AS indice_producao,
        AVG(f.valor) OVER w AS media_atividades_uf_mes,
        f.valor - AVG(f.valor) OVER w AS diferenca_para_media
@@ -166,7 +164,7 @@ WHERE f.variavel_codigo = 12606
 WINDOW w AS (PARTITION BY f.territorio_codigo, f.periodo);
 ```
 
-**Consulta exigida (S1, S2):** [top3_por_uf_mes.sql](../../sql/top3_por_uf_mes.sql). A view [vw_top3_transformacao_2025](../../dbt/models/warehouse/vw_top3_transformacao_2025.sql) traz o mesmo ranking para o painel.
+**Consulta exigida (S1, S2):** [top3_por_uf_mes.sql](../../sql/top3_por_uf_mes.sql). A view [vw_top3_transformacao_2025](../../dbt/models/warehouse/vw_top3_transformacao_2025.sql) aplica o mesmo ranking direto sobre a tabela analítica. O painel não usa views: importa a tabela e as dimensões e refaz o ranking em DAX, com o mesmo desempate pelo código.
 
 ```sql
 WITH ranqueada AS (
@@ -271,7 +269,8 @@ As três primeiras tarefas conversam com a API. `validar_lote` executa `dbt test
 
 As imagens têm versão fixa. Em [requirements/](../../requirements/), os arquivos `.lock` travam todas as dependências da ingestão e do dbt, inclusive as indiretas; a imagem do Airflow não instala pacotes. A lógica fica em funções que podem ser testadas sem Airflow, API ou banco. Todas as portas só atendem à própria máquina. Segredos ficam em `.env`, com `.env.example` versionado.
 
-O **Power BI** fica fora do Compose, por ser um aplicativo de desktop para Windows. O painel em [powerbi/](../../powerbi/) se conecta pelo conector nativo de PostgreSQL, usando um usuário somente leitura, e tem duas telas: capa e análise ([contrato](../../specs/001-pipeline-pim-pf/contracts/painel.md) e [ADR 0005](adr/0005-power-bi-como-visualizacao.md)).
+O **Power BI** fica fora do Compose, por ser um aplicativo de desktop para Windows. O painel em [powerbi/](../../powerbi/) se conecta pelo conector nativo de PostgreSQL, usando um usuário somente leitura, e tem duas telas: capa e análise ([contrato](../../specs/001-pipeline-pim-pf/contracts/painel.md) e [ADR 0005](adr/0005-power-bi-como-visualizacao.md)). O desenho segue o
+[mockup](../../mockup/observatorio-mockup.html) aprovado na feature 002, com os números reais conferidos contra o warehouse por `mockup/conferir_mockup.py`.
 
 ## 10. Rastreabilidade
 
@@ -295,7 +294,7 @@ O **Power BI** fica fora do Compose, por ser um aplicativo de desktop para Windo
 | T3, T4 | Modelo da seção 6 | Esquema das tabelas |
 | T5 | ADR 0004 | Testes de nulos e símbolos |
 | T6 | Chave primária e etapa de tratamento | Teste de unicidade |
-| A1 a A4 | `vw_transformacao_2025`, seção 6 | Consulta e caso do Ceará |
+| A1 a A4 | `fato_producao_fisica_industrial_2025`, seção 6 | Consulta e caso do Ceará |
 | A5 | PostgreSQL, schema `warehouse` | Conexão SQL |
 | S1, S2 | Consulta da seção 6 | 612 linhas em 2025 |
 | C1 a C4 | Serviços da seção 9 | `docker compose up` em clone limpo |
@@ -309,7 +308,7 @@ API e Power BI não atendem a um requisito direto da prova. As justificativas es
 |---|---|---|
 | Prazo da entrega não consta no documento | Planejamento | Confirmar o prazo com o RH |
 | Respostas da Questão 1 pendentes | Prova incompleta | Candidato responde |
-| Painel gerado fora do Power BI Desktop | Pode exigir ajustes ao abrir | O JSON foi validado contra os esquemas oficiais, mas o DAX, o TMDL e o visual só são confirmados no Desktop |
+| Painel regerado a partir do mockup | Recursos novos (subtítulo por medida, linha da média nas barras, cor de fundo da página) ainda não foram abertos no Desktop | O Desktop já abriu e salvou a versão anterior. O JSON novo passa nos esquemas oficiais; as diferenças vistas no Desktop vão para o racional do mockup |
 | Acesso ao socket do Docker no scheduler | Controle do Docker da máquina | Só no scheduler, em ambiente local; alternativas no ADR 0012 |
 | Revisão anterior à janela de 3 meses | Fica sem carregar até a próxima carga `completa` | Decisão consciente; rodar `completa` periodicamente, se o IBGE revisar meses antigos |
 | Calendário mensal no Power BI | Funções de data que exigem todos os dias não funcionam direto | Criar uma tabela diária no Power BI, se forem necessárias ([ADR 0010](adr/0010-dw-em-fato-e-dimensao.md)) |

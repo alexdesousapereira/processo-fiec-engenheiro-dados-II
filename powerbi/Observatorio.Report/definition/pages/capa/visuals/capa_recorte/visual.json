@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "capa_recorte",
   "position": {
-    "x": 530,
-    "y": 340,
-    "z": 3000,
-    "height": 110,
-    "width": 700,
-    "tabOrder": 3000
+    "x": 56,
+    "y": 168,
+    "z": 13000,
+    "height": 200,
+    "width": 560,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,10 +19,34 @@
               {
                 "textRuns": [
                   {
-                    "value": "Quais atividades puxam a produção em cada Unidade da Federação, mês a mês, em 2025?",
+                    "value": "RECORTE",
                     "textStyle": {
-                      "fontSize": "16pt",
-                      "color": "#374151",
+                      "fontSize": "8pt",
+                      "color": "#5C6470",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Indústria de Transformação, 2025",
+                    "textStyle": {
+                      "fontSize": "15pt",
+                      "color": "#33394C",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• 17 Unidades da Federação com dados na PIM-PF",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#5C6470",
                       "fontWeight": "normal"
                     }
                   }
@@ -31,10 +55,34 @@
               {
                 "textRuns": [
                   {
-                    "value": "Número-índice, base 2022 = 100.",
+                    "value": "• 24 atividades da Indústria de Transformação (CNAE 2.0)",
                     "textStyle": {
-                      "fontSize": "12pt",
-                      "color": "#374151",
+                      "fontSize": "10pt",
+                      "color": "#5C6470",
+                      "fontWeight": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Número-índice da produção física, com base 2022 = 100",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#5C6470",
+                      "fontWeight": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Meses de janeiro a dezembro de 2025",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#5C6470",
                       "fontWeight": "normal"
                     }
                   }
@@ -52,7 +100,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Pergunta que o painel responde e recorte: 2025, Número-índice com base 2022 igual a 100'"
+                  "Value": "'Recorte da análise'"
                 }
               }
             }

@@ -1,15 +1,15 @@
 expression Servidor = "localhost" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
-	lineageTag: 57fb3ab3-eb02-404a-9a04-9399ae201ee1
+	lineageTag: e1813ed5-7672-4bd6-b03c-bc0bc21a41ae
 
 	annotation PBI_ResultType = Text
 
 expression Porta = "5432" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
-	lineageTag: 552f4e89-98c0-4887-b4d2-faa1dff64f0e
+	lineageTag: 45df0f6e-e2c5-45e9-9e9c-4db458c2b61c
 
 	annotation PBI_ResultType = Text
 
 expression Banco = "pim" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
-	lineageTag: 875dc71c-847b-4af1-975d-b28153e86eeb
+	lineageTag: 82fb67b5-5466-49ea-8cdc-493fb4884e86
 
 	annotation PBI_ResultType = Text
 

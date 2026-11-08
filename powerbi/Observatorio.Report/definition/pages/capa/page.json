@@ -9,28 +9,12 @@
     "background": [
       {
         "properties": {
-          "image": {
-            "image": {
-              "name": {
+          "color": {
+            "solid": {
+              "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'capa.svg'"
-                  }
-                }
-              },
-              "url": {
-                "expr": {
-                  "ResourcePackageItem": {
-                    "PackageName": "RegisteredResources",
-                    "PackageType": "RegisteredResources",
-                    "ItemName": "capa.svg"
-                  }
-                }
-              },
-              "scaling": {
-                "expr": {
-                  "Literal": {
-                    "Value": "'Fit'"
+                    "Value": "'#F5F7FB'"
                   }
                 }
               }

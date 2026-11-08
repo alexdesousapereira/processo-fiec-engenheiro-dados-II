@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "filtro_uf",
   "position": {
-    "x": 16,
-    "y": 76,
-    "z": 2000,
-    "height": 76,
-    "width": 190,
-    "tabOrder": 2000
+    "x": 1118.5714285714287,
+    "y": 61.428571428571431,
+    "z": 13000,
+    "height": 55.714285714285715,
+    "width": 138.57142857142858,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "slicer",
@@ -55,6 +55,19 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -116,7 +129,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Filtro de unidade da federação. Escolha uma opção por vez.'"
+                  "Value": "'Filtro de uf. Escolha uma opção por vez.'"
                 }
               }
             }
@@ -136,7 +149,63 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Unidade da Federação'"
+                  "Value": "'UF'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#33394C'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6E8EC'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }

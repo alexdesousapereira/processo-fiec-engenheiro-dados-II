@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "analise_nota",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "analise_rodape",
   "position": {
     "x": 16,
-    "y": 688,
-    "z": 10000,
-    "height": 30,
+    "y": 668,
+    "z": 90000,
+    "height": 40,
     "width": 1248,
-    "tabOrder": 10000
+    "tabOrder": 90000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,10 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Número-índice, 2022 = 100. Atividades sem dado na UF não aparecem nem contam como zero. Fonte: IBGE, PIM-PF, tabela 8888.",
+                    "value": "Fonte: IBGE, Pesquisa Industrial Mensal – Produção Física (PIM-PF), tabela 8888 do SIDRA. Atividades sem dado na UF não aparecem nem contam como zero.",
                     "textStyle": {
-                      "fontSize": "9pt",
-                      "color": "#374151",
+                      "fontSize": "8pt",
+                      "color": "#5C6470",
                       "fontWeight": "normal"
                     }
                   }
@@ -40,7 +40,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Nota sobre o recorte, as atividades sem dado e a fonte'"
+                  "Value": "'Fonte dos dados'"
                 }
               }
             }

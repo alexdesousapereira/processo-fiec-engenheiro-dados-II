@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "analise_titulo",
   "position": {
     "x": 16,
-    "y": 10,
-    "z": 1000,
+    "y": 62,
+    "z": 10000,
     "height": 44,
-    "width": 780,
-    "tabOrder": 1000
+    "width": 900,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,10 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Indústria de Transformação em 2025: atividades na UF e no mês",
+                    "value": "Indústria de Transformação — atividades da UF no mês",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#FFFFFF",
+                      "color": "#33394C",
                       "fontWeight": "bold"
                     }
                   }

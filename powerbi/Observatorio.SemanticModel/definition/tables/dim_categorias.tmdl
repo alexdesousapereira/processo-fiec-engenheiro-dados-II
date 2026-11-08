@@ -1,24 +1,30 @@
 table dim_categorias
-	lineageTag: 6a13771a-038e-4ddd-a248-528ac1558380
+	lineageTag: 6490d6fa-cc95-4767-ad96-d7c648b8fa06
 
 	column categoria_codigo
 		dataType: int64
 		formatString: 0
-		lineageTag: fdb0196b-f4ed-4533-aa9e-d586a3d24178
+		lineageTag: cc6ec7cb-8693-49a1-ba90-e627123f714c
 		summarizeBy: none
 		sourceColumn: categoria_codigo
 
 	column categoria_cnae
 		dataType: string
-		lineageTag: 3211a25d-5ec2-4202-9917-bda5b4283ce0
+		lineageTag: 8edc2294-d289-4870-b9c4-2f784b881f9a
 		summarizeBy: none
 		sourceColumn: categoria_cnae
 
 	column categoria_nome
 		dataType: string
-		lineageTag: ff9a64b7-881d-4389-ba24-cf2393a3d36f
+		lineageTag: ace2418f-7d98-48be-9895-de7bc4e4d6e5
 		summarizeBy: none
 		sourceColumn: categoria_nome
+
+	column categoria_rotulo
+		dataType: string
+		lineageTag: 164552a4-2ecc-495c-9dfa-a66b3dd5f6f8
+		summarizeBy: none
+		sourceColumn: categoria_rotulo
 
 	partition dim_categorias = m
 		mode: import
@@ -27,7 +33,8 @@ table dim_categorias
 				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
 				    Tabela = Fonte{[Schema="warehouse",Item="dim_categorias"]}[Data],
 				    Filtrada = Table.SelectRows(Tabela, each [eh_atividade_transformacao] = true),
-				    Colunas = Table.SelectColumns(Filtrada, {"categoria_codigo", "categoria_cnae", "categoria_nome"})
+				    Colunas = Table.SelectColumns(Filtrada, {"categoria_codigo", "categoria_cnae", "categoria_nome"}),
+				    Calculada1 = Table.AddColumn(Colunas, "categoria_rotulo", each [categoria_cnae] & " " & [categoria_nome], type text)
 				in
-				    Colunas
+				    Calculada1
 

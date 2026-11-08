@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "capa_perguntas",
+  "position": {
+    "x": 658,
+    "y": 168,
+    "z": 14000,
+    "height": 200,
+    "width": 580,
+    "tabOrder": 14000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "O QUE A ANÁLISE RESPONDE",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#5C6470",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Uma UF e um mês por vez",
+                    "textStyle": {
+                      "fontSize": "15pt",
+                      "color": "#33394C",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Qual é o índice de cada atividade na UF e no mês?",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#33394C",
+                      "fontWeight": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. Qual é a média das atividades e quem fica acima dela?",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#33394C",
+                      "fontWeight": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. Quais são as 3 atividades com maior índice?",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#33394C",
+                      "fontWeight": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "4. Como a média da UF evoluiu ao longo de 2025?",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#33394C",
+                      "fontWeight": "normal"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Perguntas que a análise responde'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

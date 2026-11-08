@@ -50,8 +50,9 @@ cria um contêiner a partir da mesma imagem em cada execução.
 
 ## Como consultar
 
-O schema `warehouse` tem o fato `fat_producao_fisica`, as dimensões `dim_territorio`, `dim_variaveis`, `dim_categorias` e `dim_calendario`, e as views
-`vw_transformacao_2025` (índice, média e diferença) e `vw_top3_transformacao_2025`.
+O schema `warehouse` tem o fato `fat_producao_fisica`, as dimensões `dim_territorio`, `dim_variaveis`, `dim_categorias` e `dim_calendario`,
+a tabela analítica `fato_producao_fisica_industrial_2025` (índice, média e diferença por UF, mês e atividade de 2025) e as views
+`vw_transformacao_2025` (a tabela analítica com os nomes) e `vw_top3_transformacao_2025`, que leem dessa tabela.
 
 ```bash
 docker compose exec -T postgres psql -U pim -d pim < sql/top3_por_uf_mes.sql
@@ -111,6 +112,11 @@ Na DAG, os testes do lote rodam em `validar_lote`, antes de publicar: se reprova
 No Git Bash do Windows, defina `MSYS_NO_PATHCONV=1` antes de comandos que tenham caminhos do contêiner.
 
 ## Como abrir o painel
+
+![Tela de análise do painel (mockup)](mockup/tela-02-analise.svg)
+
+O desenho acima é o [mockup](mockup/observatorio-mockup.html) aprovado, com os números reais do Ceará em janeiro de 2025. As decisões de cada visual estão
+no [racional](mockup/observatorio-mockup-racional.md). O PBIP é gerado a partir desse desenho por `powerbi/ferramentas/gerar_pbip.py`.
 
 1. Com a carga concluída, abra `powerbi/Observatorio.pbip` no Power BI Desktop.
 2. Atualize os dados. Informe o usuário `pim_leitura` e a senha `PIM_LEITURA_SENHA` do `.env`, com autenticação de banco de dados.

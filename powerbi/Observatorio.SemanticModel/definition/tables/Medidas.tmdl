@@ -1,0 +1,111 @@
+table Medidas
+	lineageTag: 4b8890be-c573-419a-9518-75e4e9d150b4
+
+	measure 'Índice de produção' = AVERAGE(fato_producao_fisica_industrial_2025[indice_producao])
+		formatString: #,0.00
+		lineageTag: c2c512a2-a4ca-40b9-a728-3cc99112de6a
+
+	measure 'Média das atividades' = AVERAGE(fato_producao_fisica_industrial_2025[media_atividades_uf_mes])
+		formatString: #,0.00
+		lineageTag: 634ca99d-6fbe-42d2-9232-a3b7eff777e1
+
+	measure 'Atividades com dado' = DISTINCTCOUNT(fato_producao_fisica_industrial_2025[categoria_codigo]) + 0
+		formatString: 0
+		lineageTag: ac3f56ad-51a8-4b2a-80d6-7f36d0453ac7
+
+	measure 'Atividades acima da média' = CALCULATE(DISTINCTCOUNT(fato_producao_fisica_industrial_2025[categoria_codigo]), fato_producao_fisica_industrial_2025[diferenca_para_media] > 0) + 0
+		formatString: 0
+		lineageTag: 3bc74294-36b3-4a62-bd3b-5df64e92c26a
+
+	measure 'Acima da média' = FORMAT([Atividades acima da média], "0") & " de " & FORMAT([Atividades com dado], "0")
+		lineageTag: 21ea45a5-0fa5-4491-b5ff-62c907ccae80
+
+	measure 'Detalhe acima da média' = FORMAT(DIVIDE([Atividades acima da média], [Atividades com dado]), "0%", "pt-BR") & " das atividades"
+		lineageTag: ae964fb2-c8b4-4e72-87a8-cb5c99c44ef9
+
+	measure 'Detalhe da média' = FORMAT([Atividades com dado], "0") & " atividades com dado no mês"
+		lineageTag: 85a6350e-6bd3-4b77-b176-b3494c2e359b
+
+	measure 'Posição no ranking' =
+			VAR indice = [Índice de produção]
+			VAR codigo = SELECTEDVALUE(dim_categorias[categoria_codigo])
+			VAR ranking = FILTER(ADDCOLUMNS(ALLSELECTED(dim_categorias), "@indice", [Índice de produção]), NOT ISBLANK([@indice]))
+			RETURN
+				IF(NOT ISBLANK(indice) && NOT ISBLANK(codigo),
+					1 + COUNTROWS(FILTER(ranking, [@indice] > indice || ([@indice] = indice && dim_categorias[categoria_codigo] < codigo))))
+		formatString: 0
+		lineageTag: bb5841c6-fa52-4ead-8933-b826c14ce778
+
+	measure 'Cor do ranking' =
+			VAR posicao = [Posição no ranking]
+			RETURN IF(NOT ISBLANK(posicao) && posicao <= 3, "#0E4194", "#C9CDD4")
+		lineageTag: 00eb9cac-b9fa-4275-8aba-352fd8d92e8f
+
+	measure 'Código do líder' =
+			VAR ranking = FILTER(ADDCOLUMNS(VALUES(dim_categorias[categoria_codigo]), "@indice", [Índice de produção]), NOT ISBLANK([@indice]))
+			RETURN MAXX(TOPN(1, ranking, [@indice], DESC, dim_categorias[categoria_codigo], ASC), dim_categorias[categoria_codigo])
+		formatString: 0
+		isHidden
+		lineageTag: 74c01650-2367-4dbd-85ba-80906a2ffe06
+
+	measure 'Atividade líder' =
+			VAR codigo = [Código do líder]
+			RETURN IF(ISBLANK(codigo), "Selecione uma UF e um mês",
+				LOOKUPVALUE(dim_categorias[categoria_nome], dim_categorias[categoria_codigo], codigo))
+		lineageTag: 0807cd17-528c-4e86-93f9-c374d06e0928
+
+	measure 'Índice do líder' =
+			VAR codigo = [Código do líder]
+			RETURN CALCULATE([Índice de produção], dim_categorias[categoria_codigo] = codigo)
+		formatString: #,0.00
+		lineageTag: 5fd6b866-75a3-42bb-b2bf-ce2a7cbbe5f4
+
+	measure 'Diferença do líder' =
+			VAR codigo = [Código do líder]
+			RETURN CALCULATE(AVERAGE(fato_producao_fisica_industrial_2025[diferenca_para_media]), dim_categorias[categoria_codigo] = codigo)
+		formatString: +#,0.00;-#,0.00;0.00
+		lineageTag: 9a3d85dc-c865-4a05-99e8-198ab4f7d179
+
+	measure 'Detalhe do líder' =
+			"Índice " & FORMAT([Índice do líder], "#,0.00", "pt-BR") & " · "
+				& FORMAT([Diferença do líder], "+#,0.00;-#,0.00", "pt-BR") & " sobre a média"
+		lineageTag: 2f283867-3988-42a3-ae28-a3c6313e5966
+
+	measure 'Insight do líder' = [Atividade líder] & " lidera, " & FORMAT([Diferença do líder], "#,0.00", "pt-BR") & " pontos acima da média da UF"
+		lineageTag: d9076f00-00e4-406e-9f4c-bc506b5f89f1
+
+	measure 'Carimbo de data' =
+			"Dados: " & LEFT(SELECTEDVALUE(dim_calendario[mes_nome], "vários meses"), 3) & "/2025 · atualizado em "
+				& FORMAT(MAX(dim_territorio[data_carga]), "dd/mm/yyyy")
+		lineageTag: 7a535428-a9cf-4c26-a96c-dd8589f418e3
+
+	measure 'Legenda da média' = "Média da UF (" & FORMAT([Média das atividades], "#,0.00", "pt-BR") & ")"
+		lineageTag: 4a7eb3bd-093b-44f8-a7be-fd615078a99a
+
+	measure 'Carimbo do período' = "Dados: jan a dez/2025 · atualizado em " & FORMAT(MAX(dim_territorio[data_carga]), "dd/mm/yyyy")
+		lineageTag: e974b8ac-f73c-489f-adef-67a151365208
+
+	measure 'Média mensal da linha' = CALCULATE([Média das atividades], REMOVEFILTERS(dim_calendario), TREATAS(VALUES(meses_linha[periodo]), dim_calendario[periodo]))
+		formatString: #,0.00
+		lineageTag: a8eb37bd-dce2-46ae-8276-3dbaddb1a42c
+
+	measure 'Insight da linha' =
+			VAR mes = SELECTEDVALUE(dim_calendario[mes_nome])
+			VAR meses = ADDCOLUMNS(ALL(meses_linha[periodo], meses_linha[mes_nome]), "@media", [Média mensal da linha])
+			VAR pico = TOPN(1, meses, [@media], DESC)
+			RETURN
+				UPPER(LEFT(mes, 1)) & MID(mes, 2, 20) & " em " & FORMAT([Média das atividades], "#,0.00", "pt-BR")
+					& "; pico em " & MAXX(pico, meses_linha[mes_nome]) & " (" & FORMAT(MAXX(pico, [@media]), "#,0.00", "pt-BR") & ")"
+		lineageTag: 1dbbde47-d382-465f-9042-4ed80624d2ed
+
+	column Coluna
+		dataType: string
+		isHidden
+		lineageTag: c2741c6f-ed23-4dc8-aacf-c3c9a0a7a599
+		summarizeBy: none
+		sourceColumn: Coluna
+
+	partition Medidas = m
+		mode: import
+		source = #table(type table [Coluna = text], {})
+

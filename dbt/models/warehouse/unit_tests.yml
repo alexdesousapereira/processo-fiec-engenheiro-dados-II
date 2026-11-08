@@ -3,7 +3,7 @@ version: 2
 # Testam a regra com linhas escritas à mão, sem depender dos dados carregados.
 unit_tests:
   - name: media_ignora_nulos_agregado_e_outros_recortes
-    model: vw_transformacao_2025
+    model: fato_producao_fisica_industrial_2025
     description: >
       A média usa só as atividades 3.NN com número, do índice 12606, no nível de UF e em 2025.
     given:
@@ -36,19 +36,28 @@ unit_tests:
     expect:
       rows:
         # O texto segue a escala que o PostgreSQL devolve para AVG em numeric.
-        - {uf_codigo: 23, periodo: 202501, atividade_codigo: 1, indice_producao: 100, media_atividades_uf_mes: "150.0000000000000000", diferenca_para_media: "-50.0000000000000000"}
-        - {uf_codigo: 23, periodo: 202501, atividade_codigo: 2, indice_producao: 200, media_atividades_uf_mes: "150.0000000000000000", diferenca_para_media: "50.0000000000000000"}
+        - {territorio_codigo: 23, periodo: 202501, categoria_codigo: 1, indice_producao: 100, media_atividades_uf_mes: "150.0000000000000000", diferenca_para_media: "-50.0000000000000000"}
+        - {territorio_codigo: 23, periodo: 202501, categoria_codigo: 2, indice_producao: 200, media_atividades_uf_mes: "150.0000000000000000", diferenca_para_media: "50.0000000000000000"}
 
   - name: top3_tem_3_linhas_com_desempate_pelo_codigo
     model: vw_top3_transformacao_2025
     description: Quatro atividades com empate no topo geram 3 linhas, com a de menor código primeiro.
     given:
-      - input: ref('vw_transformacao_2025')
+      - input: ref('fato_producao_fisica_industrial_2025')
         rows:
-          - {uf_codigo: 23, periodo: 202501, atividade_codigo: 7, indice_producao: 100}
-          - {uf_codigo: 23, periodo: 202501, atividade_codigo: 5, indice_producao: 100}
-          - {uf_codigo: 23, periodo: 202501, atividade_codigo: 6, indice_producao: 90}
-          - {uf_codigo: 23, periodo: 202501, atividade_codigo: 8, indice_producao: 80}
+          - {territorio_codigo: 23, periodo: 202501, categoria_codigo: 7, indice_producao: 100}
+          - {territorio_codigo: 23, periodo: 202501, categoria_codigo: 5, indice_producao: 100}
+          - {territorio_codigo: 23, periodo: 202501, categoria_codigo: 6, indice_producao: 90}
+          - {territorio_codigo: 23, periodo: 202501, categoria_codigo: 8, indice_producao: 80}
+      - input: ref('dim_territorio')
+        rows:
+          - {territorio_codigo: 23, territorio_nome: Ceará}
+      - input: ref('dim_categorias')
+        rows:
+          - {categoria_codigo: 5, categoria_cnae: "3.10", categoria_nome: A}
+          - {categoria_codigo: 6, categoria_cnae: "3.11", categoria_nome: B}
+          - {categoria_codigo: 7, categoria_cnae: "3.12", categoria_nome: C}
+          - {categoria_codigo: 8, categoria_cnae: "3.13", categoria_nome: D}
     expect:
       rows:
         - {atividade_codigo: 5, posicao: 1}

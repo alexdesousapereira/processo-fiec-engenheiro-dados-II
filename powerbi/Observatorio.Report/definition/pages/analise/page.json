@@ -9,28 +9,12 @@
     "background": [
       {
         "properties": {
-          "image": {
-            "image": {
-              "name": {
+          "color": {
+            "solid": {
+              "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'analise.svg'"
-                  }
-                }
-              },
-              "url": {
-                "expr": {
-                  "ResourcePackageItem": {
-                    "PackageName": "RegisteredResources",
-                    "PackageType": "RegisteredResources",
-                    "ItemName": "analise.svg"
-                  }
-                }
-              },
-              "scaling": {
-                "expr": {
-                  "Literal": {
-                    "Value": "'Fit'"
+                    "Value": "'#F5F7FB'"
                   }
                 }
               }
@@ -46,12 +30,5 @@
         }
       }
     ]
-  },
-  "visualInteractions": [
-    {
-      "source": "filtro_mes",
-      "target": "linha_media",
-      "type": "NoFilter"
-    }
-  ]
+  }
 }
