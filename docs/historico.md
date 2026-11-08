@@ -3,6 +3,119 @@
 Registro do que foi feito e decidido, do mais recente para o mais antigo.
 Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
+## 2026-11-08: Tabela analítica `fato_producao_fisica_industrial_2025`
+
+### O que foi feito
+
+- dbt: nova tabela `warehouse.fato_producao_fisica_industrial_2025`, com grão UF × mês × atividade de
+  2025, índice, média da UF no mês, diferença, `path_origem` e `data_carga`. Tem contrato, chave primária
+  e chaves estrangeiras para as dimensões. Foram geradas 2.004 linhas.
+- `vw_transformacao_2025` e `vw_top3_transformacao_2025` passaram a ler da tabela, e não calculam mais nada.
+  As colunas não mudaram, então `sql/top3_por_uf_mes.sql`, os testes e o mockup continuam iguais.
+- Testes unitários apontados para a tabela. `dbt test`: 27 de 27 passaram.
+- Power BI: o modelo importa a tabela e as dimensões, sem nenhuma view. O top 3 (com desempate pelo código),
+  a líder e a cor do ranking viraram medidas DAX. Todas as medidas ficam na tabela `Medidas`. O rótulo do eixo
+  passou para `dim_categorias[categoria_rotulo]`.
+- Spec 002 (esclarecimento e FR-019), contrato do painel, arquitetura e README atualizados.
+
+### Decisões
+
+- Tabela `table`, e não `incremental`: a média depende de todas as atividades da UF no mês, e o merge deixaria
+  uma linha antiga se a fonte revisasse um valor para "-". A tabela é pequena e recriada a cada carga.
+- Nome `fato_...` pedido pelo candidato, fora do prefixo `fat_` do projeto, com o motivo registrado no `schema.yml`.
+- No painel, índice, média e diferença vêm da tabela, e não do DAX, para baterem com a consulta SQL.
+
+### Pendências
+
+- Abrir no Power BI Desktop e conferir Ceará, janeiro de 2025: média 101,58, líder 3.13 Têxteis (+43,45)
+  e top 3 com 3.13, 3.24 e 3.11.
+
+## 2026-11-08: Botões e legenda do painel iguais ao mockup
+
+### O que foi feito
+
+- Botões corrigidos: o `show` de texto, preenchimento, contorno e ícone saiu do seletor `default` e foi
+  para uma entrada própria. Antes, o Desktop ignorava a formatação e desenhava as abas Capa e Análise e o
+  botão "Abrir a análise →" como caixas vazias com contorno escuro.
+- Abas: texto azul (`#0E4194`) e negrito na aba ativa, cinza nas demais, e sublinhado azul na aba ativa.
+- Botão da capa: fundo azul com texto branco, como no mockup.
+- Barras: a linha da média ficou sem rótulo, pois o "101,58" cobria a primeira barra. No lugar, há uma
+  legenda acima das barras ("■ Top 3 ■ Demais - - - Média da UF (101,58)"), feita com uma caixa de texto
+  e a nova medida `Legenda da média`, com espaço reservado abaixo do subtítulo.
+- PBIP regerado e validado: 43 JSON sem erro e 10 TMDL conferidos.
+
+### Pendências
+
+- Conferir no Power BI Desktop se a legenda e o sublinhado ficaram no lugar. As posições foram
+  estimadas, porque a altura do título do visual só aparece no Desktop.
+
+## 2026-11-08: Painel ajustado ao mockup (feature 002, US2 e US3)
+
+### O que foi feito
+
+- Mockup aprovado pelo candidato (T012).
+- Gerador e validador do PBIP agora versionados em `powerbi/ferramentas/`.
+- PBIP regerado no desenho do mockup:
+  - visuais e telas: um só gráfico de barras com o top 3 e a linha da média, cartões com subtítulo, carimbos de data e barra de marca com abas;
+  - modelo: medidas novas e as colunas `atividade_rotulo` e `dim_territorio[data_carga]`.
+- Contrato do painel (feature 001) atualizado; README com a tela de análise; arquitetura e `CLAUDE.md` atualizados.
+- Verificado: 32 JSON válidos nos esquemas oficiais; o PBIP é idêntico ao ser gerado duas vezes; 150 testes em Python seguem aprovados; geometria e números do mockup seguem corretos.
+
+### Decisões
+
+- O PBIP do repositório tinha sido salvo pelo Power BI Desktop: há `.platform`, `diagramLayout.json`, `lineageTag` e versões de formato mais novas. Corrige a entrada anterior, que atribuía as datas de `powerbi/` ao OneDrive.
+- O Desktop descartou os fundos em SVG ao salvar. Por isso, a barra de marca e o fundo agora são visuais nativos e cor de página, sem imagem.
+- O gerador usa as versões de formato que o Desktop gravou e preserva `.platform` e `diagramLayout.json`.
+- O validador usa o esquema `visualContainer` 2.13.0 quando o 2.14.0, gravado pelo Desktop, ainda não está publicado, e avisa.
+
+### Pendências
+
+- T018: abrir o painel no Desktop e comparar com o mockup. Isso confirma a linha da média nas barras, os subtítulos por medida, a cor de fundo e os marcadores, e conclui também a T064 da feature 001.
+- T070 (imagem do diagrama) e a Questão 1.
+
+## 2026-11-08: Mockup do painel (feature 002, US1)
+
+### O que foi feito
+
+- Criação de `mockup/` com as telas `tela-01-capa.svg` e `tela-02-analise.svg`, o índice HTML, o racional, a consulta dos números, o conferidor e o validador de geometria.
+- Verificado: `check_bounds.py` sem erros, colisões nem avisos; o conferidor encontrou os 28 valores obrigatórios e nenhum número sem origem no warehouse; o teste negativo detectou um número alterado.
+- Telas convertidas para PNG e revisadas a olho, inclusive em escala de cinza. Foram corrigidos três problemas que o validador não pegou: a aba encostada na marca, um texto no limite do cartão e a linha da média sobre os rótulos.
+
+### Decisões
+
+- Gerador `mockup/ferramentas/gerar_telas.py`, fora da lista de tarefas, para regerar as telas se o IBGE revisar os dados.
+- O conferidor também verifica o caminho inverso: todo número decimal exibido precisa existir no warehouse.
+- Texto pequeno em `#5C6470`, porque os cinzas do `pbi-mockup` não atingem o contraste de 4,5:1.
+- A linha mensal rotula só janeiro e o pico, porque doze rótulos se sobreporiam; os demais meses ficam no eixo.
+
+### Pendências
+
+- T012: aprovação do mockup pelo candidato, antes de ajustar o painel (US2).
+
+## 2026-11-08: Especificação do mockup do painel (feature 002)
+
+### O que foi feito
+
+- Criação de `specs/002-mockup-power-bi/spec.md` e do checklist de qualidade, com 16 de 16 itens aprovados.
+- As respostas às duas perguntas vieram das regras de `requisitos/pbi-mockup`, um pacote de skill para mockups de Power BI.
+
+### Decisões
+
+- O mockup tem um SVG estático por tela, de 1280 × 720, um índice HTML e um racional, e é a referência que o painel passa a seguir.
+- Usa os números reais do warehouse, e não dados fictícios como as regras sugerem, porque a constituição exige dados medidos.
+- Onde as regras divergirem do contrato atual do painel, prevalece o mockup, e o PBIP é ajustado.
+
+### Plano
+
+- Criação de `plan.md`, `research.md`, `data-model.md`, `quickstart.md` e `contracts/telas-mockup.md` em `specs/002-mockup-power-bi/`.
+- Esqueleto `topo-marca`, com abas Capa e Análise e cor de ação `#0E4194`, a do tema do Observatório.
+- A regra antirredundância funde os dois gráficos de barras do painel em um só: as atividades ordenadas pelo índice, o top 3 destacado e a linha da média.
+- Os números foram medidos no warehouse: Ceará, jan/2025, 11 atividades, média 101,58 e 5 acima da média.
+
+### Pendências
+
+- `/speckit-tasks` e a implementação da feature 002.
+
 ## 2026-11-08: Commits por etapa e publicação no GitHub (T001)
 
 ### O que foi feito
