@@ -16,6 +16,10 @@
 - Q: O que fazem os endpoints por tabela? → A: Acionam a extração só daquela tabela; os dados continuam sendo lidos por SQL.
 - Q: O que acontece quando um teste de dados reprova? → A: O lote é validado na área de carga antes de publicar, e uma reprovação ali mantém os dados anteriores. Testes sobre o resultado publicado rodam depois e tornam a falha visível.
 
+### Session 2026-11-08
+
+- Q: Com o Cosmos mostrando cada modelo do dbt como uma tarefa no Airflow, o dbt continua no contêiner próprio ou passa a rodar na imagem do Airflow? → A: Continua no contêiner `pim-pf-dbt` (Cosmos em modo Docker, ADR 0012 mantido); o Airflow recebe o Cosmos e o `manifest.json` do projeto.
+
 ## User Scenarios & Testing *(mandatory)*
 
 Os códigos entre parênteses, como (I2), são os IDs de `docs/prova-requisitos.md`. As histórias seguem a
@@ -223,6 +227,8 @@ resultado da consulta SQL.
 - **FR-024**: O fluxo MUST impedir execuções simultâneas, repetir etapas com falhas temporárias e aceitar disparo manual com
   período e modo de reprocessamento como parâmetros (I9, I10).
 - **FR-025**: O fluxo MUST verificar novidades ao menos uma vez por dia e encerrar sem recarregar quando não houver (I3).
+- **FR-031**: O orquestrador MUST mostrar cada modelo e cada teste da transformação como uma etapa própria, que pode ser
+  reexecutada sozinha, e MUST agrupar as etapas semelhantes: as que conversam com a API e as da transformação.
 
 **Painel**
 
@@ -301,7 +307,7 @@ Estas escolhas vêm da prova e de `decisoes.md`. Ficam aqui, fora dos requisitos
 | API | FastAPI, no mesmo contêiner da ingestão, com só a porta da API exposta nesse contêiner |
 | Banco | PostgreSQL em contêiner próprio, com os schemas `stage` e `warehouse` criados de início |
 | Transformação | dbt em contêiner próprio, ligado à `stage` e gravando na `warehouse` |
-| Orquestração | Apache Airflow em contêiner: ingestão via API, e dbt por comando em `DockerOperator` |
+| Orquestração | Apache Airflow em contêiner: ingestão via API, e dbt no contêiner próprio, por `DockerOperator` e pelo Cosmos em modo Docker |
 | Ambiente | Docker Compose para todos os contêineres |
 | Painel | Power BI em formato PBIP, com fundo em SVG e o tema `tema_powerbi_fiec_observatorio.json` |
 

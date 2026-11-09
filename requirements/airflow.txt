@@ -1,0 +1,3 @@
+# Pacotes acrescentados à imagem oficial do Airflow. As indiretas ficam travadas em airflow.lock.
+# Cosmos desenha cada modelo e teste do dbt como uma tarefa; o dbt continua no contêiner próprio (ADR 0015).
+astronomer-cosmos==1.15.1

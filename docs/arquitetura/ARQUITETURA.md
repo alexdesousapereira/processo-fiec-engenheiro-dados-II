@@ -198,14 +198,15 @@ ORDER BY uf_nome, periodo, posicao;
 | Se `-` virasse zero | Média errada de 46,56 |
 | Testes do dbt | 46 de 46 aprovados: 19 do lote, 25 do resultado publicado e 2 de unidade |
 | Testes em Python | 150 de 150 aprovados, com a fonte simulada |
-| DAG do zero | 6 tarefas verdes em cerca de 4 minutos |
+| DAG do zero, antes do Cosmos | 6 tarefas verdes em cerca de 4 minutos |
+| DAG com Cosmos, `modo=reprocessar` em 202501 (2026-11-08) | 20 tarefas verdes em cerca de 1 min 40 s; 27 testes do resultado (25 de dados e 2 de unidade), cada um na tarefa do seu modelo |
 | Repetir a DAG sem novidade | Encerra em `verificar_novidades`, com o fato intacto |
 | `modo=reprocessar` em 202501 | Fato com 914.166 linhas e nenhuma pasta nova em `raw/` |
 | Reprocessar com a rede cortada | Conclui, sem acesso à fonte |
-| Extração com falha | Sensor falha, e `carregar_warehouse` e `testar_dados` ficam `upstream_failed` |
+| Extração com falha, antes do Cosmos | Sensor falha, e `carregar_warehouse` e `testar_dados` ficam `upstream_failed` |
 | Linha inválida no fato | Fato sem mudança, e o mês segue pendente |
 | Lote reprovado em `validar_lote` | Warehouse sem mudança, mês pendente, e a execução seguinte recupera |
-| Teste reprovado depois de publicar | `testar_dados` falha, e a execução fica como falha |
+| Teste reprovado depois de publicar, antes do Cosmos | `testar_dados` falha, e a execução fica como falha |
 | Versão nova pendente e versão antiga na Stage | `dbt run` não marca o mês como carregado |
 | API durante uma carga completa | `202` em 0,27 s e `409` em um segundo pedido |
 | Reiniciar a API durante uma carga | Execução fica `interrompida`, e novos pedidos voltam a ser aceitos |
@@ -242,17 +243,23 @@ Mato Grosso do Sul e Rio Grande do Norte têm exatamente 3 atividades com valor,
 
 ```mermaid
 flowchart LR
-    A["verificar_novidades"] --> B["solicitar_extracao"] --> C["aguardar_extracao"] --> V["validar_lote"] --> D["carregar_warehouse"] --> E["testar_dados"]
+    subgraph ingestao
+        A["verificar_novidades"] --> B["solicitar_extracao"] --> C["aguardar_extracao"]
+    end
+    subgraph dbt
+        V["validar_lote"] --> W["warehouse<br/>(Cosmos: run e test por modelo)"]
+    end
+    C --> V
 ```
 
-As três primeiras tarefas conversam com a API. `validar_lote` executa `dbt test --select source:stage`, `carregar_warehouse` executa `dbt run`, e `testar_dados` executa `dbt test --exclude source:stage`, todas pelo `DockerOperator`. O contrato completo está em [dag-airflow.md](../../specs/001-pipeline-pim-pf/contracts/dag-airflow.md).
+As tarefas ficam em dois grupos. O grupo `ingestao` tem as três tarefas que conversam com a API. O grupo `dbt` tem `validar_lote`, que executa `dbt test --select source:stage`, e o grupo `warehouse`, criado pelo [Cosmos](adr/0015-cosmos-e-grupos-de-tarefas.md): uma tarefa `run` e uma `test` para cada tabela, sem tarefas separadas para os testes de chave estrangeira, na ordem das dependências do projeto, de modo que a interface do Airflow mostra cada etapa do dbt. Todas as tarefas do dbt rodam no contêiner `pim-pf-dbt` ([ADR 0012](adr/0012-dbt-em-conteiner-e-socket-docker.md)). O contrato completo está em [dag-airflow.md](../../specs/001-pipeline-pim-pf/contracts/dag-airflow.md).
 
 | Item | Definição |
 |---|---|
 | Agendamento | Diário; a verificação é barata e a data de publicação pode variar |
 | `catchup` | Desligado: a fonte não é consultada por data de execução |
 | `max_active_runs` | 1 |
-| Retries | 3, com espera crescente. O sensor e as duas tarefas de teste não repetem, pois o erro já é definitivo. Consultas à API têm novas tentativas na sessão, para uma falha passageira não derrubar o sensor |
+| Retries | 3, com espera crescente, no grupo `ingestao`. O sensor e todo o grupo `dbt` não repetem: uma reprovação aponta um problema nos dados, e um modelo com falha pode ser reexecutado sozinho pela interface. Consultas à API têm novas tentativas na sessão, para uma falha passageira não derrubar o sensor |
 | Curto-circuito | `verificar_novidades` encerra a execução quando não há novidade |
 | Parâmetros | `modo` (`auto`, `completa` ou `reprocessar`), `inicio` e `fim` |
 | Métricas | Meses alterados, linhas e nulos, em `controle.execucao_ingestao` e nos logs |
@@ -263,11 +270,11 @@ As três primeiras tarefas conversam com a API. `validar_lote` executa `dbt test
 |---|---|---|
 | `postgres` | Metadados do Airflow e schemas `stage`, `warehouse` e `controle` | Um contêiner, bancos separados |
 | `ingestao` | API e extração | Só a porta 8000 publicada; guarda os arquivos brutos |
-| `dbt` | Constrói a imagem e encerra | O `DockerOperator` cria um contêiner a partir dela a cada execução |
+| `dbt` | Constrói a imagem e encerra | O `DockerOperator` e o Cosmos criam um contêiner a partir dela a cada tarefa |
 | `airflow-init` | Migra o banco e encerra | Sem estado |
 | `airflow-scheduler`, `airflow-apiserver`, `airflow-dag-processor` | Agendamento e interface | Airflow 3.4.0 com LocalExecutor; só o scheduler acessa o socket do Docker |
 
-As imagens têm versão fixa. Em [requirements/](../../requirements/), os arquivos `.lock` travam todas as dependências da ingestão e do dbt, inclusive as indiretas; a imagem do Airflow não instala pacotes. A lógica fica em funções que podem ser testadas sem Airflow, API ou banco. Todas as portas só atendem à própria máquina. Segredos ficam em `.env`, com `.env.example` versionado.
+As imagens têm versão fixa. Em [requirements/](../../requirements/), os arquivos `.lock` travam todas as dependências da ingestão e do dbt, inclusive as indiretas; a imagem do Airflow ganha só o Cosmos e as duas dependências dele, em `airflow.lock`. A lógica fica em funções que podem ser testadas sem Airflow, API ou banco. Todas as portas só atendem à própria máquina. Segredos ficam em `.env`, com `.env.example` versionado.
 
 O **Power BI** fica fora do Compose, por ser um aplicativo de desktop para Windows. O painel em [powerbi/](../../powerbi/) se conecta pelo conector nativo de PostgreSQL, usando um usuário somente leitura, e tem duas telas: capa e análise ([contrato](../../specs/001-pipeline-pim-pf/contracts/painel.md) e [ADR 0005](adr/0005-power-bi-como-visualizacao.md)). O desenho segue o
 [mockup](../../mockup/observatorio-mockup.html) aprovado na feature 002, com os números reais conferidos contra o warehouse por `mockup/conferir_mockup.py`.

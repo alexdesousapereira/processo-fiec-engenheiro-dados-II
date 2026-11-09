@@ -107,7 +107,9 @@ docker compose run --rm ingestao pytest
 docker compose run --rm dbt dbt test
 ```
 
-Na DAG, os testes do lote rodam em `validar_lote`, antes de publicar: se reprovarem, o warehouse não muda. Os demais rodam em `testar_dados`, depois de publicar: se reprovarem, a execução fica como falha, e a correção é reprocessar o período.
+Na DAG, os testes do lote rodam em `dbt.validar_lote`, antes de publicar: se reprovarem, o warehouse não muda. Os demais rodam no grupo `dbt.warehouse`, criado pelo Cosmos: cada modelo tem uma tarefa `run` e, logo depois, uma `test` com os testes dele. Se um teste reprovar, a execução fica como falha, e a correção é reprocessar o período. A DAG agrupa as tarefas em `ingestao` e `dbt`.
+
+O Cosmos desenha as tarefas a partir do `manifest.json`, gerado no build da imagem do Airflow. Depois de alterar o projeto dbt, refaça as imagens com `docker compose up -d --build`.
 
 No Git Bash do Windows, defina `MSYS_NO_PATHCONV=1` antes de comandos que tenham caminhos do contêiner.
 
