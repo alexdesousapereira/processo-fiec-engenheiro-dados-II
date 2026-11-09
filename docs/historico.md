@@ -3,6 +3,29 @@
 Registro do que foi feito e decidido, do mais recente para o mais antigo.
 Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
+## 2026-11-09: Uma view só e documento sem referência a questões
+
+### O que foi feito
+
+- dbt: `vw_transformacao_2025` removida (também do banco, com `DROP VIEW`). A única view é
+  `vw_top3_transformacao_2025`, que responde às 3 atividades de maior índice por UF e mês a partir da tabela
+  analítica. `sql/top3_por_uf_mes.sql` passou a ler dela.
+- Os testes que liam a view removida passaram a ler `fato_producao_fisica_industrial_2025` (Ceará, 17 UFs e 12 meses,
+  padrão `3.NN`, ao menos 3 atividades). Saíram só os 4 testes de não nulo da view, já garantidos pela chave primária.
+- Validado: `dbt run` com 7 modelos, `dbt test` com 23 testes (21 de dados e 2 de unidade), top 3 com 612 linhas,
+  conferidor do mockup com 28 de 28 números e DAG com 18 tarefas verdes.
+- Documento das questões 02 e 03: sumário depois da capa; seção "Visão geral" com problema do cliente, solução
+  entregue e escopo; sem referências a questões; seção da view com o SQL dela; orquestração com os grupos e o Cosmos.
+  O sumário é recalculado pelo Word ao abrir.
+- Desenho: caixa do warehouse com "tabela analítica e view do top 3". Na arquitetura atual, o quadro voltou a ser
+  "Fonte", só com IBGE / SIDRA; as quatro fontes ficam apenas na proposta futura.
+- Quarentena retirada da proposta futura, a pedido do candidato: desenho, `PROPOSTA-FUTURA.md` e documento Word.
+  O `ARQUITETURA.md` mantém a explicação de por que a arquitetura atual não tem quarentena.
+
+### Pendências
+
+- A data de atualização do mockup ficou em 08/11/2026, e o warehouse foi recarregado em 09/11/2026 (UTC).
+
 ## 2026-11-08: Conferência das tarefas abertas (`/speckit-implement`)
 
 ### O que foi feito

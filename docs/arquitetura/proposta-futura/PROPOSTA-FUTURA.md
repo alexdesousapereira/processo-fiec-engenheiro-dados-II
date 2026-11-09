@@ -39,7 +39,6 @@ flowchart LR
     L --> B[("Bronze<br/>Delta")]
     B --> S[("Silver<br/>Delta")]
     S --> G[("Gold<br/>Delta, fato e dimensão")]
-    S -.-> Q[("Quarentena<br/>Delta")]
     G --> SQL["SQL Warehouse<br/>top 3 e views"]
     SQL --> BI["Power BI"]
     ADF["Azure Data Factory"] -.-> ING
@@ -61,7 +60,7 @@ Landing, Bronze, Silver e Gold são containers do mesmo ADLS Gen2. O Unity Catal
 | **Escrita** | Só acrescenta | Acrescenta os meses alterados; o histórico do Delta guarda as versões | `MERGE` dos meses afetados | `MERGE` em transação, com as dimensões antes do fato |
 | **Quem lê** | Só o pipeline | Engenharia de dados | Engenharia e ciência de dados | Analistas, Power BI e ciência de dados |
 
-O controle de carga (hash e situação de cada mês) e a quarentena passam a ser tabelas Delta no mesmo catálogo.
+O controle de carga (hash e situação de cada mês) passa a ser uma tabela Delta no mesmo catálogo.
 
 ## Orquestração
 
@@ -70,7 +69,7 @@ Um pipeline do Data Factory, agendado diariamente, com os mesmos parâmetros de 
 1. Verificar novidades. Sem novidade, a execução termina.
 2. Executar o job de ingestão, que grava a Landing só com os meses cujo hash mudou.
 3. Executar o job da Bronze.
-4. Executar o job da Silver, que separa as linhas inválidas na quarentena.
+4. Executar o job da Silver.
 5. Validar o lote na Silver. Uma reprovação interrompe a execução antes da Gold.
 6. Executar o job da Gold.
 7. Testar o resultado publicado.
@@ -91,7 +90,6 @@ Cada atividade aciona um job do Databricks. Falhas e tempos aparecem no monitora
 | Modelo de consumo | Fato e dimensões no schema `warehouse` do PostgreSQL | O mesmo modelo, em Delta na Gold |
 | Consulta SQL e Power BI | PostgreSQL, com usuário `pim_leitura` | SQL Warehouse do Databricks, com grupos do Entra ID |
 | Credenciais | Senhas no `.env` | Identidades gerenciadas, sem chaves |
-| Linhas inválidas | Interrompem a carga | Quarentena |
 
 ## O que continua igual
 
