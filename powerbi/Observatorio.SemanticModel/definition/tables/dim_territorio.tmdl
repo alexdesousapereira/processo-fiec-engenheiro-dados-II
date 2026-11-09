@@ -1,23 +1,23 @@
 table dim_territorio
-	lineageTag: 1267e7fa-5725-44ce-aeda-66c59be00fea
+	lineageTag: a190defd-8058-44f9-a243-984735057a00
 
 	column territorio_codigo
 		dataType: int64
 		formatString: 0
-		lineageTag: 44af22e5-3310-49bc-8777-c446d1aea857
+		lineageTag: 3a46e89b-3820-4341-b586-77b846e4852c
 		summarizeBy: none
 		sourceColumn: territorio_codigo
 
 	column territorio_nome
 		dataType: string
-		lineageTag: 1bf69082-7492-4b01-a5cc-b96c4c7b0731
+		lineageTag: c8db2fa9-2317-4971-822a-0227eff6c6a3
 		summarizeBy: none
 		sourceColumn: territorio_nome
 
 	column data_carga
 		dataType: dateTime
 		formatString: dd/mm/yyyy
-		lineageTag: 9bdd5f02-ff6d-47ad-907b-98aebf6bde48
+		lineageTag: c0f1040a-6a90-4648-94e5-f42e5e28ffee
 		summarizeBy: none
 		sourceColumn: data_carga
 

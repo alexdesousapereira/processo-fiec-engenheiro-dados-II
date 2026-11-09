@@ -67,18 +67,6 @@
             "width": 234
           },
           "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1033.2396259971697,
-            "y": 338.1183099268236
-          },
-          "nodeIndex": "meses_linha",
-          "size": {
-            "height": 176,
-            "width": 234
-          },
-          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",

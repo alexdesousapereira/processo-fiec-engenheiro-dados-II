@@ -1,32 +1,39 @@
 table dim_calendario
-	lineageTag: 6e712ce8-0706-4d9a-a611-b7c1f38556db
+	lineageTag: 671dd29b-509a-4f2a-afa4-97158fb05c0b
 
 	column periodo
 		dataType: int64
 		formatString: 0
-		lineageTag: 632630d0-045c-4317-834b-d45246f9d7ed
+		lineageTag: 1e6fcd02-0c23-4235-82df-4b7c565693f7
 		summarizeBy: none
 		sourceColumn: periodo
 
 	column ano
 		dataType: int64
 		formatString: 0
-		lineageTag: c32e8861-8f3c-4357-ba4b-5425b2c3c68b
+		lineageTag: deafe75a-521c-44f0-a1c9-4f58b5cbb7c3
 		summarizeBy: none
 		sourceColumn: ano
 
 	column mes
 		dataType: int64
 		formatString: 0
-		lineageTag: 3d853ab1-905c-40d4-81d5-09bddcb91ae5
+		lineageTag: 08d2f403-8af2-4141-bcad-448ea55811d4
 		summarizeBy: none
 		sourceColumn: mes
 
 	column mes_nome
 		dataType: string
-		lineageTag: 434c153a-5084-4b77-98ba-22faa3e842bc
+		lineageTag: 132843b8-196a-4f66-bf1e-e2890d3c93dc
 		summarizeBy: none
 		sourceColumn: mes_nome
+		sortByColumn: mes
+
+	column mes_curto
+		dataType: string
+		lineageTag: 25a8dc12-3f92-4e64-b3b5-ddfe5d58811a
+		summarizeBy: none
+		sourceColumn: mes_curto
 		sortByColumn: mes
 
 	partition dim_calendario = m
@@ -36,7 +43,7 @@ table dim_calendario
 				    Fonte = PostgreSQL.Database(Servidor & ":" & Porta, Banco),
 				    Tabela = Fonte{[Schema="warehouse",Item="dim_calendario"]}[Data],
 				    Filtrada = Table.SelectRows(Tabela, each [ano] = 2025),
-				    Colunas = Table.SelectColumns(Filtrada, {"periodo", "ano", "mes", "mes_nome"})
+				    Colunas = Table.SelectColumns(Filtrada, {"periodo", "ano", "mes", "mes_nome", "mes_curto"})
 				in
 				    Colunas
 

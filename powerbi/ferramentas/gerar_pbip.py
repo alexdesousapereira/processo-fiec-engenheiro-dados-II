@@ -181,17 +181,13 @@ MEDIDAS = f"""\tmeasure 'Índice de produção' = AVERAGE({FATO}[indice_producao
 
 \tmeasure 'Carimbo do período' = "Dados: jan a dez/2025 · atualizado em " & FORMAT(MAX(dim_territorio[data_carga]), "dd/mm/yyyy")
 
-\tmeasure 'Média mensal da linha' =
-\t\t\tCALCULATE([Média das atividades], REMOVEFILTERS(dim_calendario), TREATAS(VALUES(meses_linha[periodo]), dim_calendario[periodo]))
-\t\tformatString: #,0.00
-
 \tmeasure 'Insight da linha' =
 \t\t\tVAR mes = SELECTEDVALUE(dim_calendario[mes_nome])
-\t\t\tVAR meses = ADDCOLUMNS(ALL(meses_linha[periodo], meses_linha[mes_nome]), "@media", [Média mensal da linha])
+\t\t\tVAR meses = ADDCOLUMNS(ALL(dim_calendario[periodo], dim_calendario[mes_nome]), "@media", CALCULATE([Média das atividades]))
 \t\t\tVAR pico = TOPN(1, meses, [@media], DESC)
 \t\t\tRETURN
 \t\t\t\tUPPER(LEFT(mes, 1)) & MID(mes, 2, 20) & " em " & FORMAT([Média das atividades], "#,0.00", "pt-BR")
-\t\t\t\t\t& "; pico em " & MAXX(pico, meses_linha[mes_nome]) & " (" & FORMAT(MAXX(pico, [@media]), "#,0.00", "pt-BR") & ")"
+\t\t\t\t\t& "; pico em " & MAXX(pico, dim_calendario[mes_nome]) & " (" & FORMAT(MAXX(pico, [@media]), "#,0.00", "pt-BR") & ")"
 
 """
 
@@ -210,7 +206,7 @@ def gerar_modelo() -> None:
         "settings": {},
     })
     escrever(SM / "definition" / "database.tmdl", "database\n\tcompatibilityLevel: 1606\n")
-    tabelas = ["dim_calendario", "dim_categorias", "dim_territorio", FATO, MED, "meses_linha"]
+    tabelas = ["dim_calendario", "dim_categorias", "dim_territorio", FATO, MED]
     refs = "\n".join(f"ref table {t}" for t in tabelas)
     escrever(SM / "definition" / "model.tmdl", f"""model Model
 \tculture: en-US
@@ -237,6 +233,8 @@ annotation PBI_ProTooling = ["DevMode"]
     escrever(t / "dim_calendario.tmdl", tabela("dim_calendario", [
         ("periodo", "int64", "0"), ("ano", "int64", "0"), ("mes", "int64", "0"),
         ("mes_nome", "string", None, "mes"),
+        # Eixo do gráfico mensal (jan, fev...), já calculado no dbt.
+        ("mes_curto", "string", None, "mes"),
     ], "[ano] = 2025"))
     escrever(t / "dim_categorias.tmdl", tabela("dim_categorias", [
         ("categoria_codigo", "int64", "0"), ("categoria_cnae", "string"), ("categoria_nome", "string"),
@@ -248,11 +246,6 @@ annotation PBI_ProTooling = ["DevMode"]
     escrever(t / "dim_territorio.tmdl", tabela("dim_territorio", [
         ("territorio_codigo", "int64", "0"), ("territorio_nome", "string"), ("data_carga", "dateTime", "dd/mm/yyyy"),
     ], '[nivel] = "N3"'))
-    # Eixo da linha mensal, sem relacionamento: o filtro de mês não esconde os outros meses, e a medida da
-    # linha lê cada mês por TREATAS. Assim o insight da linha ainda enxerga o mês selecionado.
-    escrever(t / "meses_linha.tmdl", tabela("meses_linha", [
-        ("periodo", "int64", "0"), ("mes", "int64", "0"), ("mes_nome", "string"), ("mes_curto", "string", None, "mes"),
-    ], "[ano] = 2025", adicionais=[("mes_curto", "Text.Start([mes_nome], 3)")], origem="dim_calendario"))
     escrever(t / f"{FATO}.tmdl", tabela(FATO, COLUNAS_FATO))
     escrever(t / f"{MED}.tmdl", tabela_medidas())
 
@@ -424,9 +417,12 @@ def filtro_inicial(entidade: str, coluna_nome: str, valor: str) -> dict:
     }}
 
 
-def filtro_lista(nome: str, x: float, l: float, ordem: int, entidade: str, coluna_nome: str, inicial: str, rotulo: str) -> None:
+def filtro_lista(nome: str, posicao: tuple[float, float, float, float], ordem: int, entidade: str, coluna_nome: str,
+                 inicial: str, rotulo: str) -> None:
+    """Filtro de lista suspensa. `posicao` é (x, y, largura, altura)."""
+    x, y, l, a = posicao
     m = moldura(f"Filtro de {rotulo.lower()}. Escolha uma opção por vez.", rotulo)
-    container("analise", nome, "slicer", x, 70, l, 56, ordem, consulta={"Values": [col(entidade, coluna_nome)]},
+    container("analise", nome, "slicer", x, y, l, a, ordem, consulta={"Values": [col(entidade, coluna_nome)]},
               objetos={
                   "data": [{"properties": {"mode": texto("Dropdown")}}],
                   "selection": [{"properties": {"strictSingleSelect": lit("true")}}],
@@ -462,14 +458,17 @@ def pagina_json(nome: str, exibicao: str, extras: dict | None = None) -> None:
 
 
 def gerar_analise() -> None:
-    pagina_json("analise", "Análise")
+    # O filtro de mês não age sobre a linha, que mostra sempre os 12 meses de 2025.
+    pagina_json("analise", "Análise", {"visualInteractions": [
+        {"source": "filtro_mes", "target": "linha_media", "type": "NoFilter"}]})
     barra_marca("analise", "Análise")
     caixa_texto("analise", "analise_titulo", 16, 62, 900, 44, 10,
                 [[("Indústria de Transformação — atividades da UF no mês", 16, INK, True)]], "Título da tela de análise")
     cartao_texto("analise", "analise_carimbo", 16, 100, 420, 26, 11, med(MED, "Carimbo de data"),
                  "Mês de referência dos dados e data de atualização")
-    filtro_lista("filtro_mes", 978, 130, 12, "dim_calendario", "mes_nome", "janeiro", "Mês de 2025")
-    filtro_lista("filtro_uf", 1118, 138, 13, "dim_territorio", "territorio_nome", "Ceará", "UF")
+    # Posições ajustadas no Desktop: na altura do mockup, o título do filtro cortava a lista.
+    filtro_lista("filtro_mes", (915.71, 60, 191.43, 65.71), 12, "dim_calendario", "mes_nome", "janeiro", "Mês de 2025")
+    filtro_lista("filtro_uf", (1118.57, 61.43, 138.57, 64.29), 13, "dim_territorio", "territorio_nome", "Ceará", "UF")
 
     kpi("cartao_lider", 0, 20, med(MED, "Atividade líder"), "Atividade líder", med(MED, "Detalhe do líder"),
         "Atividade de maior índice na UF e no mês, com o índice e a diferença para a média", 12)
@@ -512,18 +511,27 @@ def gerar_analise() -> None:
     ]], "Legenda: azul para o top 3, cinza para as demais, tracejado para a média da UF")
     cartao_texto("analise", "barras_legenda_media", x_coluna(0) + 190, 286, 130, 24, 33, med(MED, "Legenda da média"),
                  "Valor da média da UF no mês", tamanho=9)
+    # A linha mostra os 12 meses porque o filtro de mês não age sobre ela (visualInteractions em page.json).
     container("analise", "linha_media", "lineChart", x_coluna(8), 240, largura(4), 412, 31,
-              consulta={"Category": [col("meses_linha", "mes_curto")], "Y": [med(MED, "Média mensal da linha")]},
+              consulta={"Category": [col("dim_calendario", "mes_curto")], "Y": [med(MED, "Média das atividades")]},
               objetos={
                   "labels": [{"properties": {"show": lit("false")}}],
                   "legend": [{"properties": {"show": lit("false")}}],
                   "lineStyles": [{"properties": {"strokeWidth": lit("2D"), "showMarker": lit("true")}}],
-                  "dataPoint": [{"properties": {"fill": cor(LINHA)}, "selector": {"metadata": f"{MED}.Média mensal da linha"}}],
+                  "dataPoint": [{"properties": {"fill": cor(LINHA)}, "selector": {"metadata": f"{MED}.Média das atividades"}}],
                   "categoryAxis": [{"properties": {"showAxisTitle": lit("false"), "labelColor": cor(INK2)}}],
                   "valueAxis": [{"properties": {"showAxisTitle": lit("false"), "labelColor": cor(INK2)}}],
               },
-              moldura_visual=moldura("Linha com a média dos índices das atividades da UF em cada mês de 2025",
-                                     "Média das atividades por mês · 2025", {"expr": med(MED, "Insight da linha")}))
+              moldura_visual={
+                  **moldura("Linha com a média dos índices das atividades da UF em cada mês de 2025",
+                            "Média das atividades por mês · 2025"),
+                  # Espaço sob o título, onde fica o cartão do insight.
+                  "spacing": [{"properties": {"customizeSpacing": lit("true"), "spaceBelowTitleArea": lit("26D")}}],
+              })
+    # O insight cita o mês escolhido. Como subtítulo da linha, ele não veria o filtro de mês desligado;
+    # num cartão à parte, sobre o lugar do subtítulo, ele recebe o filtro.
+    cartao_texto("analise", "linha_insight", x_coluna(8) + 8, 262, largura(4) - 16, 24, 34, med(MED, "Insight da linha"),
+                 "Insight: média do mês escolhido e mês de pico em 2025", tamanho=9, cor_texto=ACAO)
     rodape("analise")
 
 
@@ -612,7 +620,8 @@ def gerar_relatorio() -> None:
     escrever_json(DEF / "pages" / "pages.json", {
         "$schema": f"{ESQ}/pagesMetadata/1.1.0/schema.json",
         "pageOrder": ["capa", "analise"],
-        "activePageName": "capa",
+        # Abre na análise, como ficou salvo no Desktop.
+        "activePageName": "analise",
     })
     gerar_capa()
     gerar_analise()

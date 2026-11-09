@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "filtro_mes",
   "position": {
-    "x": 915.71428571428578,
-    "y": 60.000000000000007,
+    "x": 915.71,
+    "y": 60,
     "z": 12000,
-    "height": 65.714285714285722,
-    "width": 191.42857142857144,
+    "height": 65.71,
+    "width": 191.43,
     "tabOrder": 12000
   },
   "visual": {
@@ -214,23 +214,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "a6de3dd9a7355a99740c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_calendario"
-              }
-            },
-            "Property": "mes_nome"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

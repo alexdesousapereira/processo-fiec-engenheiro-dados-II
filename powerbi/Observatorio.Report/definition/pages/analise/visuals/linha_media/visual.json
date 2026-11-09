@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "meses_linha"
+                      "Entity": "dim_calendario"
                     }
                   },
                   "Property": "mes_curto"
                 }
               },
-              "queryRef": "meses_linha.mes_curto",
+              "queryRef": "dim_calendario.mes_curto",
               "nativeQueryRef": "mes_curto",
               "active": true
             }
@@ -42,11 +42,11 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Média mensal da linha"
+                  "Property": "Média das atividades"
                 }
               },
-              "queryRef": "Medidas.Média mensal da linha",
-              "nativeQueryRef": "Média mensal da linha",
+              "queryRef": "Medidas.Média das atividades",
+              "nativeQueryRef": "Média das atividades",
               "active": true
             }
           ]
@@ -116,7 +116,7 @@
             }
           },
           "selector": {
-            "metadata": "Medidas.Média mensal da linha"
+            "metadata": "Medidas.Média das atividades"
           }
         }
       ],
@@ -228,49 +228,6 @@
           }
         }
       ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Medidas"
-                    }
-                  },
-                  "Property": "Insight da linha"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#0E4194'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
-            }
-          }
-        }
-      ],
       "border": [
         {
           "properties": {
@@ -296,6 +253,26 @@
               "expr": {
                 "Literal": {
                   "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "customizeSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "spaceBelowTitleArea": {
+              "expr": {
+                "Literal": {
+                  "Value": "26D"
                 }
               }
             }

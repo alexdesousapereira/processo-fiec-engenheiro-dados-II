@@ -1,45 +1,45 @@
 table fato_producao_fisica_industrial_2025
-	lineageTag: e2e65035-53f7-4195-9dab-89ef20ae5912
+	lineageTag: 40d71bab-dada-4343-8633-c15ff728c883
 
 	column territorio_codigo
 		dataType: int64
 		formatString: 0
-		lineageTag: c371b0b1-8275-4322-86c7-21cbeae85558
+		lineageTag: a03abb1c-1f1d-467a-85ac-e92cba11ead6
 		summarizeBy: none
 		sourceColumn: territorio_codigo
 
 	column periodo
 		dataType: int64
 		formatString: 0
-		lineageTag: e3166a6c-f890-477b-9aae-7ce9e68d0c0e
+		lineageTag: 7cce7ce3-4d65-4956-94c8-3961cb8b75a9
 		summarizeBy: none
 		sourceColumn: periodo
 
 	column categoria_codigo
 		dataType: int64
 		formatString: 0
-		lineageTag: f55003da-e8d6-4573-8439-033cc0c9ab14
+		lineageTag: 00498555-cb41-4cea-869f-62299a4251e8
 		summarizeBy: none
 		sourceColumn: categoria_codigo
 
 	column indice_producao
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 0d620450-0e38-46ad-af55-c6155c9c347e
+		lineageTag: 6571aaef-037a-463a-ab34-a1d2e059a815
 		summarizeBy: none
 		sourceColumn: indice_producao
 
 	column media_atividades_uf_mes
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 7b912e2e-e6f0-4bb9-b14c-ae859eef7497
+		lineageTag: ed5c303e-83f5-487f-85a5-7d058cfea296
 		summarizeBy: none
 		sourceColumn: media_atividades_uf_mes
 
 	column diferenca_para_media
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 43ce451e-7b8f-4ba0-8bc3-c553c87939f3
+		lineageTag: 12bd0429-cf0e-4189-9e9d-07c63a0dbb3b
 		summarizeBy: none
 		sourceColumn: diferenca_para_media
 

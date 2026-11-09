@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "filtro_uf",
   "position": {
-    "x": 1118.5714285714287,
-    "y": 61.428571428571431,
+    "x": 1118.57,
+    "y": 61.43,
     "z": 13000,
-    "height": 64.285714285714292,
-    "width": 138.57142857142858,
+    "height": 64.29,
+    "width": 138.57,
     "tabOrder": 13000
   },
   "visual": {
