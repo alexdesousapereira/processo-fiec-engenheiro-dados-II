@@ -3,6 +3,22 @@
 Registro do que foi feito e decidido, do mais recente para o mais antigo.
 Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
+## 2026-11-09: Requisitos e resolução do case no repositório
+
+### O que foi feito
+
+- `requisitos/` (enunciado `case.docx`, `decisoes.md`, tema do Power BI e regras `pbi-mockup/`) e `resolucao_case/`
+  (documentos da Questão 1 e das Questões 2 e 3) passaram a ser versionados, a pedido do candidato.
+- `.gitignore`: saiu `requisitos/`, e `Prova*.docx` passou a valer só na raiz (`/Prova*.docx`), para não esconder os
+  documentos de `resolucao_case/`.
+- `CLAUDE.md` lista as duas pastas; a spec 002 registra que `requisitos/` passou a ser versionada; o plano da
+  feature 001 indica as 18 tarefas da DAG com o Cosmos.
+
+### Decisões
+
+- Revoga a decisão de 2026-11-06 de deixar o enunciado da prova fora do Git. As menções antigas a
+  "`requisitos/` não é versionado" no plano e nas tarefas da feature 002 ficam como registro da época.
+
 ## 2026-11-09: Convergência da feature 002 (`/speckit-converge` e `/speckit-implement`)
 
 ### O que foi feito

@@ -1,5 +1,5 @@
-# Documento original da prova
-Prova*.docx
+# Cópia do documento da prova solta na raiz (o enunciado versionado é requisitos/case.docx)
+/Prova*.docx
 ~$*
 
 # Dados gerados pelo pipeline (recriáveis a partir da fonte)
@@ -27,4 +27,3 @@ powerbi/**/cache.abf
 .DS_Store
 Thumbs.db
 desktop.ini
-requisitos/

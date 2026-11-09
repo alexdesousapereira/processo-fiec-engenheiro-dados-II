@@ -99,7 +99,7 @@ src/pim_pf/
 ├── execucoes.py             # novo: registro e situação das execuções
 ├── api.py                   # novo: rotas e modelos Pydantic
 └── cliente_api.py           # novo: chamadas da DAG à API, testáveis sem Airflow
-dags/pim_pf_8888.py          # refeita: 6 tarefas
+dags/pim_pf_8888.py          # refeita: 6 tarefas (com o Cosmos, 18; ver ADR 0015)
 dbt/
 ├── models/warehouse/        # substitui models/dw: dim_*, fat_* e views
 ├── models/stage/sources.yml

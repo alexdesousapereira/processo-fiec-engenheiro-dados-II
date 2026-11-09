@@ -14,6 +14,8 @@ analítica consultável via SQL, em Docker Compose e orquestrado por Airflow.
 | `dags/`, `src/pim_pf/`, `dbt/`, `sql/`, `tests/` | Código do pipeline |
 | `docker/`, `requirements/` | Imagens de ingestão, dbt e Airflow, e dependências da ingestão |
 | `powerbi/` | Painel em PBIP, gerado por `powerbi/ferramentas/gerar_pbip.py` a partir do mockup |
+| `requisitos/` | Enunciado da prova (`case.docx`), decisões do candidato, tema do Power BI e regras do mockup (`pbi-mockup/`) |
+| `resolucao_case/` | Documentos entregues: Questão 1 e Questões 2 e 3 |
 | `mockup/` | Mockup aprovado do painel: telas em SVG, índice, racional e conferidor de números (feature 002) |
 | [specs/001-pipeline-pim-pf/](specs/001-pipeline-pim-pf/spec.md) | Especificação, plano, contratos e tarefas (Spec Kit) |
 | [docs/arquitetura/](docs/arquitetura/ARQUITETURA.md) | Arquitetura atual (API, pandas, dbt, Stage e warehouse em fato e dimensão), ADRs e diagrama único com a atual e a proposta |

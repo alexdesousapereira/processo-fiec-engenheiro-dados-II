@@ -136,7 +136,7 @@ Como candidato, quero uma imagem do painel para apresentar na entrevista e no RE
 
 ## Assumptions
 
-- **Fonte das regras**: as regras de `requisitos/pbi-mockup` valem para esta feature. Essa pasta não é versionada, então as regras aplicadas ficam registradas no racional.
+- **Fonte das regras**: as regras de `requisitos/pbi-mockup` valem para esta feature. As regras aplicadas ficam registradas no racional; a pasta passou a ser versionada em 2026-11-09.
 - **Telas**: as duas telas de `decisoes.md` são mantidas. Há um só perfil, analistas e estatísticos que só consomem as telas prontas, então não há uma tela por perfil.
 - **Dados reais, e não fictícios**: `requisitos/pbi-mockup` usa dados ilustrativos porque o mockup costuma vir antes dos dados. Aqui o warehouse já existe, e a constituição exige dados medidos. O selo de mockup informa a data de referência, em vez de "dados ilustrativos".
 - **Mudança de desenho**: onde as regras de `requisitos/pbi-mockup` divergirem do contrato atual do painel, prevalece o mockup. Exemplo: título de visual descritivo e insight no subtítulo.
