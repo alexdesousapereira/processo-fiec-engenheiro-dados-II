@@ -116,9 +116,9 @@ No Git Bash do Windows, defina `MSYS_NO_PATHCONV=1` antes de comandos que tenham
 
 ## Como abrir o painel
 
-[![Tela de análise do painel no Power BI: Ceará, janeiro de 2025](docs/painel-power-bi.png)](https://app.powerbi.com/groups/de98009a-bde0-4468-b154-2f9d17d352f7/reports/24fac210-7462-4c64-93d3-d82dca607eb1/analise?language=pt-BR&experience=power-bi)
+[![Tela de análise do painel no Power BI: Ceará, janeiro de 2025](docs/painel-power-bi.png)](https://app.powerbi.com/view?r=eyJrIjoiNmNlMTFiZmUtMjYwOS00ZWZmLWIwZTYtYWU0MzY1ZTNhZTQwIiwidCI6IjJlMDg2ODMxLTlkNTAtNDA4Zi04MWMzLTM5Zjc0OTZmYzNmNiJ9)
 
-Clique na imagem para abrir o [painel no Power BI](https://app.powerbi.com/groups/de98009a-bde0-4468-b154-2f9d17d352f7/reports/24fac210-7462-4c64-93d3-d82dca607eb1/analise?language=pt-BR&experience=power-bi), direto na tela de análise. O link abre o relatório no workspace e pede login na conta Microsoft.
+Clique na imagem para abrir o [painel no Power BI](https://app.powerbi.com/view?r=eyJrIjoiNmNlMTFiZmUtMjYwOS00ZWZmLWIwZTYtYWU0MzY1ZTNhZTQwIiwidCI6IjJlMDg2ODMxLTlkNTAtNDA4Zi04MWMzLTM5Zjc0OTZmYzNmNiJ9). O link é público: abre o relatório publicado na web, sem login.
 
 O painel segue o [mockup](mockup/observatorio-mockup.html) aprovado. As decisões de cada visual estão no
 [racional](mockup/observatorio-mockup-racional.md). O PBIP é gerado a partir desse desenho por `powerbi/ferramentas/gerar_pbip.py`.
