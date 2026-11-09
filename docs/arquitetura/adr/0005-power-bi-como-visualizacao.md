@@ -18,7 +18,7 @@ usados por analistas e equipes de negócio, e cita Power BI e QlikSense na Quest
 ## Decisão
 
 Usar Power BI como consumidor do DW, por meio de um usuário somente leitura e da view
-`dw.vw_transformacao_2025`. Ele fica fora do Compose e nenhuma etapa do pipeline depende dele.
+`warehouse.fato_producao_fisica_industrial_2025` e as dimensões. Ele fica fora do Compose e nenhuma etapa do pipeline depende dele.
 
 ## Consequências
 

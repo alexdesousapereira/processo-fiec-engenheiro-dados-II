@@ -51,8 +51,9 @@ cria um contêiner a partir da mesma imagem em cada execução.
 ## Como consultar
 
 O schema `warehouse` tem o fato `fat_producao_fisica`, as dimensões `dim_territorio`, `dim_variaveis`, `dim_categorias` e `dim_calendario`,
-a tabela analítica `fato_producao_fisica_industrial_2025` (índice, média e diferença por UF, mês e atividade de 2025) e as views
-`vw_transformacao_2025` (a tabela analítica com os nomes) e `vw_top3_transformacao_2025`, que leem dessa tabela.
+a tabela analítica `fato_producao_fisica_industrial_2025` (índice, média e diferença por UF, mês e atividade de 2025) e uma
+única view, `vw_top3_transformacao_2025`, com as 3 atividades de maior índice por UF e mês, lida dessa tabela. A consulta
+[sql/top3_por_uf_mes.sql](sql/top3_por_uf_mes.sql) lê essa view.
 
 ```bash
 docker compose exec -T postgres psql -U pim -d pim < sql/top3_por_uf_mes.sql

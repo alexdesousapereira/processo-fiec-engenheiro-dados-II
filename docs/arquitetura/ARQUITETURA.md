@@ -15,7 +15,7 @@ O pipeline foi executado do zero com os dados reais, inclusive em um clone limpo
 
 As decisões mais importantes:
 
-1. **Stage e warehouse em fato e dimensão, com calendário e views analíticas**, adequados ao cenário atual de uma fonte e cerca de 914 mil linhas
+1. **Stage e warehouse em fato e dimensão, com calendário, tabela analítica e a view do top 3**, adequados ao cenário atual de uma fonte e cerca de 914 mil linhas
    ([ADR 0008](adr/0008-stage-e-dw-estilo-oltp.md), [ADR 0010](adr/0010-dw-em-fato-e-dimensao.md) e [ADR 0013](adr/0013-nomes-do-warehouse.md)). O lakehouse em camadas fica como
    proposta futura ([ADR 0007](adr/0007-modelo-relacional-e-proposta-futura.md)).
 2. **Detecção de mudanças por hash de cada mês**, porque a fonte só informa uma data para a tabela inteira. O mesmo mecanismo cobre mês novo, mês parcial e
@@ -53,7 +53,7 @@ flowchart LR
     EXT --> RAW[("Arquivos brutos<br/>JSON gzip")]
     RAW --> TRT["pandas<br/>tratamento"]
     TRT -->|COPY| STG[("Stage<br/>sem chaves")]
-    STG -->|"dbt: upsert"| DW[("Warehouse: fato e dimensão<br/>chaves e views")]
+    STG -->|"dbt: upsert"| DW[("Warehouse: fato e dimensão<br/>tabela analítica e view do top 3")]
     DW --> SQL["Consulta top 3"]
     DW --> BI["Power BI"]
     BI --> USR["Analistas, estatísticos,<br/>ciência de dados e negócio"]
@@ -145,7 +145,7 @@ erDiagram
 Todas as tabelas têm também `path_origem` e `data_carga`. `fat_producao_fisica` guarda todas as variáveis e territórios, o que atende a "extrair todos os dados" (I2). `dim_calendario` tem uma linha por mês e se liga ao fato pelo código AAAAMM.
 `valor` usa `numeric(14,5)` e fica nulo quando há símbolo. O tipo comporta o maior valor da fonte, uma variação M/M-12 de 11.126.974,6% (Pernambuco, 04/2021), legítima porque a base estava perto de zero. O dbt cria as tabelas a partir de contratos em [schema.yml](../../dbt/models/warehouse/schema.yml), com as chaves primárias e estrangeiras.
 
-**Estrutura analítica exigida (A1 a A5):** a tabela [fato_producao_fisica_industrial_2025](../../dbt/models/warehouse/fato_producao_fisica_industrial_2025.sql), com grão UF × mês × atividade e chave primária e chaves estrangeiras para as dimensões. Ela é recriada a cada carga (`table`, e não `incremental`), porque a média depende de todas as atividades da UF no mês: com merge, um valor revisado para "-" deixaria a linha antiga. A view [vw_transformacao_2025](../../dbt/models/warehouse/vw_transformacao_2025.sql) só acrescenta os nomes da UF e da atividade.
+**Estrutura analítica exigida (A1 a A5):** a tabela [fato_producao_fisica_industrial_2025](../../dbt/models/warehouse/fato_producao_fisica_industrial_2025.sql), com grão UF × mês × atividade e chave primária e chaves estrangeiras para as dimensões. Ela é recriada a cada carga (`table`, e não `incremental`), porque a média depende de todas as atividades da UF no mês: com merge, um valor revisado para "-" deixaria a linha antiga. Os nomes da UF e da atividade ficam nas dimensões.
 
 ```sql
 SELECT f.territorio_codigo, f.periodo, f.categoria_codigo,
@@ -164,21 +164,23 @@ WHERE f.variavel_codigo = 12606
 WINDOW w AS (PARTITION BY f.territorio_codigo, f.periodo);
 ```
 
-**Consulta exigida (S1, S2):** [top3_por_uf_mes.sql](../../sql/top3_por_uf_mes.sql). A view [vw_top3_transformacao_2025](../../dbt/models/warehouse/vw_top3_transformacao_2025.sql) aplica o mesmo ranking direto sobre a tabela analítica. O painel não usa views: importa a tabela e as dimensões e refaz o ranking em DAX, com o mesmo desempate pelo código.
+**Consulta exigida (S1, S2):** a view [vw_top3_transformacao_2025](../../dbt/models/warehouse/vw_top3_transformacao_2025.sql), a única do warehouse, aplica o ranking sobre a tabela analítica, e [top3_por_uf_mes.sql](../../sql/top3_por_uf_mes.sql) lê dela. O painel não usa a view: importa a tabela e as dimensões e refaz o ranking em DAX, com o mesmo desempate pelo código.
 
 ```sql
 WITH ranqueada AS (
-    SELECT uf_nome, periodo, atividade_cnae, atividade_nome, indice_producao,
+    SELECT f.territorio_codigo, f.periodo, f.categoria_codigo, f.indice_producao,
            ROW_NUMBER() OVER (
-               PARTITION BY uf_codigo, periodo
-               ORDER BY indice_producao DESC, atividade_codigo
+               PARTITION BY f.territorio_codigo, f.periodo
+               ORDER BY f.indice_producao DESC, f.categoria_codigo
            ) AS posicao
-    FROM warehouse.vw_transformacao_2025
+    FROM warehouse.fato_producao_fisica_industrial_2025 f
 )
-SELECT uf_nome, periodo, posicao, atividade_cnae, atividade_nome, indice_producao
-FROM ranqueada
-WHERE posicao <= 3
-ORDER BY uf_nome, periodo, posicao;
+SELECT t.territorio_nome AS uf_nome, r.periodo, r.posicao,
+       c.categoria_cnae AS atividade_cnae, c.categoria_nome AS atividade_nome, r.indice_producao
+FROM ranqueada r
+JOIN warehouse.dim_territorio t USING (territorio_codigo)
+JOIN warehouse.dim_categorias c USING (categoria_codigo)
+WHERE r.posicao <= 3;
 ```
 
 `ROW_NUMBER` garante exatamente 3 linhas, e o código desempata de forma determinística. Não há empates entre os 4 maiores índices de 2025 (medido), então `RANK` daria o mesmo resultado hoje.
@@ -191,7 +193,7 @@ ORDER BY uf_nome, periodo, posicao;
 | Territórios, variáveis e categorias | 19, 6 e 27 |
 | Atividades marcadas, incluindo a 3.20 | 24 |
 | `dim_calendario` | 300 meses, de 200201 a 202612 |
-| Linhas da view | 2.004 |
+| Linhas da tabela analítica | 2.004 |
 | Linhas do top 3 | 612 = 17 UFs × 12 meses × 3 |
 | Ceará, 01/2025, à mão | 1.117,38133 ÷ 11 = **101,58012** |
 | Ceará, 01/2025, top 3 | 3.13 Têxteis 145,03; 3.24 Metalurgia 136,56; 3.11 Bebidas 120,05 |
@@ -199,7 +201,7 @@ ORDER BY uf_nome, periodo, posicao;
 | Testes do dbt | 46 de 46 aprovados: 19 do lote, 25 do resultado publicado e 2 de unidade |
 | Testes em Python | 150 de 150 aprovados, com a fonte simulada |
 | DAG do zero, antes do Cosmos | 6 tarefas verdes em cerca de 4 minutos |
-| DAG com Cosmos, `modo=reprocessar` em 202501 (2026-11-08) | 20 tarefas verdes em cerca de 1 min 40 s; 27 testes do resultado (25 de dados e 2 de unidade), cada um na tarefa do seu modelo |
+| DAG com Cosmos, `modo=reprocessar` em 202501 (2026-11-09) | 18 tarefas verdes em cerca de 1 min 45 s; 23 testes do resultado (21 de dados e 2 de unidade), cada um na tarefa do seu modelo |
 | Repetir a DAG sem novidade | Encerra em `verificar_novidades`, com o fato intacto |
 | `modo=reprocessar` em 202501 | Fato com 914.166 linhas e nenhuma pasta nova em `raw/` |
 | Reprocessar com a rede cortada | Conclui, sem acesso à fonte |
