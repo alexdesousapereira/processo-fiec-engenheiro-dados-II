@@ -3,6 +3,21 @@
 Registro do que foi feito e decidido, do mais recente para o mais antigo.
 Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
+## 2026-11-09: Convergência da feature 002 (`/speckit-converge` e `/speckit-implement`)
+
+### O que foi feito
+
+- O converge comparou a feature 002 com o código e achou 3 divergências, todas de documentação: a spec, o
+  contrato das telas e o data-model ainda citavam `vw_transformacao_2025`. Viraram as tarefas T031 a T033.
+- Corrigidos: a clarificação da spec agora diz que o dbt mantém só `vw_top3_transformacao_2025`; o contrato das
+  telas usa `dim_categorias[categoria_rotulo]` nas barras e `meses_linha[mes_curto]` com `[Média mensal da linha]`
+  na linha, como o gerador do PBIP; o data-model dá como fonte a tabela fato com `dim_categorias`.
+- Documento das questões 02 e 03: retirada a configuração `updateFields`, que fazia o Word perguntar sobre
+  "campos que referenciam outros arquivos" ao abrir. O sumário já sai com as páginas certas.
+
+- Feature 001: `data-model.md` passa a listar a tabela analítica e a view do top 3; a quickstart conta a tabela
+  no lugar da view removida e espera 18 tarefas na DAG; `research.md` ganhou uma atualização na decisão do top 3.
+
 ## 2026-11-09: Uma view só e documento sem referência a questões
 
 ### O que foi feito

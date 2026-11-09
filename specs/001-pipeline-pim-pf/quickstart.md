@@ -35,11 +35,11 @@ Em `http://localhost:8080`, dispare `pim_pf_8888`.
 
 ```powershell
 docker compose exec postgres psql -U pim -d pim -c "SELECT count(*) FROM warehouse.fat_producao_fisica"
-docker compose exec postgres psql -U pim -d pim -c "SELECT count(*) FROM warehouse.vw_transformacao_2025"
+docker compose exec postgres psql -U pim -d pim -c "SELECT count(*) FROM warehouse.fato_producao_fisica_industrial_2025"
 docker compose exec postgres psql -U pim -d pim -c "SELECT count(*) FROM warehouse.vw_top3_transformacao_2025"
 ```
 
-**Esperado**: as 6 tarefas verdes e, na medição de referência, 914.166, 2.004 e 612 linhas. Revisões da fonte podem mudar o total: o
+**Esperado**: as 18 tarefas verdes (com o Cosmos, cada modelo e teste do dbt é uma tarefa) e, na medição de referência, 914.166, 2.004 e 612 linhas. Revisões da fonte podem mudar o total: o
 fato deve ter 3.078 linhas por mês.
 
 ## 4. Resultado analítico (SC-005)

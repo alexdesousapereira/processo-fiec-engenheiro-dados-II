@@ -135,12 +135,15 @@ erDiagram
     }
 ```
 
-### Views
+### Tabela analítica e view
 
-| View | Grão | Colunas |
+| Objeto | Grão | Colunas |
 |---|---|---|
-| `vw_transformacao_2025` | UF × mês × atividade | `uf_codigo`, `uf_nome`, `periodo`, `atividade_codigo`, `atividade_cnae`, `atividade_nome`, `indice_producao`, `media_atividades_uf_mes`, `diferenca_para_media` |
-| `vw_top3_transformacao_2025` | UF × mês × posição | As colunas da view anterior, mais `posicao` (1 a 3) |
+| `fato_producao_fisica_industrial_2025` (tabela) | UF × mês × atividade | `territorio_codigo`, `periodo`, `categoria_codigo`, `indice_producao`, `media_atividades_uf_mes`, `diferenca_para_media`, `path_origem`, `data_carga` |
+| `vw_top3_transformacao_2025` (view) | UF × mês × posição | `uf_codigo`, `uf_nome`, `periodo`, `atividade_codigo`, `atividade_cnae`, `atividade_nome`, `indice_producao`, `media_atividades_uf_mes`, `diferenca_para_media` e `posicao` (1 a 3) |
+
+A tabela é lida pela view e pelo Power BI. A `vw_transformacao_2025`, que existia antes, foi removida em 2026-11-09:
+a tabela já tem a média e a diferença.
 
 Filtros: variável 12606, nível `N3`, atividade `3.NN`, valor não nulo e ano 2025.
 

@@ -122,6 +122,9 @@ continua como a consulta exigida.
 
 **Rationale**: o `decisoes.md` pede uma view que responda às duas questões, mas os grãos são diferentes. A segunda view evita recriar o ranking no painel.
 
+**Atualização (2026-11-09)**: a média e a diferença passaram para a tabela `fato_producao_fisica_industrial_2025`, e a
+`vw_transformacao_2025` foi removida. Fica uma só view, `vw_top3_transformacao_2025`, lida da tabela, que responde ao top 3.
+
 ## 13. Portas
 
 **Decision**: API, Airflow e PostgreSQL publicados só em `127.0.0.1`, em portas configuráveis.
