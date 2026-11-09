@@ -3,6 +3,30 @@
 Registro do que foi feito e decidido, do mais recente para o mais antigo.
 Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
+## 2026-11-09: Primeira execução falhava nos testes das dimensões
+
+### O que foi feito
+
+- Sintoma: num clone novo, a primeira execução agendada falhou nas quatro tarefas `dbt.warehouse.dim_*.test`, e o
+  resto do grupo ficou `upstream_failed`. Os logs mostravam `Database Error ... relation ... does not exist`.
+- Causa: pelo padrão do dbt (seleção indireta `eager`), o `dbt test --select dim_categorias` também pega os testes que
+  leem a dimensão junto com outro modelo: as `relationships` do `fat_producao_fisica` e o `fato_so_tem_atividades_3nn`.
+  Na primeira execução o fato ainda não existe. Num banco já carregado o erro não aparecia, porque a tabela existia
+  desde execuções anteriores.
+- Correção: na DAG, `ExecutionConfig(test_indirect_selection=TestIndirectSelection.BUILDABLE)`. Com `dbt ls` foi
+  conferido que nenhum teste se perde: os de FK rodam no `test` do fato, e o `3nn`, no da tabela de 2025.
+- ADR 0015, `contracts/dag-airflow.md` e a spec (clarificação e caso de borda) atualizados; tarefa T088.
+- Validado: imagem do Airflow reconstruída e as tarefas com falha limpas na mesma execução, com o fato ainda
+  inexistente. Execução `success`: o `test` do fato rodou 5 de 5 (as 4 FK e a chave única), e o da tabela de 2025, 6 de 6.
+- Validado também num clone limpo: `git clone` numa pasta temporária, com a correção aplicada, `cp .env.example .env`,
+  build sem cache e volumes novos, seguindo o README. Ao ser ativada, a DAG fez a primeira carga em 4 min 48 s, com as 18
+  tarefas em `success`. Resultado: 914.166 linhas no fato, 2.004 na tabela de 2025 e 612 no top 3 (17 UFs × 12 meses × 3).
+
+### Decisões
+
+- Ficou `buildable` em vez de `should_detach_multiple_parents_tests`, que criaria tarefas próprias para os testes de
+  FK. O grupo continua mostrando só as tabelas, como no ADR 0015.
+
 ## 2026-11-09: Rótulo curto do mês na `dim_calendario` e painel sem a `meses_linha`
 
 ### O que foi feito

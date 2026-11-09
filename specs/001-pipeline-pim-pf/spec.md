@@ -20,6 +20,10 @@
 
 - Q: Com o Cosmos mostrando cada modelo do dbt como uma tarefa no Airflow, o dbt continua no contêiner próprio ou passa a rodar na imagem do Airflow? → A: Continua no contêiner `pim-pf-dbt` (Cosmos em modo Docker, ADR 0012 mantido); o Airflow recebe o Cosmos e o `manifest.json` do projeto.
 
+### Session 2026-11-09
+
+- Q: Na primeira execução, com o warehouse vazio, em que tarefa rodam os testes que leem mais de um modelo (FK do fato com as dimensões)? → A: Só na tarefa `test` do último modelo que eles leem (seleção indireta `buildable`); o `test` de uma dimensão nunca depende de tabela que ainda não foi publicada.
+
 ## User Scenarios & Testing *(mandatory)*
 
 Os códigos entre parênteses, como (I2), são os IDs de `docs/prova-requisitos.md`. As histórias seguem a
@@ -166,6 +170,8 @@ resultado da consulta SQL.
 - **Fonte indisponível além das tentativas**: a execução falha, com os dados publicados intactos.
 - **Período pedido que a fonte não tem**: o pedido é recusado, ou o status informa quais meses não existem.
 - **Mudança de variáveis, categorias ou territórios nos metadados**: a validação falha cedo, com alerta de mudança na fonte.
+- **Primeira execução com o warehouse vazio**: os testes que leem o fato e uma dimensão só rodam depois de o fato ser
+  publicado. A primeira execução agendada, a partir de um clone limpo, termina com sucesso sem reexecução manual.
 
 ## Requirements *(mandatory)*
 
