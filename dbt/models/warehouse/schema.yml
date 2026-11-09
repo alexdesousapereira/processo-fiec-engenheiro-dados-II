@@ -184,7 +184,7 @@ models:
   - name: fato_producao_fisica_industrial_2025
     description: >
       Estrutura analítica exigida (A1 a A5). Grão UF x mês x atividade da Indústria de Transformação, em 2025.
-      Lida pelas duas views e pelo Power BI. O nome foi pedido pela equipe, por isso não usa o prefixo fat_.
+      Lida pela view do top 3 e pelo Power BI. O nome foi pedido pela equipe, por isso não usa o prefixo fat_.
     config:
       contract: {enforced: true}
     constraints:
@@ -230,20 +230,10 @@ models:
         data_type: timestamptz
         constraints: [{type: not_null}]
 
-  - name: vw_transformacao_2025
-    description: A tabela analítica com os nomes da UF e da atividade, para a consulta SQL do top 3 (S1).
-    columns:
-      - name: uf_codigo
-        data_tests: [not_null]
-      - name: periodo
-        data_tests: [not_null]
-      - name: atividade_codigo
-        data_tests: [not_null]
-      - name: indice_producao
-        data_tests: [not_null]
-
   - name: vw_top3_transformacao_2025
-    description: As 3 atividades de maior índice por UF e mês de 2025 (S2), lidas da tabela analítica.
+    description: >
+      Responde à consulta pedida: as 3 atividades de maior índice por UF e mês de 2025, lidas da tabela analítica.
+      É a única view do warehouse; sql/top3_por_uf_mes.sql lê dela.
     columns:
       - name: uf_codigo
         data_tests: [not_null]
