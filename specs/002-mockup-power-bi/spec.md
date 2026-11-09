@@ -16,6 +16,10 @@
 - Q: O mockup é a referência que o painel deve seguir, ou uma entrega independente? → A: Conforme `requisitos/pbi-mockup`: é a referência validada antes do desenvolvimento do painel. O painel e o seu contrato passam a seguir o mockup.
 - Q: Depois que o Power BI calcular o top 3 em DAX, o que acontece com a view `vw_top3_transformacao_2025`? → A: A estrutura analítica passa a ser a tabela `warehouse.fato_producao_fisica_industrial_2025`. O dbt mantém uma só view, `vw_top3_transformacao_2025`, que lê dessa tabela e responde à pergunta do top 3; a `vw_transformacao_2025` foi removida, porque a tabela já tem a média e a diferença. O painel importa só a tabela e as dimensões, calcula o top 3, a líder e as cores em DAX, e guarda todas as medidas numa tabela de medidas.
 
+### Session 2026-11-09
+
+- Q: Sem a `meses_linha`, como o gráfico de linha deve continuar mostrando os 12 meses e o subtítulo continuar citando o mês selecionado? → A: O rótulo curto do mês (`mes_curto`: jan, fev…) entra na `dim_calendario` do dbt, e a linha usa `dim_calendario[mes_curto]`, com a interação do filtro de mês desligada para ela. O insight da linha sai do subtítulo do visual e vira um cartão de texto sem moldura no mesmo lugar, que recebe o filtro de mês. A tabela `meses_linha` e o `TREATAS` saem do modelo.
+
 ## User Scenarios & Testing *(mandatory)*
 
 Contexto: a feature 001 entregou o painel em duas telas (capa e análise), mas ele foi gerado fora do Power BI Desktop e ainda não
@@ -77,6 +81,7 @@ Como candidato, quero uma imagem do painel para apresentar na entrevista e no RE
 - **Atividade sem dado na UF**: não aparece no mockup nem é desenhada como zero, como no painel.
 - **UF com só 3 atividades**, como Mato Grosso do Sul: o top 3 mostra as 3, e as barras de diferença mostram só essas.
 - **Nomes longos de atividades**: precisam caber no visual sem ultrapassar a moldura, com quebra de linha ou abreviação documentada no racional.
+- **Mês selecionado no filtro**: o gráfico de linha continua com os 12 meses, porque a interação do filtro de mês com ele é desligada; o insight da linha, em cartão de texto à parte, cita o mês selecionado.
 - **Valores negativos na diferença**: distinguíveis por sinal e rótulo, e não só pela cor, e legíveis em escala de cinza.
 - **Dados revisados pela fonte**: se os números do warehouse mudarem, o mockup indica a data de referência dos valores mostrados.
 - **Regra de `requisitos/pbi-mockup` que não se aplica ao projeto**: segue-se a regra do projeto, com o desvio registrado no racional, como o uso de dados reais.
@@ -113,7 +118,7 @@ Como candidato, quero uma imagem do painel para apresentar na entrevista e no RE
 
 - **FR-017**: O contrato do painel MUST ser atualizado para refletir o mockup aprovado, e o painel MUST ser ajustado a ele.
 - **FR-018**: Toda diferença entre o painel aberto no Desktop e o mockup MUST ser corrigida no painel ou registrada com o motivo.
-- **FR-019**: O painel MUST importar a tabela `fato_producao_fisica_industrial_2025` e as dimensões, e nenhuma view. As regras do painel (top 3 com desempate pelo código, atividade líder, cor do ranking e atividades acima da média) MUST ser medidas DAX, guardadas na tabela `Medidas`.
+- **FR-019**: O painel MUST importar a tabela `fato_producao_fisica_industrial_2025` e as dimensões, e nenhuma view nem tabela criada só no Power BI, além da tabela `Medidas`; colunas de apoio ao visual, como o rótulo curto do mês, vêm das dimensões do dbt. As regras do painel (top 3 com desempate pelo código, atividade líder, cor do ranking e atividades acima da média) MUST ser medidas DAX, guardadas na tabela `Medidas`.
 
 ### Key Entities *(include if feature involves data)*
 
