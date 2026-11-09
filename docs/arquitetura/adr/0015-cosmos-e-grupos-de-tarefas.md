@@ -30,7 +30,11 @@ Escolhida pelo candidato: **Cosmos em modo Docker**.
 - `TestBehavior.AFTER_EACH`: cada modelo tem uma tarefa `run` e, em seguida, uma `test`. Um modelo com teste reprovado
   não deixa os modelos seguintes rodarem.
 - O grupo mostra só as tabelas, a pedido do candidato. Os testes de chave estrangeira do fato não viram tarefas
-  próprias: rodam dentro da tarefa `test` dos modelos que eles leem, e a do fato vem depois das dimensões.
+  próprias: rodam dentro da tarefa `test` do fato, que vem depois das dimensões. Para isso a seleção indireta de testes
+  é `buildable` (`ExecutionConfig(test_indirect_selection=TestIndirectSelection.BUILDABLE)`): um teste só entra na
+  tarefa de um modelo quando todos os modelos que ele lê são esse modelo ou vêm antes dele. No padrão (`eager`), o
+  `test` de cada dimensão também rodava os testes de FK e o `fato_so_tem_atividades_3nn`, e na primeira execução, com
+  o fato ainda inexistente, falhava com `relation ... does not exist` (corrigido em 09/11/2026).
 - `validar_lote` continua como uma tarefa só, porque os testes da Stage precisam rodar antes de qualquer modelo.
 - Grupos de tarefas: `ingestao` (as três tarefas que falam com a API) e `dbt` (`validar_lote` e o grupo `warehouse`).
 - Versão 1.15.1, de 04/08/2026. A 1.16.0 saiu em 03/11/2026, há poucos dias, e foi descartada por isso.

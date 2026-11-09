@@ -12,7 +12,7 @@ from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.providers.standard.operators.python import PythonOperator, ShortCircuitOperator
 from airflow.providers.standard.sensors.python import PythonSensor
 from airflow.sdk import DAG, Param, TaskGroup
-from cosmos import DbtTaskGroup, ExecutionConfig, ExecutionMode, LoadMode, ProjectConfig, RenderConfig, TestBehavior
+from cosmos import DbtTaskGroup, ExecutionConfig, ExecutionMode, LoadMode, ProjectConfig, RenderConfig, TestBehavior, TestIndirectSelection
 
 from pim_pf import cliente_api
 
@@ -103,7 +103,14 @@ with DAG(
                 # não viram tarefas próprias; rodam dentro do test do fato, que vem depois das dimensões.
                 test_behavior=TestBehavior.AFTER_EACH,
             ),
-            execution_config=ExecutionConfig(execution_mode=ExecutionMode.DOCKER, dbt_project_path="/app/dbt"),
+            execution_config=ExecutionConfig(
+                execution_mode=ExecutionMode.DOCKER,
+                dbt_project_path="/app/dbt",
+                # No padrão (eager), o test de uma dimensão também pegaria os testes que leem o fato. Na primeira
+                # execução o fato ainda não existe, e esses testes falhariam. Com buildable, um teste só roda
+                # quando todos os modelos que ele lê já foram publicados: os de FK ficam no test do fato.
+                test_indirect_selection=TestIndirectSelection.BUILDABLE,
+            ),
             # Depois de publicar, um teste reprovado deixa a execução como falha, para corrigir e reprocessar.
             operator_args=dict(DOCKER_DBT),
             default_args={"retries": 0},

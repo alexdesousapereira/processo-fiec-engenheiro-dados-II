@@ -49,6 +49,7 @@ O Airflow mostra só as tabelas. Os testes de chave estrangeira do fato não vir
 | Leitura do projeto | `LoadMode.DBT_MANIFEST`, com o `manifest.json` gerado por `dbt parse` no build da imagem do Airflow |
 | Seleção | `path:models/warehouse`; os testes da Stage ficam em `validar_lote` |
 | Testes | `TestBehavior.AFTER_EACH` |
+| Seleção indireta de testes | `TestIndirectSelection.BUILDABLE`: um teste que lê vários modelos roda só na tarefa `test` do último deles (os de FK, na do fato), e a primeira execução não testa tabela que ainda não existe |
 | Execução | `ExecutionMode.DOCKER`, no contêiner `pim-pf-dbt:1.0`, com o projeto em `/app/dbt` |
 
 ## Contêiner do dbt (DockerOperator e Cosmos)
