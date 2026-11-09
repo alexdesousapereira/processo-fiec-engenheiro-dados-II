@@ -2,7 +2,7 @@
 
 ## Caso de referência (warehouse, 2026-11-08)
 
-Recorte: Ceará (`uf_codigo = 23`), janeiro de 2025 (`periodo = 202501`), Número-índice 2022=100. Fonte: `warehouse.vw_transformacao_2025`.
+Recorte: Ceará (`uf_codigo = 23`), janeiro de 2025 (`periodo = 202501`), Número-índice 2022=100. Fonte: `warehouse.fato_producao_fisica_industrial_2025` com `warehouse.dim_categorias`, pelas consultas de `mockup/dados-referencia.sql`.
 
 | CNAE | Atividade | Índice | Diferença | Destaque |
 |---|---|---|---|---|

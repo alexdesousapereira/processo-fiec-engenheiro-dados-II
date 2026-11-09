@@ -14,7 +14,7 @@
 
 - Q: Em que formato o mockup deve ser entregue? → A: Conforme `requisitos/pbi-mockup`: uma imagem vetorial estática por tela, no canvas do Power BI, mais um índice navegável com todas as telas e um racional das decisões de cada visual. É mockup, não protótipo clicável.
 - Q: O mockup é a referência que o painel deve seguir, ou uma entrega independente? → A: Conforme `requisitos/pbi-mockup`: é a referência validada antes do desenvolvimento do painel. O painel e o seu contrato passam a seguir o mockup.
-- Q: Depois que o Power BI calcular o top 3 em DAX, o que acontece com a view `vw_top3_transformacao_2025`? → A: A estrutura analítica passa a ser a tabela `warehouse.fato_producao_fisica_industrial_2025`. As views `vw_transformacao_2025` e `vw_top3_transformacao_2025` continuam no dbt, mas leem dessa tabela. O painel importa só a tabela e as dimensões, calcula o top 3, a líder e as cores em DAX, e guarda todas as medidas numa tabela de medidas.
+- Q: Depois que o Power BI calcular o top 3 em DAX, o que acontece com a view `vw_top3_transformacao_2025`? → A: A estrutura analítica passa a ser a tabela `warehouse.fato_producao_fisica_industrial_2025`. O dbt mantém uma só view, `vw_top3_transformacao_2025`, que lê dessa tabela e responde à pergunta do top 3; a `vw_transformacao_2025` foi removida, porque a tabela já tem a média e a diferença. O painel importa só a tabela e as dimensões, calcula o top 3, a líder e as cores em DAX, e guarda todas as medidas numa tabela de medidas.
 
 ## User Scenarios & Testing *(mandatory)*
 

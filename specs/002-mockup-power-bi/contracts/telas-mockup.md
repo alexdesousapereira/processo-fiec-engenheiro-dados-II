@@ -70,5 +70,5 @@ O bloco de 4 colunas do corpo começa no mesmo eixo do 3º KPI.
 | `kpi-1` | `cartao_lider` | `[Atividade líder]` e `[Diferença do líder]` |
 | `kpi-2` | `cartao_media` | `[Média das atividades]` e `[Atividades com dado]` |
 | `kpi-3` | `cartao_acima` | `[Atividades acima da média]` e `[Atividades com dado]` |
-| `visual-principal` | `barras_indice` | `vw_transformacao_2025[atividade_nome]`, `[Índice de produção]`, `[Cor do ranking]` e linha constante `[Média das atividades]` |
-| `visual-1` | `linha_media` | `dim_calendario[mes_nome]` e `[Média das atividades]`, sem resposta ao filtro de mês |
+| `visual-principal` | `barras_indice` | `dim_categorias[categoria_rotulo]` sobre a tabela `fato_producao_fisica_industrial_2025`, `[Índice de produção]`, `[Cor do ranking]` e linha constante `[Média das atividades]` |
+| `visual-1` | `linha_media` | `meses_linha[mes_curto]` e `[Média mensal da linha]`, que mostra os 12 meses sem depender do filtro de mês |
