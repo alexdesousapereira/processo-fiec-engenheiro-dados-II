@@ -99,6 +99,10 @@ models:
       - name: mes_nome
         data_type: text
         constraints: [{type: not_null}]
+      - name: mes_curto
+        data_type: text
+        description: Três primeiras letras do mês (jan, fev...), para o eixo do gráfico mensal.
+        constraints: [{type: not_null}]
       - name: trimestre
         data_type: integer
         constraints: [{type: not_null}]

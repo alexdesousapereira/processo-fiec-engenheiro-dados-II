@@ -21,15 +21,22 @@ partes AS (
            EXTRACT(YEAR FROM data)::integer AS ano,
            EXTRACT(MONTH FROM data)::integer AS mes
     FROM meses
+),
+nomes AS (
+    SELECT *,
+           (ARRAY['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto',
+                  'setembro', 'outubro', 'novembro', 'dezembro'])[mes] AS mes_nome
+    FROM partes
 )
 SELECT ano * 100 + mes AS periodo,
        data,
        ano,
        mes,
-       (ARRAY['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto',
-              'setembro', 'outubro', 'novembro', 'dezembro'])[mes] AS mes_nome,
+       mes_nome,
+       -- Rótulo curto do eixo do gráfico mensal no Power BI: jan, fev, mar...
+       left(mes_nome, 3) AS mes_curto,
        (mes + 2) / 3 AS trimestre,
        (mes + 5) / 6 AS semestre,
        'gerado:dbt'::text AS path_origem,
        now() AS data_carga
-FROM partes
+FROM nomes
