@@ -3,6 +3,28 @@
 Registro do que foi feito e decidido, do mais recente para o mais antigo.
 Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
+## 2026-11-09: Rótulo curto do mês na `dim_calendario` e painel sem a `meses_linha`
+
+### O que foi feito
+
+- Clarificação da spec 002: o painel não cria tabelas próprias além de `Medidas`; o rótulo curto do mês vem do
+  dbt. O converge gerou as tarefas T034 a T037, todas concluídas.
+- dbt: `dim_calendario` ganhou `mes_curto` (jan, fev…), declarada no contrato como `not null`. Como o modelo é
+  incremental com `on_schema_change: fail`, o banco existente precisou de uma migração única: `ALTER TABLE ... ADD
+  COLUMN`, `dbt run`, preenchimento dos 288 meses fora da Stage atual (2002 a 2026) e `SET NOT NULL`. Um banco novo
+  já nasce com a coluna. As imagens do dbt e do Airflow foram reconstruídas (o manifesto do Cosmos fica na imagem).
+- Painel: saíram a tabela `meses_linha`, o `TREATAS` e a medida "Média mensal da linha". A linha usa
+  `dim_calendario[mes_curto]` com `[Média das atividades]`, e o filtro de mês não age sobre ela (`visualInteractions`
+  com `NoFilter` no `page.json`). O insight virou o cartão `linha_insight`, que recebe o filtro de mês.
+- O gerador passou a gravar a posição dos filtros e a página inicial (Análise) ajustadas no Desktop, que uma
+  regeração desfaria.
+- Validado: `dbt run` com 7 modelos, `dbt test` com 42 de 42, PBIP com 44 JSON sem erro e 9 TMDL conferidos.
+
+### Pendências
+
+- Abrir `powerbi/Observatorio.pbip` no Desktop e conferir a linha com 12 meses, o cartão do insight no lugar do
+  subtítulo e o texto "Janeiro em 101,58; pico em outubro (115,35)"; depois republicar no serviço.
+
 ## 2026-11-09: Requisitos e resolução do case no repositório
 
 ### O que foi feito

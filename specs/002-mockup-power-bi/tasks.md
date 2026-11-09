@@ -194,3 +194,12 @@ O mockup aprovado já tem valor sozinho. Se o tempo apertar, a US2 pode ficar pa
 - [X] T031 Em `specs/002-mockup-power-bi/spec.md`, corrija a clarificação de 2026-11-08 sobre as views: o dbt mantém só `vw_top3_transformacao_2025`, lida da tabela `fato_producao_fisica_industrial_2025`, e `vw_transformacao_2025` foi removida per FR-019 (contradicts)
 - [X] T032 [P] Em `specs/002-mockup-power-bi/contracts/telas-mockup.md`, troque `vw_transformacao_2025[atividade_nome]` pelo campo usado no `barras_indice` (tabela fato com `dim_categorias`) e descreva a `linha_media` com `meses_linha[mes_curto]` e `[Média mensal da linha]`, como no gerador per FR-008, FR-017 (partial)
 - [X] T033 [P] Em `specs/002-mockup-power-bi/data-model.md`, troque a fonte `warehouse.vw_transformacao_2025` por `warehouse.fato_producao_fisica_industrial_2025` com `dim_categorias`, como em `mockup/dados-referencia.sql` per FR-003 (partial)
+
+---
+
+## Phase 9: Convergence
+
+- [X] T034 Em `dbt/models/warehouse/dim_calendario.sql`, acrescente `mes_curto` ("jan", "fev"…, as 3 primeiras letras de `mes_nome`) e declare a coluna no contrato de `dim_calendario` em `dbt/models/warehouse/schema.yml`; rode o dbt e os testes per FR-019, clarificação de 2026-11-09 (missing)
+- [X] T035 Em `powerbi/ferramentas/gerar_pbip.py`, remova a tabela `meses_linha` e importe `mes_curto` (ordenada por `mes`) em `dim_calendario`; o eixo de `linha_media` passa a ser `dim_calendario[mes_curto]`, "Média mensal da linha" vira `CALCULATE([Média das atividades], REMOVEFILTERS(dim_calendario[mes_nome]))` sem `TREATAS`, e "Insight da linha" calcula o pico sobre `ALL(dim_calendario[periodo], dim_calendario[mes_nome])` per FR-019 (contradicts)
+- [X] T036 Em `powerbi/ferramentas/gerar_pbip.py`, desligue a interação de `filtro_mes` com `linha_media` (`NoFilter`) para a linha mostrar os 12 meses, e troque o subtítulo de `linha_media` por um cartão de texto sem moldura no mesmo lugar com "Insight da linha", que recebe o filtro de mês; regere e valide o PBIP com `powerbi/ferramentas/validar_pbip.py` per FR-019, Edge Cases (missing)
+- [X] T037 [P] Atualize `specs/002-mockup-power-bi/contracts/telas-mockup.md` (linha com `dim_calendario[mes_curto]`, interação desligada e insight em cartão) e a `dim_calendario` em `specs/001-pipeline-pim-pf/data-model.md` com `mes_curto` per FR-008, FR-017 (partial)

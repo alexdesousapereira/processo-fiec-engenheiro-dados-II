@@ -121,6 +121,7 @@ erDiagram
         int ano
         int mes
         text mes_nome
+        text mes_curto
         int trimestre
         int semestre
     }
