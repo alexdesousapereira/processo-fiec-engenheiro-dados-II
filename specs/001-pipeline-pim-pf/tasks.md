@@ -173,7 +173,7 @@ description: "Lista de tarefas do pipeline da PIM-PF, da extração ao painel an
 - [X] T061 [P] [US5] Crie `capa.svg` e `analise.svg` em `powerbi/Observatorio.Report/StaticResources/RegisteredResources/`, em 16:9, com as cores do tema e áreas reservadas para os visuais de [contrato](contracts/painel.md)
 - [X] T062 [US5] Crie o modelo semântico em `powerbi/Observatorio.SemanticModel/` (TMDL), com importação das 5 tabelas do contrato, parâmetros de servidor e porta, relacionamentos em uma direção e as 5 medidas
 - [X] T063 [US5] Crie o relatório em `powerbi/Observatorio.Report/` e `powerbi/Observatorio.pbip`, com exatamente as telas de capa e análise, os filtros de UF e mês, os visuais, os títulos, a nota sobre atividades sem dado e o tema
-- [ ] T064 [US5] Candidato: abra `powerbi/Observatorio.pbip` no Power BI Desktop, atualize com `pim_leitura`, corrija o que o Desktop apontar e valide o cenário 7 de [quickstart.md](quickstart.md)
+- [X] T064 [US5] Candidato: abra `powerbi/Observatorio.pbip` no Power BI Desktop, atualize com `pim_leitura`, corrija o que o Desktop apontar e valide o cenário 7 de [quickstart.md](quickstart.md)
 
 **Checkpoint**: todas as histórias concluídas
 
@@ -188,7 +188,7 @@ description: "Lista de tarefas do pipeline da PIM-PF, da extração ao painel an
 - [X] T067 [P] Crie `docs/arquitetura/adr/0013-nomes-do-warehouse.md`, com `warehouse`, `dim_*` e `fat_*`, e marque em `docs/arquitetura/adr/0010-dw-em-fato-e-dimensao.md` a parte dos nomes como substituída
 - [X] T068 Com dados reais, rode `EXPLAIN` nas views e na consulta do top 3; crie índices só se o plano justificar, em `dbt/models/warehouse/fat_producao_fisica.sql`, e registre o resultado em `docs/arquitetura/ARQUITETURA.md`
 - [X] T069 Atualize `docs/arquitetura/ARQUITETURA.md` com o novo desenho, as medições, a qualidade, a orquestração, os serviços, a rastreabilidade e as perguntas da entrevista
-- [ ] T070 [P] Atualize `docs/arquitetura/arquitetura.excalidraw` e `docs/arquitetura/arquitetura.png` com os contêineres de ingestão e dbt e o painel
+- [X] T070 [P] Atualize `docs/arquitetura/arquitetura.excalidraw` e `docs/arquitetura/arquitetura.png` com os contêineres de ingestão e dbt e o painel
 - [X] T071 [P] Atualize `README.md`: como subir, testar, usar a API, reprocessar, migrar com `docker compose down -v`, finalidade de cada porta (FR-022) e limites do ambiente local
 - [X] T072 [P] Atualize a tabela de caminhos em `CLAUDE.md` com `specs/`, `docker/` e `powerbi/`, e remova o que deixou de existir
 - [X] T073 Audite os padrões de engenharia da constituição nos arquivos alterados: tipos anotados, sem `print`, sem `SELECT *` na projeção final, consultas parametrizadas e tipos explícitos no pandas, corrigindo o que faltar (`src/pim_pf/`, `dbt/`, `sql/`)

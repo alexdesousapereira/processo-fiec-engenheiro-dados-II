@@ -3,6 +3,67 @@
 Registro do que foi feito e decidido, do mais recente para o mais antigo.
 Modelo de entrada: **O que foi feito**, **Decisões**, **Pendências**.
 
+## 2026-11-08: Conferência das tarefas abertas (`/speckit-implement`)
+
+### O que foi feito
+
+- Checklists de requisitos das features 001 e 002: 16 de 16 itens cada.
+- T023 a T030 (feature 002) e T070 (feature 001) conferidas no código e marcadas como concluídas: já tinham sido feitas
+  ao ajustar o painel e o desenho da arquitetura.
+
+- T018 (feature 002) e T064 (feature 001) concluídas: o candidato conferiu o painel no Power BI Desktop e aceitou as
+  diferenças restantes, registradas em `mockup/observatorio-mockup-racional.md`. As features 001 (87 tarefas) e 002
+  (30 tarefas) estão completas.
+
+## 2026-11-08: Cosmos no Airflow e grupos de tarefas na DAG
+
+### O que foi feito
+
+- DAG em dois grupos: `ingestao` (verificar, solicitar e aguardar a extração) e `dbt` (`validar_lote` e o grupo
+  `warehouse` do Cosmos). O grupo `warehouse` mostra só as tabelas, com uma tarefa `run` e uma `test` cada; os testes
+  de chave estrangeira rodam dentro do `test` do fato, a pedido do candidato. `carregar_warehouse` e `testar_dados` saíram.
+- Imagem do Airflow: `astronomer-cosmos==1.15.1` (mais `aenum` e `deprecation`, em `requirements/airflow.lock`) e uma
+  etapa de build que gera o `manifest.json` com `dbt parse`. O dbt não entra na imagem final.
+- O teste "soma das diferenças é zero" passou a ler a tabela analítica, para ela ganhar uma tarefa de teste que roda
+  também o teste de unidade da média.
+- Validado com o scheduler, em `modo=reprocessar` para 202501: 20 tarefas verdes em cerca de 1 min 40 s e 27 testes
+  aprovados.
+- ADR 0015, contrato da DAG, arquitetura, README e spec 001 (esclarecimento e FR-031) atualizados.
+
+### Decisões
+
+- Cosmos em modo Docker, escolhido pelo candidato: o dbt continua no contêiner `pim-pf-dbt`, e o ADR 0012 vale.
+- Versão 1.15.1, e não a 1.16.0, publicada em 03/11/2026, há menos de duas semanas.
+- O grupo `dbt` não repete tarefas: um modelo com falha é reexecutado sozinho pela interface.
+
+### Pendências
+
+- `airflow dags test` com o scheduler ligado disputa as mesmas tarefas e falha; validar sempre disparando pelo scheduler.
+
+## 2026-11-08: Documento das questões 02 e 03 atualizado e desenhos em fundo branco
+
+### O que foi feito
+
+- `docs/arquitetura/arquitetura.excalidraw`: fundo branco nos dois painéis, caixa "tabela analítica 2025 e views" no
+  warehouse e correção de rótulos sobrepostos ("Ingestão", "dbt", nomes `dim_`, "Databricks" e "SQL Warehouse").
+  `arquitetura.png` foi exportado de novo a partir dele.
+- `resolucao_case/Prova_Pratica_7778_Questao_02_03_Alex_Pereira.docx` alinhado à arquitetura atual:
+  - API FastAPI como entrada da ingestão, hash por mês e schemas `stage`, `warehouse` e `controle`;
+  - tabelas `dim_`, `fat_producao_fisica` e a tabela analítica `fato_producao_fisica_industrial_2025`, com as views;
+  - as 6 tarefas reais da DAG e os testes do lote antes de publicar;
+  - proposta futura na Azure (ADLS Gen2, Databricks, Data Factory e Unity Catalog).
+- Figuras 1 e 2 trocadas pelos painéis do Excalidraw em fundo branco. Nova seção 3.9 "Painel no Power BI", com o
+  link publicado na web e o print da tela de análise (Figura 3).
+- Desenho: o quadro "Fonte" virou "Fontes", com cartões de IBGE / SIDRA, APIs REST, bancos relacionais e arquivos.
+  Na arquitetura atual, só o IBGE está ativo, e as demais aparecem tracejadas como fontes futuras; na proposta
+  futura, as quatro estão ativas.
+- Documento todo em A4 retrato: as seções em paisagem das Figuras 1 e 2 saíram, e as figuras ocupam a largura
+  útil da página.
+
+### Pendências
+
+- O `.docx` fica fora do Git (`.gitignore`). Abrir no Word para conferir antes de enviar.
+
 ## 2026-11-08: Painel publicado no README
 
 ### O que foi feito

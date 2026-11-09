@@ -98,9 +98,12 @@ O painel é regerado a partir deste mockup por `powerbi/ferramentas/gerar_pbip.p
 | Rótulo "índice (diferença)" nas barras | Rótulo só com o índice; a diferença aparece na dica e no cartão da líder | O rótulo de dados nativo mostra um valor por barra |
 | Rótulos só em janeiro e no pico, na linha | Sem rótulos; eixo de valores e dica | Rotular pontos escolhidos exige uma série a mais |
 | Carimbos de data alinhados à esquerda | Cartão com a medida, centralizado na própria caixa | A caixa de texto nativa não mostra valores de medida |
+| Legenda "■ Top 3 ■ Demais - - - Média da UF (101,58)" em uma linha de texto | Caixa de texto com a parte fixa e um cartão com o valor da média, que pode mostrar um pequeno traço antes do texto | A caixa de texto nativa não mostra valores de medida; aceito pelo candidato |
 
-A abertura no Desktop (T018) confirma ou corrige: a linha constante da média nas barras (`y1AxisReferenceLine`), os subtítulos por medida
-(`subTitle`), a cor de fundo das páginas e os marcadores da linha. Cada diferença encontrada entra nesta tabela.
+**Conferência no Desktop (T018), 2026-11-08:** o candidato abriu o painel no Power BI Desktop e o comparou com o mockup.
+Confirmados a linha constante da média nas barras, os subtítulos por medida, a cor de fundo das páginas, os marcadores da linha,
+as abas e o botão em azul e os números do caso de referência (Ceará, janeiro de 2025: média 101,58, líder 3.13 Têxteis com
++43,45, top 3 com 3.13, 3.24 e 3.11). As diferenças que ficaram estão na tabela acima.
 
 ## Regras aplicadas do `pbi-mockup` (resumo)
 
